@@ -71,21 +71,21 @@ public class Medlem_tabel {
 	      model.setRowCount(medlemmer.size());
 	   
 	   	// create a counter for counting what row we are in
-	      int row = 0;
+	      int rowSet = 0;
 	   
 	   	// Foreach loop to loop through the ArrayList. One row (person) at a
 	   	// time
 	      for (Medlemmer medlem : medlemmer) {
-	         model.setValueAt(medlem.id, row, 0);
-	         model.setValueAt(medlem.fornavn, row, 1);
-	         model.setValueAt(medlem.efternavn, row, 2);
-	         model.setValueAt(medlem.adresse, row, 3);
-	         model.setValueAt(medlem.fødselsdato, row, 4);
-	         model.setValueAt(medlem.telefon, row, 5);
-	         model.setValueAt(medlem.email, row, 6);
-	         model.setValueAt(medlem.navnPåDør, row, 7);
-	         model.setValueAt(medlem.billeder, row, 8);
-	         row++;
+	         model.setValueAt(medlem.id, rowSet, 0);
+	         model.setValueAt(medlem.fornavn, rowSet, 1);
+	         model.setValueAt(medlem.efternavn, rowSet, 2);
+	         model.setValueAt(medlem.adresse, rowSet, 3);
+	         model.setValueAt(medlem.fødselsdato, rowSet, 4);
+	         model.setValueAt(medlem.telefon, rowSet, 5);
+	         model.setValueAt(medlem.email, rowSet, 6);
+	         model.setValueAt(medlem.navnPåDør, rowSet, 7);
+	         model.setValueAt(medlem.billeder, rowSet, 8);
+	         rowSet++;
 	      }
 	   	// add the DefaultTableModel to the JTable
 	      table.setModel(model);
