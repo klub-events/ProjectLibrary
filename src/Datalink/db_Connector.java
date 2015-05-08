@@ -1,7 +1,4 @@
 package Datalink;
-import Medlem_tabel;
-import Medlemmer;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
