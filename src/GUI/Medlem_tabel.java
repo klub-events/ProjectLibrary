@@ -1,15 +1,12 @@
-package Datalink;
+package GUI;
 import javax.swing.*;
-
 import java.awt.*;
-import java.awt.event.*;
-
 import javax.swing.table.DefaultTableModel;
-
+import Domain.Medlem;
 import java.util.*;
-import java.io.*;
+
 public class Medlem_tabel {
-	public ArrayList<Medlemmer> medlemmer;
+	private ArrayList<Medlem> medlemmer;
 	private JFrame frame;
 	private JTable table;
 	private JPanel northPanel;
@@ -19,7 +16,7 @@ public class Medlem_tabel {
 	
 	private DefaultTableModel model = new DefaultTableModel();
 	
-	public Medlem_tabel(ArrayList<Medlemmer> medlemmer){
+	public Medlem_tabel(ArrayList<Medlem> medlemmer){
 	this.medlemmer = medlemmer;
 		 frame = new JFrame ();
 	      
@@ -74,16 +71,16 @@ public class Medlem_tabel {
 	   
 	   	// Foreach loop to loop through the ArrayList. One row (person) at a
 	   	// time
-	      for (Medlemmer medlem : medlemmer) {
-	         model.setValueAt(medlem.id, rowSet, 0);
-	         model.setValueAt(medlem.fornavn, rowSet, 1);
-	         model.setValueAt(medlem.efternavn, rowSet, 2);
-	         model.setValueAt(medlem.adresse, rowSet, 3);
-	         model.setValueAt(medlem.fødselsdato, rowSet, 4);
-	         model.setValueAt(medlem.telefon, rowSet, 5);
-	         model.setValueAt(medlem.email, rowSet, 6);
-	         model.setValueAt(medlem.navnPåDør, rowSet, 7);
-	         model.setValueAt(medlem.billeder, rowSet, 8);
+	      for (Medlem medlem : medlemmer) {
+	         model.setValueAt(medlem.getId(), rowSet, 0);
+	         model.setValueAt(medlem.getFornavn(), rowSet, 1);
+	         model.setValueAt(medlem.getEfternavn(), rowSet, 2);
+	         model.setValueAt(medlem.getAdresse(), rowSet, 3);
+	         model.setValueAt(medlem.getFødselsdato(), rowSet, 4);
+	         model.setValueAt(medlem.getTelefon(), rowSet, 5);
+	         model.setValueAt(medlem.getEmail(), rowSet, 6);
+	         model.setValueAt(medlem.getNavnPåDør(), rowSet, 7);
+	         model.setValueAt(medlem.getBilleder(), rowSet, 8);
 	         rowSet++;
 	      }
 	   	// add the DefaultTableModel to the JTable
