@@ -1,6 +1,4 @@
 package Datalink;
-import Medlemmer;
-
 import javax.swing.*;
 
 import java.awt.*;
