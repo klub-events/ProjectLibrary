@@ -8,7 +8,6 @@ import javax.swing.table.DefaultTableModel;
 
 import java.util.*;
 import java.io.*;
-
 public class Medlem_tabel {
 	public ArrayList<Medlemmer> medlemmer;
 	private JFrame frame;
