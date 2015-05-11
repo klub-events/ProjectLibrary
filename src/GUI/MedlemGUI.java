@@ -13,13 +13,17 @@ import Domain.Program;
 
 public class MedlemGUI extends MainGUI implements ActionListener
 {
-	JButton btm_opretMedlem = new JButton();
-	JButton btn_visMember = new JButton();
+	JButton btn_opretMedlem = new JButton("opret medlem");
+	JButton btn_visMember = new JButton("vis member");
 	
 	public MedlemGUI(){
 		  btn_medlem.setBackground(Color.white);	
-		  btn_visMember.addActionListener(this);
+		  
 		  Panel_Midt.add(btn_visMember);
+		  btn_visMember.addActionListener(this);
+		  
+		  Panel_Midt.add(btn_opretMedlem);
+		  btn_opretMedlem.addActionListener(this);
 		
 	}//constructor slutter
 	
