@@ -4,8 +4,11 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import Domain.Medlem;
+import GUI.Medlem_tabel;
+
 public class db_Connector{
-	public ArrayList<Medlemmer> medlemmer = new ArrayList<Medlemmer>();
+	public ArrayList<Medlem> medlemmer = new ArrayList<Medlem>();
 	
 	public db_Connector(){
 		
@@ -38,7 +41,7 @@ public class db_Connector{
 					String email = rs.getString("email");
 					String navnPåDør = rs.getString("navnPåDør");
 					boolean billeder = rs.getBoolean("billeder");
-					medlemmer.add(new Medlemmer (id, fornavn, efternavn, adresse, fødselsdato, telefon, email, navnPåDør, billeder));
+					medlemmer.add(new Medlem (id, fornavn, efternavn, adresse, fødselsdato, telefon, email, navnPåDør, billeder));
 					System.out.println(id + "\t" + fornavn + "\t" + efternavn + "\t" + adresse + "\t" + fødselsdato + "\t" + telefon + "\t" + email + "\t" + navnPåDør + "\t" + billeder );	
 					}
 				conn.close();
