@@ -3,15 +3,20 @@ package GUI;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 
+import Domain.Control;
+import Domain.Program;
 
-public class medlem_GUI extends MainGUI implements ActionListener
+
+
+public class MedlemGUI extends MainGUI implements ActionListener
 {
 	
 	JButton btn_visMember = new JButton();
 	
-	public medlem_GUI(){
+	public MedlemGUI(){
 		  btn_medlem.setBackground(Color.white);	
 		  btn_visMember.addActionListener(this);
 		  Panel_Midt.add(btn_visMember);
@@ -21,7 +26,7 @@ public class medlem_GUI extends MainGUI implements ActionListener
 	public void actionPerformed(ActionEvent e){	  
 		if(e.getSource() == btn_visMember) {
 			System.out.println("vis member clicked");
-		new Datalink.db_Connector();
+			Control.startTabel();
 		
 	       
 	    }

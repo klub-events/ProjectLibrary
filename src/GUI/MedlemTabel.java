@@ -1,11 +1,16 @@
 package GUI;
 import javax.swing.*;
+
 import java.awt.*;
+
 import javax.swing.table.DefaultTableModel;
+
+import Datalink.DBConnector;
 import Domain.Medlem;
+
 import java.util.*;
 
-public class Medlem_tabel {
+public class MedlemTabel {
 	private ArrayList<Medlem> medlemmer;
 	private JFrame frame;
 	private JTable table;
@@ -13,10 +18,11 @@ public class Medlem_tabel {
 	private JPanel southPanel;
 	private JPanel centerPanel;
 	private JPanel eastPanel;
+
 	
 	private DefaultTableModel model = new DefaultTableModel();
 	
-	public Medlem_tabel(ArrayList<Medlem> medlemmer){
+	public MedlemTabel(ArrayList<Medlem> medlemmer){
 	this.medlemmer = medlemmer;
 		 frame = new JFrame ();
 	      

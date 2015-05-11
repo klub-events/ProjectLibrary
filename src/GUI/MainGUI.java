@@ -83,14 +83,14 @@ public class MainGUI implements ActionListener
 	{	  
 		if(e.getSource() == btn_aktivitet)
 	    {
-			new aktivitet_GUI();
+			new AktivitetGUI();
 		
 	       frame.dispose();
 	    }
 		
 		if(e.getSource() == btn_medlem )
 	    {
-		   new medlem_GUI();
+		   new MedlemGUI();
 		
 	       frame.dispose();
 	    }

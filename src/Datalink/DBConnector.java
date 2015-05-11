@@ -5,12 +5,12 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import Domain.Medlem;
-import GUI.Medlem_tabel;
+import GUI.MedlemTabel;
 
-public class db_Connector{
-	public ArrayList<Medlem> medlemmer = new ArrayList<Medlem>();
+public class DBConnector{
+	public static ArrayList<Medlem> medlemmer = new ArrayList<Medlem>();
 	
-	public db_Connector(){
+	public DBConnector(){
 		
 		java.sql.Statement stmt = null;
 		ResultSet rs = null;
@@ -49,6 +49,13 @@ public class db_Connector{
 		catch(Exception e){
 			e.printStackTrace();
 		}
-		new Medlem_tabel (medlemmer);
+	}
+
+	public static ArrayList<Medlem> getMedlemmer() {
+		return medlemmer;
+	}
+
+	public void setMedlemmer(ArrayList<Medlem> medlemmer) {
+		this.medlemmer = medlemmer;
 	}
 }

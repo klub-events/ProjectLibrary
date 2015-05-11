@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 //For dan
-public class aktivitet_GUI extends MainGUI
+public class AktivitetGUI extends MainGUI
 {
 	
 	JButton btn_gem = new JButton();
@@ -22,7 +22,7 @@ public class aktivitet_GUI extends MainGUI
 	JTextField txt_tlf = new JTextField(20);
 	JLabel label = new JLabel("Hello world!");
 	
-	public aktivitet_GUI()
+	public AktivitetGUI()
 	{
 		
 		//JPanel Labels
