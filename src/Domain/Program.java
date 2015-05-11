@@ -1,9 +1,11 @@
-package Datalink;
+package Domain;
+import Datalink.*;
+import GUI.*;
 
 
 public class Program {
 	public static void main(String[] args){
-		new db_Connector();
+		new MainGUI();
 		
 	}
 }

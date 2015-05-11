@@ -1,9 +1,4 @@
 package GUI;
-
-//Super gui
-
-
-
 import java.awt.BorderLayout; 
 import java.awt.Color;
 import java.awt.Cursor;
@@ -34,9 +29,6 @@ public class MainGUI implements ActionListener
 	 JButton  btn_medlem = new JButton("MEDLEM");
 	 JButton  btn_aktivitet = new JButton("AKTIVITET"); 
 	 JButton  btn_Test = new JButton("#");
-	
-	 
-	 
 	
 	public MainGUI()
 	{
@@ -91,14 +83,14 @@ public class MainGUI implements ActionListener
 	{	  
 		if(e.getSource() == btn_aktivitet)
 	    {
-		   aktivitet_GUI a = new aktivitet_GUI();
+			new aktivitet_GUI();
 		
 	       frame.dispose();
 	    }
 		
 		if(e.getSource() == btn_medlem )
 	    {
-		   medlem_GUI m = new medlem_GUI();
+		   new medlem_GUI();
 		
 	       frame.dispose();
 	    }
