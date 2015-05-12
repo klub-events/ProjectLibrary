@@ -89,6 +89,7 @@ public class MedlemTabel {
 	         model.setValueAt(medlem.getBilleder(), rowSet, 8);
 	         rowSet++;
 	      }
+	      // comment for testing
 	   	// add the DefaultTableModel to the JTable
 	      table.setModel(model);
 	   }
