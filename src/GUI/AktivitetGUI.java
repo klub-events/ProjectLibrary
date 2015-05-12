@@ -27,27 +27,31 @@ public class AktivitetGUI extends MainGUI
 		
 		//JPanel Labels
 		JPanel center = new JPanel(new GridLayout(10,1));
-		//JPanel center = new JPanel(new BoxLayout(null, 0));
+		
+		//Navne ud for textfield
 		String[] labelTekster = {"Fornavn:", "Efternavn:", "Adresse:", "Telefon:"};
+		
+		//adder navn og tekstfield til vinduet
 		LabelTextfield fornavnsBox = new LabelTextfield(labelTekster[0]);
 		String fornavn = fornavnsBox.getInputText();
-	
 		center.add(fornavnsBox);
-		//add panels to frame
-		//Panel_Midt.add(Labels, BorderLayout.WEST);
-		//Panel_Midt.add(textFields, BorderLayout.CENTER);
-		// Panel_Midt.getContentPane().add(center, "West");
+		
+		LabelTextfield efternavnsBox = new LabelTextfield(labelTekster[0]);
+		String efternavn = efternavnsBox.getInputText();
+		center.add(efternavnsBox);
+		
+		LabelTextfield adresseBox = new LabelTextfield(labelTekster[0]);
+		String adresse = adresseBox .getInputText();
+		center.add(adresseBox );
+		
+		LabelTextfield telefonBox = new LabelTextfield(labelTekster[0]);
+		String telefon = telefonBox.getInputText();
+		center.add(telefonBox);
+		
+		
 		Panel_Midt.add(center);
-		 center.setBackground(Color.darkGray);
-		
-		
-		
-		
-		
-		
-	
-		
-		  btn_aktivitet.setBackground(Color.GRAY);
+		center.setBackground(Color.WHITE);
+		 btn_aktivitet.setBackground(Color.WHITE);
 		 btn_gem.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		
 	}//constructor slutter

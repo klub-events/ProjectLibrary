@@ -29,6 +29,12 @@ public class MedlemGUI extends MainGUI implements ActionListener
 	
 	public void actionPerformed(ActionEvent e){	  
 		
+		if(e.getSource() == btn_aktivitet)
+	    {
+			new AktivitetGUI();
+		
+	       frame.dispose();
+	    }
 		
 		if(e.getSource() == btn_visMember) 
 		{

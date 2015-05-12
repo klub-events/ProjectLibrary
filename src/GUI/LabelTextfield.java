@@ -7,7 +7,7 @@ import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
+// smelter teksten og skrive feltet sammen
 public class LabelTextfield extends JPanel {
 
 	JTextField textField = new JTextField();
