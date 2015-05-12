@@ -20,14 +20,14 @@ import javax.swing.border.Border;
 public class MainGUI implements ActionListener
 {
     
-	 JFrame frame = new JFrame("Administration");
+	 protected JFrame frame = new JFrame("Administration");
 
 	 JPanel Panel_Top = new JPanel();
 	 
-	 JPanel Panel_Midt = new JPanel();
+	 protected JPanel Panel_Midt = new JPanel();
 	 
-	 JButton  btn_medlem = new JButton("MEDLEM");
-	 JButton  btn_aktivitet = new JButton("AKTIVITET"); 
+	 protected JButton  btn_medlem = new JButton("MEDLEM");
+	 protected JButton  btn_aktivitet = new JButton("AKTIVITET"); 
 	 JButton  btn_Test = new JButton("#");
 	
 	public MainGUI()

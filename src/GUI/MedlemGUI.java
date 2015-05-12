@@ -5,18 +5,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
 
 import Domain.Control;
 import Domain.Program;
+import GUI.AktivitetGUI;
+import GUI.MainGUI;
 
 
 
 public class MedlemGUI extends MainGUI implements ActionListener
 {
-	JButton btn_opretMedlem = new JButton("opret medlem");
-	JButton btn_visMember = new JButton("vis member");
+	private JButton btn_opretMedlem = new JButton("opret medlem");
+	private JButton btn_visMember = new JButton("vis member");
+
 	
-	public MedlemGUI(){
+	public MedlemGUI()
+	{
 		  btn_medlem.setBackground(Color.white);	
 		  
 		  Panel_Midt.add(btn_visMember);
@@ -27,7 +32,8 @@ public class MedlemGUI extends MainGUI implements ActionListener
 		
 	}//constructor slutter
 	
-	public void actionPerformed(ActionEvent e){	  
+	public void actionPerformed(ActionEvent e)
+	{	  
 		
 		if(e.getSource() == btn_aktivitet)
 	    {
@@ -47,5 +53,5 @@ public class MedlemGUI extends MainGUI implements ActionListener
 			System.out.println("vis member clicked");
 			Control.startTabel();  
 	    }
-	}
+	}//actionPerformed slutter
 }//public class medlem_GUI slutter

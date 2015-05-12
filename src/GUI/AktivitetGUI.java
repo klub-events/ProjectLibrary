@@ -51,8 +51,8 @@ public class AktivitetGUI extends MainGUI
 		
 		Panel_Midt.add(center);
 		center.setBackground(Color.WHITE);
-		 btn_aktivitet.setBackground(Color.WHITE);
-		 btn_gem.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btn_aktivitet.setBackground(Color.WHITE);
+		btn_gem.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		
 	}//constructor slutter
 	
