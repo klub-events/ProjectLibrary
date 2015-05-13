@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -12,15 +14,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 //For dan
-public class AktivitetGUI extends MainGUI
+public class AktivitetGUI extends MainGUI implements ActionListener
 {
-	
-	JButton btn_gem = new JButton();
-	JTextField txt_fornavn = new JTextField(20);
-	JTextField txt_efternavn = new JTextField(20);
-	JTextField txt_adresse = new JTextField(20);
-	JTextField txt_tlf = new JTextField(20);
-	JLabel label = new JLabel("Hello world!");
+		
+	JButton btn_gem = new JButton("GEM");
+	JButton btn_visAktiviteter = new JButton("VIS AKTIVITETER");
 	
 	public AktivitetGUI()
 	{
@@ -29,33 +27,55 @@ public class AktivitetGUI extends MainGUI
 		JPanel center = new JPanel(new GridLayout(10,1));
 		
 		//Navne ud for textfield
-		String[] labelTekster = {"Fornavn:", "Efternavn:", "Adresse:", "Telefon:"};
+		String[] labelTekster = {"navn:", "pris:", "deltagerantal:", "dato:"};
 		
 		//adder navn og tekstfield til vinduet
-		LabelTextfield fornavnsBox = new LabelTextfield(labelTekster[0]);
-		String fornavn = fornavnsBox.getInputText();
-		center.add(fornavnsBox);
+		LabelTextfield navnBox = new LabelTextfield(labelTekster[0]);
+		String navn = navnBox.getInputText();
+		center.add(navnBox);
 		
-		LabelTextfield efternavnsBox = new LabelTextfield(labelTekster[0]);
-		String efternavn = efternavnsBox.getInputText();
-		center.add(efternavnsBox);
+		LabelTextfield prisBox = new LabelTextfield(labelTekster[1]);
+		String pris = prisBox.getInputText();
+		center.add(prisBox);
 		
-		LabelTextfield adresseBox = new LabelTextfield(labelTekster[0]);
-		String adresse = adresseBox .getInputText();
-		center.add(adresseBox );
+		LabelTextfield deltagerantalBox = new LabelTextfield(labelTekster[2]);
+		String deltagerantal = deltagerantalBox.getInputText();
+		center.add(deltagerantalBox);
 		
-		LabelTextfield telefonBox = new LabelTextfield(labelTekster[0]);
-		String telefon = telefonBox.getInputText();
-		center.add(telefonBox);
+		//speciel desginet dato api kommer
+		LabelTextfield datoBox = new LabelTextfield(labelTekster[3]);
+		String dato = datoBox.getInputText();
+		center.add(datoBox);
+		
 		
 		
 		Panel_Midt.add(center);
 		center.setBackground(Color.WHITE);
 		btn_aktivitet.setBackground(Color.WHITE);
-		btn_gem.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		
+		btn_gem.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		center.add(btn_gem);
+		btn_visAktiviteter.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		center.add(btn_visAktiviteter);
 	}//constructor slutter
 	
+	public void actionPerformed(ActionEvent e)
+	{
+		if(e.getSource() == btn_tilmeld)
+		{
+			new TilmeldAktivitetGUI();
+			
+			frame.dispose();
+		}
+		
+		if(e.getSource() == btn_medlem )
+	    {
+		   new MedlemGUI();
+		
+	       frame.dispose();
+	    }
+		
+	}//actionperformed sluter
 	
 }//public class medlem_GUI slutter
 

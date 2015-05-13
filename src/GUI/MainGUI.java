@@ -28,7 +28,7 @@ public class MainGUI implements ActionListener
 	 
 	 protected JButton  btn_medlem = new JButton("MEDLEM");
 	 protected JButton  btn_aktivitet = new JButton("AKTIVITET"); 
-	 JButton  btn_Test = new JButton("#");
+	 protected JButton  btn_tilmeld = new JButton("TILMELD AKTIVITET");
 	
 	public MainGUI()
 	{
@@ -59,9 +59,9 @@ public class MainGUI implements ActionListener
 	     btn_aktivitet.addActionListener(this);
 	     btn_aktivitet.setCursor(new Cursor(Cursor.HAND_CURSOR));
 	    
-	     Panel_Top.add(btn_Test);
-	     btn_Test.addActionListener(this);
-	     btn_Test.setCursor(new Cursor(Cursor.HAND_CURSOR));
+	     Panel_Top.add(btn_tilmeld);
+	     btn_tilmeld.addActionListener(this);
+	     btn_tilmeld.setCursor(new Cursor(Cursor.HAND_CURSOR));
 	   
 	    
 	     Panel_Top.setBorder(BorderFactory.createEmptyBorder(1,1,1,1));// border
@@ -94,6 +94,13 @@ public class MainGUI implements ActionListener
 		
 	       frame.dispose();
 	    }
+		
+		if(e.getSource() == btn_tilmeld)
+		{
+			new TilmeldAktivitetGUI();
+			
+			frame.dispose();
+		}
 		
 	}//actionPerformed slutter
 }//MainGUI slutter
