@@ -19,7 +19,8 @@ import GUI.MainGUI;
 
 public class MedlemGUI extends MainGUI implements ActionListener
 {
-	private JButton btn_opretMedlem = new JButton("GEM");
+	private JButton btn_opretMedlem = new JButton("OPRET");
+	private JButton btn_redigerMedlem = new JButton("GEM");
 	private JButton btn_visMember = new JButton("VIS MEMBER");
 	
 
@@ -78,6 +79,10 @@ public class MedlemGUI extends MainGUI implements ActionListener
 		  btn_opretMedlem.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		  btn_opretMedlem.addActionListener(this);
 		  center2.add(btn_opretMedlem);
+		  
+		  btn_redigerMedlem.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		  btn_redigerMedlem.addActionListener(this);
+		  center2.add(btn_redigerMedlem);
 		  
 		  
 		  btn_visMember.setCursor(new Cursor(Cursor.HAND_CURSOR));
