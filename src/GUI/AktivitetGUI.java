@@ -54,14 +54,15 @@ public class AktivitetGUI extends MainGUI implements ActionListener
 		btn_aktivitet.setBackground(Color.WHITE);
 		
 		btn_opret.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		
 		center.add(btn_opret);
 		
 		btn_gem.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btn_gem.setToolTipText("Gemmer hvis oprettet medlem bliver redigeret");
 		center.add(btn_gem);
 		
-		
-		
 		btn_visAktiviteter.setCursor(new Cursor(Cursor.HAND_CURSOR));
+	
 		center.add(btn_visAktiviteter);
 	}//constructor slutter
 	

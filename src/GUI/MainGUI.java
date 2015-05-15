@@ -52,15 +52,18 @@ public class MainGUI implements ActionListener
 	     
 	     Panel_Top.add(btn_medlem);
 	     btn_medlem.addActionListener(this);
+	     btn_medlem.setToolTipText("Administrer tilmeldinger til klubben");
 	     btn_medlem.setCursor(new Cursor(Cursor.HAND_CURSOR));
 	     
 	     
 	     Panel_Top.add(btn_aktivitet);
 	     btn_aktivitet.addActionListener(this);
+	     btn_aktivitet.setToolTipText("Administrer aktiviter");
 	     btn_aktivitet.setCursor(new Cursor(Cursor.HAND_CURSOR));
 	    
 	     Panel_Top.add(btn_tilmeld);
 	     btn_tilmeld.addActionListener(this);
+	     btn_tilmeld.setToolTipText("Tilmeld til aktiviteter");
 	     btn_tilmeld.setCursor(new Cursor(Cursor.HAND_CURSOR));
 	   
 	    

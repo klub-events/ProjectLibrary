@@ -78,15 +78,18 @@ public class MedlemGUI extends MainGUI implements ActionListener
 		  
 		  btn_opretMedlem.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		  btn_opretMedlem.addActionListener(this);
+		  
 		  center2.add(btn_opretMedlem);
 		  
 		  btn_redigerMedlem.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		  btn_redigerMedlem.setToolTipText("Gemmer hvis oprettet medlem bliver redigeret");
 		  btn_redigerMedlem.addActionListener(this);
 		  center2.add(btn_redigerMedlem);
 		  
 		  
 		  btn_visMember.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		  btn_visMember.addActionListener(this);
+		 
 		  center2.add(btn_visMember);
 		  
 		  
