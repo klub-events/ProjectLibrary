@@ -121,7 +121,9 @@ public class MedlemGUI extends MainGUI implements ActionListener
 			email = emailBox.getInputText();
 			navnDoer = navnDoerBox.getInputText();
 			billeder = (boolean) billedeValg.getSelectedItem();
-			new Control().opretMedlem(strInfo, intInfo, billeder);
+			Medlem medlem = new Medlem (0, fornavn, efternavn, adresse, foedselsdato, telefon, email, navnDoer, billeder);
+			new Control().opretMedlem(medlem);
+			System.out.println(fornavn);
 		}
 		
 		if(e.getSource() == btn_aktivitet)
