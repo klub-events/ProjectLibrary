@@ -19,13 +19,15 @@ import javax.swing.border.Border;
 
 public class MainGUI implements ActionListener
 {
-    
+	//Laver vinduet
 	 protected JFrame frame = new JFrame("Administration");
-
-	 JPanel Panel_Top = new JPanel();
+	 //Laver et canvas for det der skal på vinduet - top knapperne
+	 protected JPanel Panel_Top = new JPanel();
 	 
+	//Laver et canvas for det der skal på vinduet - alt i midten
 	 protected JPanel Panel_Midt = new JPanel();
 	 
+	 //opretter knapperne til toppen af menuen
 	 protected JButton  btn_medlem = new JButton("MEDLEM");
 	 protected JButton  btn_aktivitet = new JButton("AKTIVITET"); 
 	 protected JButton  btn_tilmeld = new JButton("TILMELD AKTIVITET");
@@ -33,7 +35,7 @@ public class MainGUI implements ActionListener
 	public MainGUI()
 	{
 		
-		
+		//standard gui settings
 		 frame.setSize(960, 790);
 	     frame.setLocationRelativeTo(null);
 	     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -50,6 +52,7 @@ public class MainGUI implements ActionListener
 	     Panel_Top.setPreferredSize(new Dimension(100, 100));
 	     Panel_Midt.setPreferredSize(new Dimension(860, 690));
 	     
+	     //opretter knapper med actionlisteners, alle til toppen af menu
 	     Panel_Top.add(btn_medlem);
 	     btn_medlem.addActionListener(this);
 	     btn_medlem.setToolTipText("Administrer tilmeldinger til klubben");

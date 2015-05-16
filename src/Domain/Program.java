@@ -8,7 +8,7 @@ import GUI.*;
 public class Program {
 	
 	public static void main(String[] args){
-		new Control();
+		new DBConnector();
 		new MainGUI();
 	}
 }

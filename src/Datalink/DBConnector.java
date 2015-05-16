@@ -9,7 +9,7 @@ import GUI.MedlemTabel;
 
 public class DBConnector{
 	public static ArrayList<Medlem> medlemmer = new ArrayList<Medlem>();
-	
+	private Medlem m;
 	public DBConnector(){
 		
 		java.sql.Statement stmt = null;
@@ -41,8 +41,9 @@ public class DBConnector{
 					String email = rs.getString("email");
 					String navnPåDør = rs.getString("navnPåDør");
 					boolean billeder = rs.getBoolean("billeder");
-					medlemmer.add(new Medlem (id, fornavn, efternavn, adresse, fødselsdato, telefon, email, navnPåDør, billeder));
+					medlemmer.add(m = new Medlem (id, fornavn, efternavn, adresse, fødselsdato, telefon, email, navnPåDør, billeder));
 					System.out.println(id + "\t" + fornavn + "\t" + efternavn + "\t" + adresse + "\t" + fødselsdato + "\t" + telefon + "\t" + email + "\t" + navnPåDør + "\t" + billeder );	
+					System.out.println(m.toString());
 					}
 				conn.close();
 		}
@@ -53,9 +54,5 @@ public class DBConnector{
 
 	public static ArrayList<Medlem> getMedlemmer() {
 		return medlemmer;
-	}
-
-	public void setMedlemmer(ArrayList<Medlem> medlemmer) {
-		this.medlemmer = medlemmer;
 	}
 }

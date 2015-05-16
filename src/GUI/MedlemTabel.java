@@ -10,7 +10,7 @@ import Domain.Medlem;
 
 import java.util.*;
 
-public class MedlemTabel {
+public final class MedlemTabel {
 	private ArrayList<Medlem> medlemmer;
 	private JFrame frame;
 	private JTable table;
@@ -38,7 +38,6 @@ public class MedlemTabel {
 	      frame.setLayout(new BorderLayout());
 	      frame.setSize(800, 300);
 	      frame.setLocationRelativeTo(null);
-	      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	      frame.setTitle("Vis medlemmer");    
 	      
 	      
@@ -89,8 +88,8 @@ public class MedlemTabel {
 	         model.setValueAt(medlem.getBilleder(), rowSet, 8);
 	         rowSet++;
 	      }
-	      // comment for testing
 	   	// add the DefaultTableModel to the JTable
 	      table.setModel(model);
+	      medlemmer.clear();
 	   }
 	}

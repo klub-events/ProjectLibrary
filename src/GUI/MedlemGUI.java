@@ -6,16 +6,9 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
+import javax.swing.*;
 
-import Domain.Control;
-import Domain.Program;
-import GUI.AktivitetGUI;
-import GUI.MainGUI;
-
-
+import Domain.*;
 
 public class MedlemGUI extends MainGUI implements ActionListener
 {
@@ -23,50 +16,68 @@ public class MedlemGUI extends MainGUI implements ActionListener
 	private JButton btn_redigerMedlem = new JButton("GEM");
 	private JButton btn_visMember = new JButton("VIS MEMBER");
 	
-
+	//Værdier for indtastede oplysnigner
+	private String fornavn;
+	private String efternavn;
+	private String adresse;
+	private int foedselsdato;
+	private int telefon;
+	private String email;
+	private String navnDoer;
+	private boolean billeder;
 	
-	public MedlemGUI()
-	{
+	//
+	String[] strInfo = {fornavn, efternavn, adresse, email, navnDoer};
+	int[] intInfo = {foedselsdato, telefon};
+	
+	private Boolean[] comboValg = {true,false};
+	
+	//Text-label fields created
+	private LabelTextfield forNavnBox;
+	private LabelTextfield efterNavnBox;
+	private LabelTextfield adresseBox;
+	private LabelTextfield foedselsdatoBox;
+	private LabelTextfield telefonBox;
+	private LabelTextfield emailBox;
+	private LabelTextfield navnDoerBox;
+	private LabelTextfield billederBox;
+	private JComboBox billedeValg;
+	
+	public MedlemGUI(){
 		  
 		//JPanel Labels
 				JPanel center2 = new JPanel(new GridLayout(10,1));
 				
 				//Navne ud for textfield
-				String[] labelTekster = {"navn:", "adresse:", "foedselsdato:", "telefon:", "email", "navn på doer:", "billeder"};
+				String[] labelTekster = {"fornavn:","efternavn", "adresse:", "foedselsdato:", "telefon:", "email", "navn på doer:", "billeder"};
 				
 				//adder navn og tekstfield til vinduet
-				LabelTextfield navnBox = new LabelTextfield(labelTekster[0]);
-				String navn = navnBox.getInputText();
-				center2.add(navnBox);
+				forNavnBox = new LabelTextfield(labelTekster[0]);
+				center2.add(forNavnBox);
 				
-				LabelTextfield adresseBox = new LabelTextfield(labelTekster[1]);
-				String adresse = adresseBox.getInputText();
+				//adder navn og tekstfield til vinduet
+				 efterNavnBox = new LabelTextfield(labelTekster[1]);
+				center2.add(efterNavnBox);
+				
+				adresseBox = new LabelTextfield(labelTekster[2]);
 				center2.add(adresseBox);
 				
 				//dato api
-				LabelTextfield foedselsdatoBox = new LabelTextfield(labelTekster[2]);
-				String foedselsdato = foedselsdatoBox.getInputText();
+				foedselsdatoBox = new LabelTextfield(labelTekster[3]);
 				center2.add(foedselsdatoBox);
 				
-				
-				LabelTextfield telefonBox = new LabelTextfield(labelTekster[3]);
-				String telefon = telefonBox.getInputText();
+				telefonBox = new LabelTextfield(labelTekster[4]);
 				center2.add(telefonBox);
 				
-				LabelTextfield emailBox = new LabelTextfield(labelTekster[4]);
-				String email = emailBox.getInputText();
+				emailBox = new LabelTextfield(labelTekster[5]);
 				center2.add(emailBox);
 				
-				LabelTextfield navnDoerBox = new LabelTextfield(labelTekster[5]);
-				String navnDoer = navnDoerBox.getInputText();
+				navnDoerBox = new LabelTextfield(labelTekster[6]);
 				center2.add(navnDoerBox);
 				
-				//billed upload ??
-				LabelTextfield billederBox = new LabelTextfield(labelTekster[6]);
-				String billeder = billederBox.getInputText();
-				center2.add(billederBox);
-				
-				
+				billedeValg = new JComboBox(comboValg);
+				billedeValg.setLayout(new GridLayout(1, 4));
+				center2.add(billedeValg);				
 				
 				Panel_Midt.add(center2);
 				center2.setBackground(Color.WHITE);		
@@ -95,9 +106,23 @@ public class MedlemGUI extends MainGUI implements ActionListener
 		  
 		
 	}//constructor slutter
+	//public Medlem opretMedlem(){
+	//	return new Medlem (0,fornavn, efternavn, adresse, foedselsdato, telefon, email, navnDoer, false); 
+	//}
 	
 	public void actionPerformed(ActionEvent e)
 	{	  
+		if(e.getSource() == btn_opretMedlem){
+			fornavn = forNavnBox.getInputText();
+			efternavn = efterNavnBox.getInputText();
+			adresse = adresseBox.getInputText();
+			foedselsdato = Integer.parseInt(foedselsdatoBox.getInputText());
+			telefon = Integer.parseInt(telefonBox.getInputText());
+			email = emailBox.getInputText();
+			navnDoer = navnDoerBox.getInputText();
+			billeder = (boolean) billedeValg.getSelectedItem();
+			new Control().opretMedlem(strInfo, intInfo, billeder);
+		}
 		
 		if(e.getSource() == btn_aktivitet)
 	    {
@@ -116,7 +141,7 @@ public class MedlemGUI extends MainGUI implements ActionListener
 		if(e.getSource() == btn_visMember) 
 		{
 			System.out.println("vis member clicked");
-			Control.startTabel();  
+			new Control().startTabel();
 	    }
 	}//actionPerformed slutter
 }//public class medlem_GUI slutter
