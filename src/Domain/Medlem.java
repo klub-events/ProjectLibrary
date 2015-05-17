@@ -24,7 +24,7 @@ int billeder;
 	}
 
 	public String toString(){
-		return (String) (this.id + ", " + this.fornavn + ", " + this.efternavn + ", " + this.adresse + ", " + this.fødselsdato + ", " + this.telefon + ", " + this.email + ", " + this.navnPåDør + ", " + this.billeder);
+		return (String) ("'"+this.id+"'" + ", " + "'"+this.fornavn+"'" + ", " + "'"+this.efternavn+"'" + ", " + "'"+this.adresse+"'" + ", " + this.fødselsdato + ", " + this.telefon + ", " + "'"+this.email+"'" + ", " + "'"+this.navnPåDør+"'" + ", " + "'"+this.billeder+"'");
 	}
 	
 	public int getId() {
