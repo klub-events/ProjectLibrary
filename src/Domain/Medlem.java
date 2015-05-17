@@ -9,9 +9,9 @@ int fødselsdato;
 int telefon;
 String email;
 String navnPåDør;
-Boolean billeder;
+int billeder;
 
-	public Medlem(int id, String fornavn, String efternavn, String adresse, int fødselsdato, int telefon, String email, String navnPåDør, Boolean billeder){
+	public Medlem(int id, String fornavn, String efternavn, String adresse, int fødselsdato, int telefon, String email, String navnPåDør, int billeder){
 		this.id = id;
 		this.fornavn = fornavn;
 		this.efternavn = efternavn;
@@ -24,7 +24,7 @@ Boolean billeder;
 	}
 
 	public String toString(){
-		return (String) (this.fornavn + " " + this.efternavn + " " + this.adresse + " " + this.fødselsdato + " " + this.telefon + " " + this.email + " " + this.navnPåDør + " " + this.billeder);
+		return (String) (this.id + ", " + this.fornavn + ", " + this.efternavn + ", " + this.adresse + ", " + this.fødselsdato + ", " + this.telefon + ", " + this.email + ", " + this.navnPåDør + ", " + this.billeder);
 	}
 	
 	public int getId() {
@@ -91,11 +91,11 @@ Boolean billeder;
 		this.navnPåDør = navnPåDør;
 	}
 
-	public Boolean getBilleder() {
+	public int getBilleder() {
 		return billeder;
 	}
 
-	public void setBilleder(Boolean billeder) {
+	public void setBilleder(int billeder) {
 		this.billeder = billeder;
 	}
 	

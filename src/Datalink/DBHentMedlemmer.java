@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import Domain.Medlem;
 import GUI.MedlemTabel;
 
-public class DBConnector{
+public class DBHentMedlemmer{
 	public static ArrayList<Medlem> medlemmer = new ArrayList<Medlem>();
 	private Medlem m;
-	public DBConnector(){
+	public DBHentMedlemmer(){
 		
 		java.sql.Statement stmt = null;
 		ResultSet rs = null;
@@ -40,7 +40,7 @@ public class DBConnector{
 					int telefon = rs.getInt("telefon");
 					String email = rs.getString("email");
 					String navnPåDør = rs.getString("navnPåDør");
-					boolean billeder = rs.getBoolean("billeder");
+					int billeder = rs.getInt("billeder");
 					medlemmer.add(m = new Medlem (id, fornavn, efternavn, adresse, fødselsdato, telefon, email, navnPåDør, billeder));
 					System.out.println(id + "\t" + fornavn + "\t" + efternavn + "\t" + adresse + "\t" + fødselsdato + "\t" + telefon + "\t" + email + "\t" + navnPåDør + "\t" + billeder );	
 					System.out.println(m.toString());

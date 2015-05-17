@@ -5,7 +5,7 @@ import java.awt.*;
 
 import javax.swing.table.DefaultTableModel;
 
-import Datalink.DBConnector;
+import Datalink.DBHentMedlemmer;
 import Domain.Medlem;
 
 import java.util.*;

@@ -1,8 +1,6 @@
 package GUI;
 
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -24,14 +22,12 @@ public class MedlemGUI extends MainGUI implements ActionListener
 	private int telefon;
 	private String email;
 	private String navnDoer;
-	private boolean billeder;
+	private int billeder;
 	
 	//
 	String[] strInfo = {fornavn, efternavn, adresse, email, navnDoer};
 	int[] intInfo = {foedselsdato, telefon};
-	
-	private Boolean[] comboValg = {true,false};
-	
+		
 	//Text-label fields created
 	private LabelTextfield forNavnBox;
 	private LabelTextfield efterNavnBox;
@@ -40,9 +36,9 @@ public class MedlemGUI extends MainGUI implements ActionListener
 	private LabelTextfield telefonBox;
 	private LabelTextfield emailBox;
 	private LabelTextfield navnDoerBox;
-	private LabelTextfield billederBox;
-	private JComboBox billedeValg;
 	
+	private JComboBox billedeValg;
+	private String[] comboValg = {"0","1"};
 	public MedlemGUI(){
 		  
 		//JPanel Labels
@@ -76,6 +72,7 @@ public class MedlemGUI extends MainGUI implements ActionListener
 				center2.add(navnDoerBox);
 				
 				billedeValg = new JComboBox(comboValg);
+				billedeValg.setSelectedIndex(0);
 				billedeValg.setLayout(new GridLayout(1, 4));
 				center2.add(billedeValg);				
 				
@@ -120,10 +117,14 @@ public class MedlemGUI extends MainGUI implements ActionListener
 			telefon = Integer.parseInt(telefonBox.getInputText());
 			email = emailBox.getInputText();
 			navnDoer = navnDoerBox.getInputText();
-			billeder = (boolean) billedeValg.getSelectedItem();
+			if(billedeValg.getSelectedItem()== "1"){
+				billeder = 1;
+			}
+			else{
+				billeder = 0;
+			}
 			Medlem medlem = new Medlem (0, fornavn, efternavn, adresse, foedselsdato, telefon, email, navnDoer, billeder);
 			new Control().opretMedlem(medlem);
-			System.out.println(fornavn);
 		}
 		
 		if(e.getSource() == btn_aktivitet)
