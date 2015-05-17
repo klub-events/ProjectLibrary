@@ -28,6 +28,7 @@ public class MainGUI implements ActionListener
 	 protected JPanel Panel_Midt = new JPanel();
 	 
 	 //opretter knapperne til toppen af menuen
+	 protected JButton  btn_saldo = new JButton("SALDO");
 	 protected JButton  btn_medlem = new JButton("MEDLEM");
 	 protected JButton  btn_aktivitet = new JButton("AKTIVITET"); 
 	 protected JButton  btn_tilmeld = new JButton("TILMELD AKTIVITET");
@@ -63,6 +64,11 @@ public class MainGUI implements ActionListener
 	     btn_aktivitet.addActionListener(this);
 	     btn_aktivitet.setToolTipText("Administrer aktiviter");
 	     btn_aktivitet.setCursor(new Cursor(Cursor.HAND_CURSOR));
+	     
+	     Panel_Top.add(btn_saldo);
+	     btn_saldo.addActionListener(this);
+	     btn_saldo.setToolTipText("Administrer medlemmers saldo");
+	     btn_saldo.setCursor(new Cursor(Cursor.HAND_CURSOR));
 	    
 	     Panel_Top.add(btn_tilmeld);
 	     btn_tilmeld.addActionListener(this);
@@ -73,16 +79,8 @@ public class MainGUI implements ActionListener
 	     Panel_Top.setBorder(BorderFactory.createEmptyBorder(1,1,1,1));// border
 	     
 	     frame.setVisible(true);
-		 
-		
-		
-		
 		
 	}//Construtor MainGUI slutter
-	
-	
-	
-	
 	
 	//Actions til knapper
 	public void actionPerformed(ActionEvent e)
@@ -104,6 +102,11 @@ public class MainGUI implements ActionListener
 		if(e.getSource() == btn_tilmeld)
 		{
 			new TilmeldAktivitetGUI();
+			
+			frame.dispose();
+		}
+		if(e.getSource() == btn_saldo){
+			new BarBogGUI();
 			
 			frame.dispose();
 		}

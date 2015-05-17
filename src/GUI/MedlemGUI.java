@@ -23,10 +23,6 @@ public class MedlemGUI extends MainGUI implements ActionListener
 	private String email;
 	private String navnDoer;
 	private int billeder;
-	
-	//
-	String[] strInfo = {fornavn, efternavn, adresse, email, navnDoer};
-	int[] intInfo = {foedselsdato, telefon};
 		
 	//Text-label fields created
 	private LabelTextfield forNavnBox;
@@ -41,7 +37,7 @@ public class MedlemGUI extends MainGUI implements ActionListener
 	private String[] comboValg = {"0","1"};
 	public MedlemGUI(){
 		  
-		//JPanel Labels
+				//JPanel Labels
 				JPanel center2 = new JPanel(new GridLayout(10,1));
 				
 				//Navne ud for textfield
@@ -102,11 +98,7 @@ public class MedlemGUI extends MainGUI implements ActionListener
 		  
 		  
 		
-	}//constructor slutter
-	//public Medlem opretMedlem(){
-	//	return new Medlem (0,fornavn, efternavn, adresse, foedselsdato, telefon, email, navnDoer, false); 
-	//}
-	
+	}//constructor slutter	
 	public void actionPerformed(ActionEvent e)
 	{	  
 		if(e.getSource() == btn_opretMedlem){
