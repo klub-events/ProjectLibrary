@@ -26,5 +26,11 @@ public class TilmeldAktivitetGUI extends MainGUI implements ActionListener
 		
 	       frame.dispose();
 	    }
+		
+		if(e.getSource() == btn_saldo ){
+		   new BarBogGUI();
+		
+	       frame.dispose();
+	    }
 	}
 }//public class slutter

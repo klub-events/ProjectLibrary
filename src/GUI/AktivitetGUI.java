@@ -16,9 +16,9 @@ import javax.swing.JTextField;
 //For dan
 public class AktivitetGUI extends MainGUI implements ActionListener
 {
-	JButton btn_opret = new JButton("OPRET");	
-	JButton btn_gem = new JButton("GEM");
-	JButton btn_visAktiviteter = new JButton("VIS AKTIVITETER");
+	private JButton btn_opret = new JButton("OPRET");	
+	private JButton btn_gem = new JButton("GEM");
+	private JButton btn_visAktiviteter = new JButton("VIS AKTIVITETER");
 	
 	public AktivitetGUI()
 	{
@@ -81,6 +81,12 @@ public class AktivitetGUI extends MainGUI implements ActionListener
 		
 	       frame.dispose();
 	    }
+		
+		if(e.getSource() == btn_saldo){
+			new BarBogGUI();
+			
+			frame.dispose();
+		}
 		
 	}//actionperformed sluter
 	

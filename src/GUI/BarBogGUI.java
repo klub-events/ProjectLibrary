@@ -54,6 +54,19 @@ public class BarBogGUI extends MainGUI implements ActionListener
 		   new MedlemGUI();
 	       frame.dispose();
 	    }
+		
+		if(e.getSource() == btn_saldo){
+			new BarBogGUI();
+			
+			frame.dispose();
+		}
+		
+		if(e.getSource() == btn_aktivitet)
+	    {
+			new AktivitetGUI();
+		
+	       frame.dispose();
+	    }
 	}//actionperformed sluter
 }//public class medlem_GUI slutter
 

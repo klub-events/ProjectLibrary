@@ -91,6 +91,8 @@ public class MedlemGUI extends MainGUI implements ActionListener
 		  center2.add(btn_redigerMedlem);
 		  
 		  
+		  
+		  
 		  btn_visMember.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		  btn_visMember.addActionListener(this);
 		 
@@ -125,6 +127,12 @@ public class MedlemGUI extends MainGUI implements ActionListener
 		
 	       frame.dispose();
 	    }
+		
+		if(e.getSource() == btn_saldo){
+			new BarBogGUI();
+			
+			frame.dispose();
+		}
 		
 		if(e.getSource() == btn_tilmeld)
 		{
