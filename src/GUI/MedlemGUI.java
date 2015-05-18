@@ -151,5 +151,14 @@ public class MedlemGUI extends MainGUI implements ActionListener
 			System.out.println("vis member clicked");
 			new Control().startTabel();
 	    }
+		if(e.getSource() == btn_saldo)
+		{	
+			new BarBogGUI();
+			
+			new ControlBarbog().startTabel();
+			//new TilmeldAktivitetGUI();
+			
+			frame.dispose();
+		} 
 	}//actionPerformed slutter
 }//public class medlem_GUI slutter
