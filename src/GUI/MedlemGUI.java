@@ -33,12 +33,14 @@ public class MedlemGUI extends MainGUI implements ActionListener
 	private LabelTextfield emailBox;
 	private LabelTextfield navnDoerBox;
 	
+	
 	private JComboBox billedeValg;
 	private String[] comboValg = {"0","1"};
+	
 	public MedlemGUI(){
 		  
 				//JPanel Labels
-				JPanel center2 = new JPanel(new GridLayout(10,1));
+				JPanel center2 = new JPanel(new GridLayout(11,1));
 				
 				//Navne ud for textfield
 				String[] labelTekster = {"fornavn:","efternavn", "adresse:", "foedselsdato:", "telefon:", "email", "navn på doer:", "billeder"};
@@ -67,9 +69,12 @@ public class MedlemGUI extends MainGUI implements ActionListener
 				navnDoerBox = new LabelTextfield(labelTekster[6]);
 				center2.add(navnDoerBox);
 				
+				
+				//skal have label foran som de andre :S
 				billedeValg = new JComboBox(comboValg);
 				billedeValg.setSelectedIndex(0);
-				billedeValg.setLayout(new GridLayout(1, 4));
+				//billedeValg.setLayout(new GridLayout(1, 1));
+				
 				center2.add(billedeValg);				
 				
 				Panel_Midt.add(center2);
