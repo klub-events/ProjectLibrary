@@ -1,7 +1,7 @@
 package GUI;
 
-import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.JLabel;
@@ -10,6 +10,10 @@ import javax.swing.JTextField;
 // smelter teksten og skrive feltet sammen
 public class LabelTextfield extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	JTextField textField = new JTextField();
 	JLabel label = new JLabel();
 	
@@ -20,6 +24,9 @@ public class LabelTextfield extends JPanel {
 		this.add(label);
 		this.add(textField);
 		this.add(new JLabel());
+		Font font1 = new Font("SansSerif", Font.BOLD, 20);
+		textField.setFont(font1);
+		
 	}
 	
 	public String getInputText() {

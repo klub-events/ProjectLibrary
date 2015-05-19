@@ -35,7 +35,7 @@ public class MedlemGUI extends MainGUI implements ActionListener
 	
 	
 	private JComboBox billedeValg;
-	private String[] comboValg = {"0","1"};
+	private String[] comboValg = {"Nej","Ja"};
 	
 	public MedlemGUI(){
 		  
@@ -116,7 +116,7 @@ public class MedlemGUI extends MainGUI implements ActionListener
 			telefon = Integer.parseInt(telefonBox.getInputText());
 			email = emailBox.getInputText();
 			navnDoer = navnDoerBox.getInputText();
-			if(billedeValg.getSelectedItem()== "1"){
+			if(billedeValg.getSelectedItem()== "Ja"){
 				billeder = 1;
 			}
 			else{
@@ -155,7 +155,7 @@ public class MedlemGUI extends MainGUI implements ActionListener
 		{	
 			new BarBogGUI();
 			
-			new ControlBarbog().startTabel();
+			//new ControlBarbog().startTabel();
 			//new TilmeldAktivitetGUI();
 			
 			frame.dispose();
