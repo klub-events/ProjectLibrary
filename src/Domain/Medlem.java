@@ -1,15 +1,17 @@
 package Domain;
 
 public class Medlem{
-int id;
-String fornavn;
-String efternavn;
-String adresse;
-int fødselsdato;
-int telefon;
-String email;
-String navnPåDør;
-int billeder;
+
+	private boolean hasChanged = false;
+	private int id;
+	private String fornavn;
+	private String efternavn;
+	private String adresse;
+	private int fødselsdato;
+	private int telefon;
+	private String email;
+	private String navnPåDør;
+	private	int billeder;
 
 	public Medlem(int id, String fornavn, String efternavn, String adresse, int fødselsdato, int telefon, String email, String navnPåDør, int billeder){
 		this.id = id;

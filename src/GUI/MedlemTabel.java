@@ -2,7 +2,10 @@ package GUI;
 import javax.swing.*;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
 import Datalink.DBHentMedlemmer;
@@ -10,7 +13,7 @@ import Domain.Medlem;
 
 import java.util.*;
 
-public final class MedlemTabel {
+public class MedlemTabel extends AbstractTableModel implements ActionListener {
 	private ArrayList<Medlem> medlemmer;
 	private JFrame frame;
 	private JTable table;
@@ -18,11 +21,13 @@ public final class MedlemTabel {
 	private JPanel southPanel;
 	private JPanel centerPanel;
 	private JPanel eastPanel;
+	
+	private JButton btn_opdater;
 
 	
 	private DefaultTableModel model = new DefaultTableModel();
 	
-	public MedlemTabel(ArrayList<Medlem> medlemmer){
+	public MedlemTabel(ArrayList	<Medlem> medlemmer){
 	this.medlemmer = medlemmer;
 		 frame = new JFrame ();
 	      
@@ -53,6 +58,9 @@ public final class MedlemTabel {
 	      centerPanel.setLayout(new GridLayout(1,1));
 	      frame.add(centerPanel, BorderLayout.CENTER);
 	            	           
+	      btn_opdater.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		  btn_opdater.addActionListener(this);
+		  southPanel.add(btn_opdater);
 	      
 	      // add scrollpane to table
 	      JScrollPane scrollPane = new JScrollPane(table);
@@ -92,4 +100,128 @@ public final class MedlemTabel {
 	      table.setModel(model);
 	      medlemmer.clear();
 	   }
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btn_opdater){
+			
+		}
+		
+	}
+
+	@Override
+	public String getColumnName(int column){
+		String name = null;
+		switch (column){
+		case 0:
+			name = "id";
+			break;
+		case 1:
+			name = "Fornavn";
+			break;
+		case 2:
+			name = "Efternavn";
+			break;
+		case 3:
+			name = "Adresse";
+			break;
+		case 4:
+			name = "Fødselsdato";
+			break;
+		case 5: 
+			name = "Telefon";
+			break;
+		case 6:
+			name = "Email";
+			break;
+		case 7:
+			name = "NavnPåDør";
+			break;
+		case 8:
+			name = "Billeder";
+			break;
+		}
+		return name;
+	}
+	
+	@Override
+	public int getColumnCount() {
+		return 9;
+	}
+
+	@Override
+	public int getRowCount() {
+		// TODO Auto-generated method stub
+		return medlemmer.size();
+	}
+
+	@Override
+	public Object getValueAt(int rowIndex, int columnIndex) {
+		Medlem m = medlemmer.get(rowIndex);
+		Object value = null;
+		switch(columnIndex){
+		case 0:
+			value = m.getId();
+			break;
+		case 1:
+			value = m.getFornavn();
+			break;
+		case 2:
+			value = m.getEfternavn();
+			break;
+		case 3:
+			value = m.getAdresse();
+			break;
+		case 4:
+			value = m.getFødselsdato();
+			break;
+		case 5:
+			value = m.getTelefon();
+			break;
+		case 6:
+			value = m.getEmail();
+			break;
+		case 7:
+			value = m.getNavnPåDør();
+			break;
+		case 8:
+			value = m.getBilleder();
+			break;
+		}
+		return null;
+	}
+	public void setValueAt(Object aValue, int rowIndex, int columnIndex){
+		if(aValue instanceof String){
+			Medlem m = medlemmer.get(rowIndex);
+			switch (columnIndex){
+			case 0:
+				m.setId(Integer.parseInt(aValue.toString()));
+				break;
+			case 1:
+				m.setFornavn(aValue.toString());
+				break;
+			case 2:
+				m.setEfternavn(aValue.toString());
+				break;
+			case 3:
+				m.setAdresse(aValue.toString());
+				break;
+			case 4:
+				m.setFødselsdato(Integer.parseInt(aValue.toString()));
+				break;
+			case 5:
+				m.setTelefon(Integer.parseInt(aValue.toString()));
+				break;
+			case 6:
+				m.setEmail(aValue.toString());
+				break;
+			case 7:
+				m.setNavnPåDør(aValue.toString());
+				break;
+			case 8:
+				m.setBilleder(Integer.parseInt(aValue.toString()));
+				break;
+			}
+		}
+	}
 	}

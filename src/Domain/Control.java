@@ -2,9 +2,8 @@ package Domain;
 
 import java.util.ArrayList;
 
-import Datalink.DBHentMedlemmer;
-import Datalink.DBOpretMedlem;
-import GUI.MedlemTabel;
+import Datalink.*;
+import GUI.*;
 
 public class Control {
 private ArrayList<Medlem> medlemmer;
