@@ -97,11 +97,7 @@ public class BarBogGUI extends MainGUI implements ActionListener
 			
 			frame.dispose();
 		}
-		if(e.getSource() == btn_visSaldo){
-			new BarBogGUI();
-			
-			frame.dispose();
-		}
+		
 		
 	}//actionperformed sluter
 }//public class medlem_GUI slutter
