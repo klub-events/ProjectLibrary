@@ -2,7 +2,6 @@ package Domain;
 
 public class Medlem{
 
-	private boolean hasChanged = false;
 	private int id;
 	private String fornavn;
 	private String efternavn;

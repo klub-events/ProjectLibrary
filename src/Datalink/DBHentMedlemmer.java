@@ -42,7 +42,6 @@ public class DBHentMedlemmer{
 					String navnPåDør = rs.getString("navnPåDør");
 					int billeder = rs.getInt("billeder");
 					medlemmer.add(m = new Medlem (id, fornavn, efternavn, adresse, fødselsdato, telefon, email, navnPåDør, billeder));
-					System.out.println(id + "\t" + fornavn + "\t" + efternavn + "\t" + adresse + "\t" + fødselsdato + "\t" + telefon + "\t" + email + "\t" + navnPåDør + "\t" + billeder );	
 					System.out.println(m.toString());
 					}
 				conn.close();

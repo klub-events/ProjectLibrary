@@ -5,7 +5,6 @@ import java.awt.*;
 
 import javax.swing.table.DefaultTableModel;
 
-import Datalink.DBHentBarbog;
 import Domain.Barbog;
 
 import java.util.*;
