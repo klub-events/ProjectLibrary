@@ -61,7 +61,9 @@ public class DB_Connector  {
         }
         
         public void opretBarbog()
-
+        {
+        	
+        }
         public void addItemGroup(String name, int position, String color) {
                 try {
                         String sql = "INSERT INTO item_group (Name, Position, Color)"

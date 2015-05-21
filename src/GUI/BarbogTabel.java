@@ -65,6 +65,11 @@ public class BarbogTabel implements ActionListener {
 	      JScrollPane scrollPane = new JScrollPane(table);
 	      frame.add(scrollPane);
 	      
+	      //implements the btn_updater on the jtable
+	      btn_opdater.setCursor(new Cursor(Cursor.HAND_CURSOR));
+	      btn_opdater.addActionListener(this);
+	      southPanel.add(btn_opdater);
+	      
 	      // call the method updateJTable()
 	      updateJTable();
 	         
@@ -73,7 +78,7 @@ public class BarbogTabel implements ActionListener {
 	
 	public void updateJTable() {
 	   	// add the column names
-	      model.setColumnIdentifiers(new String[] { "ID", "Pris", "Vare", "Tilgængelig", "VigtigNote", "Saldo" });
+	      model.setColumnIdentifiers(new String[] { "ID","VigtigNote", "Saldo" });
 	   
 	   	// set how many rows will be in the table
 	      model.setRowCount(barbogs.size());
@@ -85,11 +90,8 @@ public class BarbogTabel implements ActionListener {
 	   	// time
 	      for (Barbog barbog : barbogs) {
 	         model.setValueAt(barbog.getId(), rowSet, 0);
-	         model.setValueAt(barbog.getPris(), rowSet, 1);
-	         model.setValueAt(barbog.getVare(), rowSet, 2);
-	         model.setValueAt(barbog.getTilgængelig(), rowSet, 3);
-	         model.setValueAt(barbog.getVigtigNote(), rowSet, 4);
-	         model.setValueAt(barbog.getSaldo(), rowSet, 5);
+	         model.setValueAt(barbog.getVigtigNote(), rowSet, 1);
+	         model.setValueAt(barbog.getSaldo(), rowSet, 2);
 
 	         rowSet++;
 	      }
@@ -108,8 +110,8 @@ public class BarbogTabel implements ActionListener {
 				for(column = 0; column < model.getColumnCount(); column++){
 				data.add(model.getValueAt(row, column).toString());					
 				}
-					//				Barbog-objekts values:		int id, 	int pris, 					String vare, 		int tilgængelig, 	String vigtigNote, 	int saldo
-				opdateBarbog.add(new Barbog(Integer.parseInt(data.get(0)), Integer.parseInt(data.get(1)), data.get(2), Integer.parseInt(data.get(3)), data.get(4), Integer.parseInt(data.get(5))));
+					//				Barbog-objekts values:		int id,  	String vigtigNote, 	int saldo
+				opdateBarbog.add(new Barbog(Integer.parseInt(data.get(0)), data.get(1), Integer.parseInt(data.get(2))));
 				System.out.println(data);
 				data.clear();
 			}

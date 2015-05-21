@@ -8,7 +8,8 @@ public class Barbog {
 	String vigtigNote;
 	int saldo;
 	
-	public Barbog(int id, int pris, String vare, int tilgængelig, String vigtigNote, int saldo) {
+	public Barbog(int id, String vigtigNote, int saldo) {
+		super();
 		this.id = id;
 		this.vigtigNote = vigtigNote;
 		this.saldo = saldo;
@@ -19,27 +20,6 @@ public class Barbog {
 	}
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public int getPris() {
-		return pris;
-	}
-	public void setPris(int pris) {
-		this.pris = pris;
-	}
-
-	public String getVare() {
-		return vare;
-	}
-	public void setVare(String vare) {
-		this.vare = vare;
-	}
-
-	public int getTilgængelig() {
-		return tilgængelig;
-	}
-	public void setTilgængelig(int tilgængelig) {
-		this.tilgængelig = tilgængelig;
 	}
 
 	public String getVigtigNote() {

@@ -30,9 +30,6 @@ public class DBUpdateBarbog {
 		  + " WHERE id = ?";
 			PreparedStatement ps = conn.prepareStatement(statementToQuery);
 			ps.setInt(9, barbog.getId());
-			ps.setInt(1,barbog.getPris());
-			ps.setString(2,barbog.getVare());
-			ps.setInt(3,barbog.getTilgængelig());
 			ps.setString(4,barbog.getVigtigNote());
 			ps.setInt(5,barbog.getSaldo());
 	

@@ -40,18 +40,15 @@ public class DBHentBarbog{
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(
 					"SELECT * FROM barbog "
-					+ "ORDER BY barbog.id ASC, vare"
+					+ "ORDER BY barbog.id ASC"
 					+ ";");
 			
 				while(rs.next()){
 					int id = rs.getInt("ID");
-					int pris = rs.getInt("pris");
-					String vare = rs.getString("vare");
-					int tilgængelig = rs.getInt("tilgængelig");
 					String vigtigNote = rs.getString("vigtigNote");
 					int saldo = rs.getInt("saldo");
-					barbogs.add(b = new Barbog (id, pris, vare, tilgængelig, vigtigNote,saldo));
-					System.out.println(id + "\t" + pris + "\t" + vare + "\t" + tilgængelig + "\t" + vigtigNote + "\t" + saldo);	
+					barbogs.add(b = new Barbog (id, vigtigNote,saldo));
+					System.out.println(id + "\t" + "\t" + vigtigNote + "\t" + saldo);	
 					System.out.println(b.toString());
 					}
 				conn.close();
