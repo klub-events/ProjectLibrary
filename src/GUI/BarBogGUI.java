@@ -63,7 +63,7 @@ public class BarBogGUI extends MainGUI implements ActionListener
 		{	
 			
 			
-			new ControlBarbog().startTabel();
+			new Control().hentBarbogDB();
 			//new TilmeldAktivitetGUI();
 			
 			frame.dispose();

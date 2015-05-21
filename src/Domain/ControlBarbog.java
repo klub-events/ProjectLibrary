@@ -8,7 +8,7 @@ import GUI.BarbogTabel;
 
 public class ControlBarbog {
 private ArrayList<Barbog> barbogs;
-
+/**
 	public ControlBarbog(){
 	this.barbogs = DBHentBarbog.getBarbog();
 	}
@@ -21,5 +21,6 @@ private ArrayList<Barbog> barbogs;
 	public void opretBarbog(Barbog barbog){
 		new DBOpretBarbog(barbog);
 		System.out.println(barbog.toString());
-	}	
+	}
+**/	
 }

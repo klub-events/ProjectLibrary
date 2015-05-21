@@ -32,11 +32,11 @@ public class DBOpretBarbog {
 //		return serialized_id;
 //	}
 	
-	public DBOpretBarbog(Barbog barbogs) {
+	public void opretBarbog(Barbog barbogs) {
 		
 
-		this.barbogs = barbogs;
-
+	//	this.barbogs = barbogs;
+		
 		java.sql.Statement stmt = null;
 		ResultSet rs = null;
 		try {

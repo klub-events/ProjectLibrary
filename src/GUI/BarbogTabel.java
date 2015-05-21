@@ -2,21 +2,29 @@ package GUI;
 import javax.swing.*;
 
 import java.awt.*;
+import java.awt.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.table.DefaultTableModel;
 
 import Domain.Barbog;
+import Domain.Control;
+import Domain.Medlem;
 
 import java.util.*;
 
-public final class BarbogTabel {
+public class BarbogTabel implements ActionListener {
 	private ArrayList<Barbog> barbogs;
+	private ArrayList<Barbog> opdateBarbog = new ArrayList<Barbog>();
+	private ArrayList<String> data = new ArrayList<String>();
 	private JFrame frame;
 	private JTable table;
 	private JPanel northPanel;
 	private JPanel southPanel;
 	private JPanel centerPanel;
 	private JPanel eastPanel;
+	private JButton btn_opdater = new JButton("Opdater");
 
 	
 	private DefaultTableModel model = new DefaultTableModel();
@@ -89,4 +97,23 @@ public final class BarbogTabel {
 	      table.setModel(model);
 	      barbogs.clear();
 	   }
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btn_opdater){
+			model.fireTableDataChanged();
+			int row;
+			int column;
+			for(row = 0; row < model.getRowCount(); row++){
+				for(column = 0; column < model.getColumnCount(); column++){
+				data.add(model.getValueAt(row, column).toString());					
+				}
+					//				Barbog-objekts values:		int id, 	int pris, 					String vare, 		int tilgængelig, 	String vigtigNote, 	int saldo
+				opdateBarbog.add(new Barbog(Integer.parseInt(data.get(0)), Integer.parseInt(data.get(1)), data.get(2), Integer.parseInt(data.get(3)), data.get(4), Integer.parseInt(data.get(5))));
+				System.out.println(data);
+				data.clear();
+			}
+			 new Control().updateBarbogDB(opdateBarbog);
+		}
+	}
 	}

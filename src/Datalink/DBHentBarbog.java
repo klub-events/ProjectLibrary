@@ -14,13 +14,15 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import Domain.Control;
 import Domain.Barbog;
 import GUI.BarbogTabel;
 
 public class DBHentBarbog{
-	public static ArrayList<Barbog> barbogs = new ArrayList<Barbog>();
-	private Barbog m;
-	public DBHentBarbog(){
+	private ArrayList<Barbog> barbogs = new ArrayList<Barbog>();
+	private Barbog b;
+	
+	public void hentBarbog(){
 		
 		java.sql.Statement stmt = null;
 		ResultSet rs = null;
@@ -48,18 +50,19 @@ public class DBHentBarbog{
 					int tilgængelig = rs.getInt("tilgængelig");
 					String vigtigNote = rs.getString("vigtigNote");
 					int saldo = rs.getInt("saldo");
-					barbogs.add(m = new Barbog (id, pris, vare, tilgængelig, vigtigNote,saldo));
+					barbogs.add(b = new Barbog (id, pris, vare, tilgængelig, vigtigNote,saldo));
 					System.out.println(id + "\t" + pris + "\t" + vare + "\t" + tilgængelig + "\t" + vigtigNote + "\t" + saldo);	
-					System.out.println(m.toString());
+					System.out.println(b.toString());
 					}
 				conn.close();
 		}
 		catch(Exception e){
 			e.printStackTrace();
 		}
+		sendBarbog();
 	}
-
-	public static ArrayList<Barbog> getBarbog() {
-		return barbogs;
+	//sender barbogs-arrayet igennem control til medlems tabel klassen.
+	private void sendBarbog() {
+		Control.startBarbogTabel(barbogs);
 	}
 }
