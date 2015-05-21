@@ -53,12 +53,7 @@ public class BarBogGUI extends MainGUI implements ActionListener
 	{
 		if(e.getSource() == btn_visSaldo)
 		{	
-			
-			
-			new Control().hentBarbogDB();
-			//new TilmeldAktivitetGUI();
-			
-			
+			new BarbogTabel();	
 		} 
 		
 		if(e.getSource() == btn_redigerSaldo )

@@ -15,7 +15,6 @@ import Domain.Medlem;
 import java.util.*;
 
 public class BarbogTabel implements ActionListener {
-	private ArrayList<Barbog> barbogs;
 	private ArrayList<Barbog> opdateBarbog = new ArrayList<Barbog>();
 	private ArrayList<String> data = new ArrayList<String>();
 	private JFrame frame;
@@ -29,8 +28,7 @@ public class BarbogTabel implements ActionListener {
 	
 	private DefaultTableModel model = new DefaultTableModel();
 	
-	public BarbogTabel(ArrayList<Barbog> barbogs){
-	this.barbogs = barbogs;
+	public BarbogTabel(){
 		 frame = new JFrame ();
 	      
 	      northPanel = new JPanel();
@@ -77,6 +75,8 @@ public class BarbogTabel implements ActionListener {
 	   }
 	
 	public void updateJTable() {
+		//Henter Barbogs værdier fra db
+		ArrayList<Barbog> barbogs = new Control().hentBarbog();
 	   	// add the column names
 	      model.setColumnIdentifiers(new String[] { "ID","VigtigNote", "Saldo" });
 	   
@@ -115,7 +115,7 @@ public class BarbogTabel implements ActionListener {
 				System.out.println(data);
 				data.clear();
 			}
-			 new Control().updateBarbogDB(opdateBarbog);
+			 new Control().opdaterBarbog(opdateBarbog);
 		}
 	}
 	}

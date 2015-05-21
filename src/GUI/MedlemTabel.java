@@ -15,11 +15,8 @@ import Domain.Medlem;
 import java.util.*;
 
 public class MedlemTabel implements ActionListener {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 8609290261454458093L;
-	private ArrayList<Medlem> medlemmer;
+	
+	
 	private ArrayList<Medlem> opdateMedlemmer = new ArrayList<Medlem>();
 	private JFrame frame;
 	private JTable table;
@@ -30,13 +27,12 @@ public class MedlemTabel implements ActionListener {
 	private JPanel eastPanel;
 	private int rowSet;
 	private JButton btn_opdater = new JButton("Opdater");
-	private Medlem m;
+	private Control con;
 
 	
 	private DefaultTableModel model = new DefaultTableModel();
 	
-	public MedlemTabel(ArrayList	<Medlem> medlemmer){
-	this.medlemmer = medlemmer;
+	public MedlemTabel(){
 		 frame = new JFrame ();
 	      
 	      northPanel = new JPanel();
@@ -77,13 +73,12 @@ public class MedlemTabel implements ActionListener {
 			  
 	      // call the method updateJTable()
 	      updateJTable();
-	         
-	      
 	      
 	      frame.setVisible(true);
 	   }
 	
 	public void updateJTable() {
+		 ArrayList<Medlem> medlemmer = new Control().hentMedlemmer();
 	   	// add the column names
 	      model.setColumnIdentifiers(new String[] { "id", "Fornavn", "Efternavn", "Adresse", "Fødselsdato", "Telefon", "Email", "Navn på dør", "Billeder" });
 	   

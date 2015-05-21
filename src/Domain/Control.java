@@ -11,34 +11,31 @@ public class Control {
 	public Control(){
 		db = DB_Connector.getInstance();
 	}
-	public void hentMedlemmerDB(){
-		new DBHentMedlemmer().hentMedlemmer();
-	}
-	public static void startMedTabel(ArrayList<Medlem> medlemmer){
-		new MedlemTabel(medlemmer);
+	
+	//MedlemsDB controls
+	public ArrayList<Medlem> hentMedlemmer(){
+		return db.hentMedlemmer();
 	}
 	
 	public void opretMedlem(Medlem medlem){
 		db.opretMedlem(medlem);
 	}
+	
 	public void updateDB(ArrayList <Medlem> opdateMedlem){
-		new DBUpdateMedlemmer().opdaterMedlemmer(opdateMedlem);
+		db.opdaterMedlemmer(opdateMedlem);
 	}
 		
-	public static void startBarbogTabel(ArrayList<Barbog> barbog){
-		new DBHentBarbog();
-		new BarbogTabel(barbog);
+	//BarbogsDB Controls
+	public ArrayList<Barbog> hentBarbog(){
+		return db.hentBarbog();
 	}
 		
 	public void opretBarbog(Barbog barbog){
-		new DBOpretBarbog().opretBarbog(barbog);
-		System.out.println(barbog.toString());
+		db.opretBarbog(barbog);
 	}
-	public void hentBarbogDB(){
-		new DBHentBarbog().hentBarbog();
-	}
-	public void updateBarbogDB(ArrayList<Barbog> opdateBarbog){
-		new DBUpdateBarbog().opdaterBarbog(opdateBarbog);
+	
+	public void opdaterBarbog(ArrayList<Barbog> opdateBarbog){
+		db.opdaterBarbog(opdateBarbog);
 	}
 }
 
