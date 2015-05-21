@@ -56,7 +56,7 @@ public class DBHentMedlemmer{
 	}
 	//sender medlems arrayet igennem control til medlems tabel klassen.
 	private void sendMedlemmer() {
-		Control.startTabel(medlemmer);
+		Control.startMedTabel(medlemmer);
 		
 	}
 }

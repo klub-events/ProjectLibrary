@@ -10,9 +10,6 @@ public class Barbog {
 	
 	public Barbog(int id, int pris, String vare, int tilgængelig, String vigtigNote, int saldo) {
 		this.id = id;
-		this.pris = pris;
-		this.vare = vare;
-		this.tilgængelig = tilgængelig;
 		this.vigtigNote = vigtigNote;
 		this.saldo = saldo;
 	}
