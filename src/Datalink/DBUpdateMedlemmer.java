@@ -42,9 +42,6 @@ public class DBUpdateMedlemmer {
 			
 			ps.executeUpdate();
 		  }
-		
-		
-			
 			conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
