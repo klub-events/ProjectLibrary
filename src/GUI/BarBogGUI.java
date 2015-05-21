@@ -66,7 +66,7 @@ public class BarBogGUI extends MainGUI implements ActionListener
 			new Control().hentBarbogDB();
 			//new TilmeldAktivitetGUI();
 			
-			frame.dispose();
+			
 		} 
 		
 		if(e.getSource() == btn_redigerSaldo )
