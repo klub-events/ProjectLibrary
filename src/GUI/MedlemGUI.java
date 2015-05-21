@@ -148,7 +148,6 @@ public class MedlemGUI extends MainGUI implements ActionListener
 		
 		if(e.getSource() == btn_visMember) 
 		{
-			System.out.println("vis member clicked");
 			new MedlemTabel();
 	    }
 		

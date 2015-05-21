@@ -26,8 +26,10 @@ public class MedlemTabel implements ActionListener {
 	private ArrayList<String> data = new ArrayList<String>();
 	private JPanel eastPanel;
 	private int rowSet;
-	private JButton btn_opdater = new JButton("Opdater");
+	private JButton btn_opdater = new JButton("Opdater Medlemmer");
+	private JButton btn_slet = new JButton("Slet Medlem");
 	private Control con;
+	private int selectedRow;
 
 	
 	private DefaultTableModel model = new DefaultTableModel();
@@ -70,6 +72,10 @@ public class MedlemTabel implements ActionListener {
 	      btn_opdater.setCursor(new Cursor(Cursor.HAND_CURSOR));
 	      btn_opdater.addActionListener(this);
 	      southPanel.add(btn_opdater);
+	      
+	      btn_slet.setCursor(new Cursor(Cursor.HAND_CURSOR));
+	      btn_slet.addActionListener(this);
+	      southPanel.add(btn_slet);
 			  
 	      // call the method updateJTable()
 	      updateJTable();
@@ -123,6 +129,13 @@ public class MedlemTabel implements ActionListener {
 			}
 			 new Control().updateDB(opdateMedlemmer);
 		}
-	}
- 
+			if (e.getSource() == btn_slet){
+				selectedRow = table.getSelectedRow();
+				int identifier = (int) model.getValueAt(selectedRow,0);
+				model.removeRow(selectedRow);
+				System.out.println(identifier);
+				new Control().sletMedlem(identifier);
+				
+			}
+	} 
 }

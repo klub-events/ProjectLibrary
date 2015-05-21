@@ -37,6 +37,11 @@ public class Control {
 	public void opdaterBarbog(ArrayList<Barbog> opdateBarbog){
 		db.opdaterBarbog(opdateBarbog);
 	}
+
+	public void sletMedlem(int identifier) {
+		db.sletMedlem(identifier);
+		
+	}
 }
 
 

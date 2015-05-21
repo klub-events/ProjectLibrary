@@ -23,7 +23,7 @@ public class DB_Connector {
 	private static DB_Connector database;
 
 	private DB_Connector() { // Private constructor to prevent outside
-								// instantiation.. Singleton
+							// instantiation.. Singleton
 		try {
 
 			Class.forName(JDCB_DRIVER);
@@ -31,7 +31,7 @@ public class DB_Connector {
 			conn = DriverManager.getConnection(DATABASE_URL, DATABASE_USR,
 					DATABASE_PWD);
 
-			System.out.println("Connected to database,, YEEEAHHHH");
+			System.out.println("Connected to database");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 			System.out.println("Internal error");
@@ -42,7 +42,7 @@ public class DB_Connector {
 	}
 
 	// Returns the singleton instance of the DB class; instantiates it if it
-	// isn't:
+	// is not instantiated yet
 	public static DB_Connector getInstance() {
 		if (database == null) {
 			database = new DB_Connector();
@@ -154,5 +154,18 @@ public void opdaterMedlemmer(ArrayList<Medlem> opdateretMedlemmer){
 		} catch(Exception e){
 			e.printStackTrace();
 		}
+	}
+
+public void sletMedlem(int identifier) {
+	try{
+		String statementToQuery = "DELETE FROM medlemmer WHERE id = ?";
+		PreparedStatement ps = conn.prepareStatement(statementToQuery);
+		ps.setInt(1, identifier);
+		ps.executeUpdate();
+		
+	} catch(Exception e){
+		e.printStackTrace();
+	}
+	
 	}
 }
