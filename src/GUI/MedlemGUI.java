@@ -121,8 +121,9 @@ public class MedlemGUI extends MainGUI implements ActionListener
 			else{
 				billeder = 0;
 			}
-			Medlem medlem = new Medlem (0, fornavn, efternavn, adresse, foedselsdato, telefon, email, navnDoer, billeder);
-			new Control().opretMedlem(medlem);
+			Medlem m = new Medlem (0, fornavn, efternavn, adresse, foedselsdato, telefon, email, navnDoer, billeder);
+			System.out.println(m.toString());
+			new Control().opretMedlem(m);
 		}
 		
 		if(e.getSource() == btn_aktivitet)
@@ -148,7 +149,7 @@ public class MedlemGUI extends MainGUI implements ActionListener
 		if(e.getSource() == btn_visMember) 
 		{
 			System.out.println("vis member clicked");
-			new Control().startTabel();
+			new Control().hentMedlemmerDB();
 	    }
 		
 	}//actionPerformed slutter

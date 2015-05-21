@@ -4,13 +4,16 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import Domain.Control;
 import Domain.Medlem;
 import GUI.MedlemTabel;
 
 public class DBHentMedlemmer{
-	public static ArrayList<Medlem> medlemmer = new ArrayList<Medlem>();
+	
+	private ArrayList<Medlem> medlemmer = new ArrayList<Medlem>();
 	private Medlem m;
-	public DBHentMedlemmer(){
+	
+	public void hentMedlemmer(){
 		
 		java.sql.Statement stmt = null;
 		ResultSet rs = null;
@@ -49,9 +52,11 @@ public class DBHentMedlemmer{
 		catch(Exception e){
 			e.printStackTrace();
 		}
+		sendMedlemmer();
 	}
-
-	public static ArrayList<Medlem> getMedlemmer() {
-		return medlemmer;
+	//sender medlems arrayet igennem control til medlems tabel klassen.
+	private void sendMedlemmer() {
+		Control.startTabel(medlemmer);
+		
 	}
 }

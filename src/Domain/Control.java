@@ -6,20 +6,22 @@ import Datalink.*;
 import GUI.*;
 
 public class Control {
-private ArrayList<Medlem> medlemmer;
-
-	public Control(){
-	this.medlemmer = DBHentMedlemmer.getMedlemmer();
-	}
 	
-	public void startTabel(){
-		new DBHentMedlemmer();
+	public Control(){
+		
+	}
+	public void hentMedlemmerDB(){
+		new DBHentMedlemmer().hentMedlemmer();
+	}
+	public static void startTabel(ArrayList<Medlem> medlemmer){
 		new MedlemTabel(medlemmer);
 	}
 	
 	public void opretMedlem(Medlem medlem){
-		new DBOpretMedlem(medlem);
-		System.out.println(medlem.toString());
-	}	
+		new DBOpretMedlem().opretMedlem(medlem);
+	}
+	public void updateDB(ArrayList <Medlem> opdateMedlem){
+		new DBUpdateMedlemmer().opdaterMedlemmer(opdateMedlem);
+	}
 }
 

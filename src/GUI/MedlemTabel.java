@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
 
 import Domain.Barbog;
+import Domain.Control;
 import Domain.Medlem;
 
 import java.util.*;
@@ -114,6 +115,7 @@ public class MedlemTabel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btn_opdater){
+			model.fireTableDataChanged();
 			int row;
 			int column;
 			for(row = 0; row < model.getRowCount(); row++){
@@ -121,9 +123,10 @@ public class MedlemTabel implements ActionListener {
 				data.add(model.getValueAt(row, column).toString());					
 				}
 				opdateMedlemmer.add(new Medlem(Integer.parseInt(data.get(0)), data.get(1), data.get(2), data.get(3), Integer.parseInt(data.get(4)), Integer.parseInt(data.get(5)), data.get(6), data.get(7), Integer.parseInt(data.get(8))));
-				System.out.println(opdateMedlemmer);
+				System.out.println(data);
 				data.clear();
 			}
+			 new Control().updateDB(opdateMedlemmer);
 		}
 	}
 
