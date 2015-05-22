@@ -31,7 +31,7 @@ public class BarBogGUI extends MainGUI implements ActionListener
 		saldoBox = new LabelTextfield(labelTekstSaldo);
 		center3.add(saldoBox);	
 		
-		Panel_Midt.add(center3);
+		Panel_Content.add(center3);
 		center3.setBackground(Color.WHITE);
 		
 

@@ -40,34 +40,34 @@ public class MedlemGUI extends MainGUI implements ActionListener
 	public MedlemGUI(){
 		  
 				//JPanel Labels
-				JPanel center2 = new JPanel(new GridLayout(11,1));
+				JPanel content2 = new JPanel(new GridLayout(11,1));
 				
 				//Navne ud for textfield
 				String[] labelTekster = {"fornavn:","efternavn", "adresse:", "foedselsdato:", "telefon:", "email", "navn på doer:", "billeder"};
 				
 				//adder navn og tekstfield til vinduet
 				forNavnBox = new LabelTextfield(labelTekster[0]);
-				center2.add(forNavnBox);
+				content2.add(forNavnBox);
 				
 				//adder navn og tekstfield til vinduet
 				 efterNavnBox = new LabelTextfield(labelTekster[1]);
-				center2.add(efterNavnBox);
+				content2.add(efterNavnBox);
 				
 				adresseBox = new LabelTextfield(labelTekster[2]);
-				center2.add(adresseBox);
+				content2.add(adresseBox);
 				
 				//dato api
 				foedselsdatoBox = new LabelTextfield(labelTekster[3]);
-				center2.add(foedselsdatoBox);
+				content2.add(foedselsdatoBox);
 				
 				telefonBox = new LabelTextfield(labelTekster[4]);
-				center2.add(telefonBox);
+				content2.add(telefonBox);
 				
 				emailBox = new LabelTextfield(labelTekster[5]);
-				center2.add(emailBox);
+				content2.add(emailBox);
 				
 				navnDoerBox = new LabelTextfield(labelTekster[6]);
-				center2.add(navnDoerBox);
+				content2.add(navnDoerBox);
 				
 				
 				//skal have label foran som de andre :S
@@ -75,10 +75,10 @@ public class MedlemGUI extends MainGUI implements ActionListener
 				billedeValg.setSelectedIndex(0);
 				//billedeValg.setLayout(new GridLayout(1, 1));
 				
-				center2.add(billedeValg);				
+				content2.add(billedeValg);				
 				
-				Panel_Midt.add(center2);
-				center2.setBackground(Color.WHITE);		
+				Panel_Content.add(content2);
+				content2.setBackground(Color.WHITE);		
 		
 		
 		
@@ -87,7 +87,7 @@ public class MedlemGUI extends MainGUI implements ActionListener
 		  
 		  btn_opretMedlem.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		  btn_opretMedlem.addActionListener(this);
-		  center2.add(btn_opretMedlem);
+		  content2.add(btn_opretMedlem);
 		  
 		 
 		  
@@ -97,7 +97,7 @@ public class MedlemGUI extends MainGUI implements ActionListener
 		  btn_visMember.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		  btn_visMember.addActionListener(this);
 		 
-		  center2.add(btn_visMember);
+		  content2.add(btn_visMember);
 		  
 		  
 		

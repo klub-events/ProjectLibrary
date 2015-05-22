@@ -25,7 +25,7 @@ public class MainGUI implements ActionListener
 	 protected JPanel Panel_Top = new JPanel();
 	 
 	//Laver et canvas for det der skal på vinduet - alt i midten
-	 protected JPanel Panel_Midt = new JPanel();
+	 protected JPanel Panel_Content = new JPanel();
 	 
 	 //opretter knapperne til toppen af menuen
 	 protected JButton  btn_saldo = new JButton("SALDO");
@@ -44,14 +44,14 @@ public class MainGUI implements ActionListener
 	    	   
 	     
 	     Panel_Top.setLayout( new GridLayout());
-	     Panel_Midt.setLayout(new GridLayout());// MANGLER LAYOUT TIL AT PLACE DE FORSKELLIGE TING
+	     Panel_Content.setLayout(new GridLayout());// MANGLER LAYOUT TIL AT PLACE DE FORSKELLIGE TING
 	     frame.getContentPane().add(Panel_Top, "North");
-	     frame.getContentPane().add(Panel_Midt, "Center");
+	     frame.getContentPane().add(Panel_Content, "Center");
 	     
 	     Panel_Top.setBackground(Color.darkGray);
-	     Panel_Midt.setBackground(Color.GRAY);
+	     Panel_Content.setBackground(Color.GRAY);
 	     Panel_Top.setPreferredSize(new Dimension(100, 100));
-	     Panel_Midt.setPreferredSize(new Dimension(860, 690));
+	     Panel_Content.setPreferredSize(new Dimension(860, 690));
 	     
 	     //opretter knapper med actionlisteners, alle til toppen af menu
 	     Panel_Top.add(btn_medlem);

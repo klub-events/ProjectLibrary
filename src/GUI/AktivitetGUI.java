@@ -17,14 +17,14 @@ import javax.swing.JTextField;
 public class AktivitetGUI extends MainGUI implements ActionListener
 {
 	private JButton btn_opret = new JButton("OPRET");	
-	private JButton btn_gem = new JButton("GEM");
+	
 	private JButton btn_visAktiviteter = new JButton("VIS AKTIVITETER");
 	
 	public AktivitetGUI()
 	{
 		
 		//JPanel Labels
-		JPanel center = new JPanel(new GridLayout(10,1));
+		JPanel content1 = new JPanel(new GridLayout(10,1));
 		
 		//Navne ud for textfield
 		String[] labelTekster = {"navn:", "pris:", "deltagerantal:", "dato:"};
@@ -32,38 +32,36 @@ public class AktivitetGUI extends MainGUI implements ActionListener
 		//adder navn og tekstfield til vinduet
 		LabelTextfield navnBox = new LabelTextfield(labelTekster[0]);
 		String navn = navnBox.getInputText();
-		center.add(navnBox);
+		content1.add(navnBox);
 		
 		LabelTextfield prisBox = new LabelTextfield(labelTekster[1]);
 		String pris = prisBox.getInputText();
-		center.add(prisBox);
+		content1.add(prisBox);
 		
 		LabelTextfield deltagerantalBox = new LabelTextfield(labelTekster[2]);
 		String deltagerantal = deltagerantalBox.getInputText();
-		center.add(deltagerantalBox);
+		content1.add(deltagerantalBox);
 		
 		//speciel desginet dato api kommer
 		LabelTextfield datoBox = new LabelTextfield(labelTekster[3]);
 		String dato = datoBox.getInputText();
-		center.add(datoBox);
+		content1.add(datoBox);
 		
 		
 		
-		Panel_Midt.add(center);
-		center.setBackground(Color.WHITE);
+		Panel_Content.add(content1);
+		content1.setBackground(Color.WHITE);
 		btn_aktivitet.setBackground(Color.WHITE);
 		
 		btn_opret.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		
-		center.add(btn_opret);
+		content1.add(btn_opret);
 		
-		btn_gem.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btn_gem.setToolTipText("Gemmer hvis oprettet medlem bliver redigeret");
-		center.add(btn_gem);
+		
 		
 		btn_visAktiviteter.setCursor(new Cursor(Cursor.HAND_CURSOR));
 	
-		center.add(btn_visAktiviteter);
+		content1.add(btn_visAktiviteter);
 	}//constructor slutter
 	
 	public void actionPerformed(ActionEvent e)
