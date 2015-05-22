@@ -11,7 +11,7 @@ import Domain.*;
 public class MedlemGUI extends MainGUI implements ActionListener
 {
 	private JButton btn_opretMedlem = new JButton("OPRET");
-	private JButton btn_redigerMedlem = new JButton("GEM");
+	
 	private JButton btn_visMember = new JButton("VIS MEMBER");
 	
 	//Værdier for indtastede oplysnigner
@@ -89,10 +89,7 @@ public class MedlemGUI extends MainGUI implements ActionListener
 		  btn_opretMedlem.addActionListener(this);
 		  center2.add(btn_opretMedlem);
 		  
-		  btn_redigerMedlem.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		  btn_redigerMedlem.setToolTipText("Gemmer hvis oprettet medlem bliver redigeret");
-		  btn_redigerMedlem.addActionListener(this);
-		  center2.add(btn_redigerMedlem);
+		 
 		  
 		  
 		  
