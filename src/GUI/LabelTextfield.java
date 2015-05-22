@@ -33,4 +33,8 @@ public class LabelTextfield extends JPanel {
 		return textField.getText();
 	}
 
+	public void setText(String string) {
+		textField.setText("");
+	}
+
 }
