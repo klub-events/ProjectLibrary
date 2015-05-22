@@ -121,6 +121,12 @@ public class MedlemGUI extends MainGUI implements ActionListener
 			Medlem m = new Medlem (0, fornavn, efternavn, adresse, foedselsdato, telefon, email, navnDoer, billeder);
 			System.out.println(m.toString());
 			new Control().opretMedlem(m);
+			
+			
+			JOptionPane.showMessageDialog(frame, "Medlemmet er nu tilføjet til databasen");
+			
+			new MedlemGUI();
+			frame.dispose();
 		}
 		
 		if(e.getSource() == btn_aktivitet)
