@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.mysql.jdbc.Statement;
+
 import Domain.Barbog;
 import Domain.Medlem;
 
@@ -53,10 +55,19 @@ public class DB_Connector {
 	public void opretMedlem(Medlem medlem) {
 
 		try {
-			String sql = "INSERT INTO medlemmer VALUES(" + medlem.toString()
-					+ ");";
+			String sql = "INSERT INTO medlemmer VALUES("+medlem.toString()+");";
 			System.out.println(sql);
-			conn.createStatement().executeUpdate(sql);
+			PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			statement.executeUpdate();
+	        try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+	            if (generatedKeys.next()) {
+	                medlem.setId(generatedKeys.getInt(1));
+	            }
+	            else {
+	            	System.out.println("No keys generated - hvor er mit medlem?");
+	            }
+	        }
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

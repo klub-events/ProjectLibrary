@@ -19,6 +19,7 @@ public class Control {
 	
 	public void opretMedlem(Medlem medlem){
 		db.opretMedlem(medlem);
+		//updateGUI med nye oplysninger
 	}
 	
 	public void updateDB(ArrayList <Medlem> opdateMedlem){

@@ -119,9 +119,11 @@ public class MedlemTabel implements ActionListener {
 			model.fireTableDataChanged();
 			int row;
 			int column;
+			System.out.println(model.getRowCount() + ", " + model.getColumnCount());
 			for(row = 0; row < model.getRowCount(); row++){
 				for(column = 0; column < model.getColumnCount(); column++){
-				data.add(model.getValueAt(row, column).toString());					
+					System.out.println(row +", " +column);
+					data.add(model.getValueAt(row, column).toString());					
 				}
 				opdateMedlemmer.add(new Medlem(Integer.parseInt(data.get(0)), data.get(1), data.get(2), data.get(3), Integer.parseInt(data.get(4)), Integer.parseInt(data.get(5)), data.get(6), data.get(7), Integer.parseInt(data.get(8))));
 				System.out.println(data);
