@@ -2,15 +2,14 @@ package Domain;
 
 public class Barbog {
 	int id;
-	int pris;
-	String vare;
-	int tilgængelig; 
+	String navn;
 	String vigtigNote;
 	int saldo;
 	
-	public Barbog(int id, String vigtigNote, int saldo) {
+	public Barbog(int id, String navn, String vigtigNote, int saldo) {
 		super();
 		this.id = id;
+		this.navn = navn;
 		this.vigtigNote = vigtigNote;
 		this.saldo = saldo;
 	}
@@ -20,6 +19,12 @@ public class Barbog {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public String getNavn(){
+		return navn;
+	}
+	public void setNavn(String navn){
+		this.navn = navn;
 	}
 
 	public String getVigtigNote() {

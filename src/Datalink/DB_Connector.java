@@ -108,17 +108,23 @@ public class DB_Connector {
 		return medlemmer;	
 		
 	}
-	
+	/**
+	 *       String query ="SELECT fname,lname,isbn from author 
+      inner join books on author.AUTHORID = books.AUTHORID";
+	 * @return
+	 */
 	public ArrayList<Barbog> hentBarbog(){
 		ArrayList<Barbog> barbogs = new ArrayList<Barbog>();
 		try{
-		String sql = "SELECT * FROM barbog ORDER BY barbog.id ASC;";
+			String sql = "SELECT m.ID, m.fornavn, b.vigtignote, b.saldo FROM medlemmer m, barbog b WHERE m.ID = b.ID ORDER BY b.ID ASC;";
+		//String sql = "SELECT * FROM barbog ORDER BY barbog.id ASC;";
 		rs = conn.createStatement().executeQuery(sql);
 		while(rs.next()){
 			int id = rs.getInt("ID");
+			String navn = rs.getString("fornavn");
 			String vigtigNote = rs.getString("vigtigNote");
 			int saldo = rs.getInt("saldo");
-			barbogs.add(new Barbog (id, vigtigNote,saldo));
+			barbogs.add(new Barbog (id, navn, vigtigNote,saldo));
 			}
 	} catch(Exception e){
 		e.printStackTrace();
