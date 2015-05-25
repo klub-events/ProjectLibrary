@@ -2,8 +2,9 @@ package GUI;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.text.NumberFormat;
+
 import javax.swing.*;
+
 import Domain.*;
 
 public class MedlemGUI extends MainGUI {
@@ -32,10 +33,11 @@ public class MedlemGUI extends MainGUI {
 	private LabelTextfield emailBox;
 	private LabelTextfield navnDoerBox;
 
+	@SuppressWarnings("rawtypes")
 	private JComboBox billedeValg;
 	private String[] comboValg = { "Nej", "Ja" };
-	private JLabel foedselsdatoLabel;
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public MedlemGUI() {
 		// Tilføjer et panel som alle
 		JPanel content2 = new JPanel(new GridLayout(0, 1));

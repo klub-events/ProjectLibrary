@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import Domain.Control;
 //For dan
 public class BarBogGUI extends MainGUI implements ActionListener
 {

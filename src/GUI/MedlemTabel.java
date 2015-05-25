@@ -1,14 +1,9 @@
 package GUI;
 import javax.swing.*;
-
 import java.awt.*;
-import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.table.DefaultTableModel;
-
-import Domain.Barbog;
 import Domain.Control;
 import Domain.Medlem;
 
