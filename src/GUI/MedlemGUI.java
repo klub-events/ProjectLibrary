@@ -3,14 +3,20 @@ package GUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.text.NumberFormat;
+import java.util.InputMismatchException;
 
 import javax.swing.*;
 
 import Domain.*;
 
-public class MedlemGUI extends MainGUI implements ActionListener {
+public class MedlemGUI extends MainGUI {
+	{
+		btn_medlem.setBackground(Color.white);
+	}
 	private JButton btn_opretMedlem = new JButton("OPRET");
-
 	private JButton btn_visMember = new JButton("VIS MEMBER");
 
 	// Værdier for indtastede oplysnigner
@@ -27,72 +33,64 @@ public class MedlemGUI extends MainGUI implements ActionListener {
 	private LabelTextfield forNavnBox;
 	private LabelTextfield efterNavnBox;
 	private LabelTextfield adresseBox;
+	private JFormattedTextField foedselsdatoField;
+	private NumberFormat foedselsdatoFormat;
 	private LabelTextfield foedselsdatoBox;
 	private LabelTextfield telefonBox;
 	private LabelTextfield emailBox;
 	private LabelTextfield navnDoerBox;
+	private JLabel labelBilleder = new JLabel();
 
 	private JComboBox billedeValg;
 	private String[] comboValg = { "Nej", "Ja" };
+	private JLabel foedselsdatoLabel;
 
 	public MedlemGUI() {
 
-		// JPanel Labels
-		JPanel content2 = new JPanel(new GridLayout(11, 1));
+		// Tilføjer et panel som alle
+		JPanel content2 = new JPanel(new GridLayout(0, 1));
 
-		// Navne ud for textfield
-		String[] labelTekster = { "fornavn:", "efternavn", "adresse:",
-				"foedselsdato:", "telefon:", "email", "navn på doer:",
-				"billeder" };
+		// Tilføjer labelTextFields til content2 panel
+		forNavnBox 		= new LabelTextfield("fornavn:"		);
+		efterNavnBox 	= new LabelTextfield("efternavn"	);
+		adresseBox 		= new LabelTextfield("adresse:"		);
+		foedselsdatoBox = new LabelTextfield("foedselsdato:");
+		telefonBox		= new LabelTextfield("telefon:"		);
+		emailBox 		= new LabelTextfield("email"		);
+		navnDoerBox 	= new LabelTextfield("navn på doer:");
 
-		// adder navn og tekstfield til vinduet
-		forNavnBox = new LabelTextfield(labelTekster[0]);
-		content2.add(forNavnBox);
-
-		// adder navn og tekstfield til vinduet
-		efterNavnBox = new LabelTextfield(labelTekster[1]);
-		content2.add(efterNavnBox);
-
-		adresseBox = new LabelTextfield(labelTekster[2]);
-		content2.add(adresseBox);
-
-		// dato api
-		foedselsdatoBox = new LabelTextfield(labelTekster[3]);
-		content2.add(foedselsdatoBox);
-
-		telefonBox = new LabelTextfield(labelTekster[4]);
-		content2.add(telefonBox);
-
-		emailBox = new LabelTextfield(labelTekster[5]);
-		content2.add(emailBox);
-
-		navnDoerBox = new LabelTextfield(labelTekster[6]);
-		content2.add(navnDoerBox);
-
-		// skal have label foran som de andre :S
 		billedeValg = new JComboBox(comboValg);
 		billedeValg.setSelectedIndex(0);
-		// billedeValg.setLayout(new GridLayout(1, 1));
-
-		content2.add(billedeValg);
-
-		Panel_Content.add(content2);
-		content2.setBackground(Color.WHITE);
-
-		btn_medlem.setBackground(Color.white);
+		billedeValg.setBackground(Color.white);
+		JPanel panel1 = new JPanel(new FlowLayout());
+		JLabel label1 = new JLabel("Tillade Deling af billeder?: ");
+		panel1.add(label1);
+		panel1.add(billedeValg);
 
 		btn_opretMedlem.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btn_opretMedlem.addActionListener(this);
-		content2.add(btn_opretMedlem);
-
 		btn_visMember.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btn_visMember.addActionListener(this);
 
+		//Tilføjer content til content2 panelet
+		content2.add(forNavnBox);
+		content2.add(efterNavnBox);
+		content2.add(adresseBox);
+		content2.add(foedselsdatoBox);
+		content2.add(telefonBox);
+		content2.add(emailBox);
+		content2.add(navnDoerBox);
+		content2.add(panel1);
+		content2.add(btn_opretMedlem);
 		content2.add(btn_visMember);
+		content2.setBackground(Color.WHITE);
 
-	}// constructor slutter
-	
-	public void clearAll(){
+		//Tilføjer al contentet fra content2 panelet, til main GUI center panelet for denne klasse
+		Panel_Content.add(content2);
+	}
+
+	//Rydder alle tekstFields for tekst
+	public void clearAll() {
 		forNavnBox.setText(null);
 		efterNavnBox.setText(null);
 		adresseBox.setText(null);
@@ -101,9 +99,13 @@ public class MedlemGUI extends MainGUI implements ActionListener {
 		emailBox.setText(null);
 		navnDoerBox.setText(null);
 	}
-	
+
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btn_opretMedlem) {
+
+			// Anskaffer input tekst fra hver af TekstFieldsne.
+			// Anvender selvkreeret getInputText() for at få input
+			// er at finde i LabelTextField klassen.
 			fornavn = forNavnBox.getInputText();
 			efternavn = efterNavnBox.getInputText();
 			adresse = adresseBox.getInputText();
@@ -111,19 +113,19 @@ public class MedlemGUI extends MainGUI implements ActionListener {
 			telefon = Integer.parseInt(telefonBox.getInputText());
 			email = emailBox.getInputText();
 			navnDoer = navnDoerBox.getInputText();
+			
 			if (billedeValg.getSelectedItem() == "Ja") {
 				billeder = 1;
 			} else {
 				billeder = 0;
 			}
-			Medlem m = new Medlem(0, fornavn, efternavn, adresse, foedselsdato,
-					telefon, email, navnDoer, billeder);
-			System.out.println(m.toString());
+			
+			// Går igennem controller klassen for at kalde opretMedlem
+			// funktionen i Databasen.
+			Medlem m = new Medlem(0, fornavn, efternavn, adresse, foedselsdato,	telefon, email, navnDoer, billeder);
 			new Control().opretMedlem(m);
 
-			JOptionPane.showMessageDialog(frame,
-					"Medlemmet er nu tilføjet til databasen");
-
+			JOptionPane.showMessageDialog(frame, "Medlemmet: " + m.getFornavn()	+ " er nu tilføjet til databasen med ID: " + m.getId());
 			clearAll();
 		}
 
@@ -149,5 +151,5 @@ public class MedlemGUI extends MainGUI implements ActionListener {
 			new MedlemTabel();
 		}
 
-	}// actionPerformed slutter
-}// public class medlem_GUI slutter
+	}
+}

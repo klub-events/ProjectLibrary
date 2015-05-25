@@ -3,7 +3,6 @@ package Domain;
 import java.util.ArrayList;
 
 import Datalink.*;
-import GUI.*;
 
 public class Control {
 	//private DB_Connector;
@@ -13,24 +12,36 @@ public class Control {
 	}
 	
 	//MedlemsDB controls
+	//Bruges til at kalde funktionen, som henter arraylisten, som bliver fyldt med medlemmer fra databasen
 	public ArrayList<Medlem> hentMedlemmer(){
 		return db.hentMedlemmer();
 	}
 	
+	//Bruges til at kalde funktionen der opretter nye medlemmer i databasen, ud fra et medlems objekt
 	public void opretMedlem(Medlem medlem){
 		db.opretMedlem(medlem);
 		//updateGUI med nye oplysninger
 	}
 	
+	//Bruges til at kalde funktionen der opdatere alle felter i databasen, med værdier
+	//hentet fra en arrayliste, fyldt med medlemmer, der komemr fra gui - JTablet.
 	public void updateDB(ArrayList <Medlem> opdateMedlem){
 		db.opdaterMedlemmer(opdateMedlem);
 	}
+	//kalder funktionen slet medlem i databasen, med en identifier, altså id, fra et medlem
+	//for at slette et medlem i databasen, på angivet id's plads
+	public void sletMedlem(int identifier) {
+		db.sletMedlem(identifier);
+		
+	}
 		
 	//BarbogsDB Controls
+	//Bruges til at kalde funktionen, som henter arraylisten, som bliver fyldt med "barbøger" fra databasen
 	public ArrayList<Barbog> hentBarbog(){
 		return db.hentBarbog();
 	}
 		
+	//Bruges til at kalde funktionen der opretter nye barbøger i databasen, ud fra et barbog objekt
 	public void opretBarbog(Barbog barbog){
 		db.opretBarbog(barbog);
 	}
@@ -39,10 +50,7 @@ public class Control {
 		db.opdaterBarbog(opdateBarbog);
 	}
 
-	public void sletMedlem(int identifier) {
-		db.sletMedlem(identifier);
-		
-	}
+	
 }
 
 
