@@ -2,14 +2,8 @@ package GUI;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.text.NumberFormat;
-import java.util.InputMismatchException;
-
 import javax.swing.*;
-
 import Domain.*;
 
 public class MedlemGUI extends MainGUI {
@@ -33,31 +27,27 @@ public class MedlemGUI extends MainGUI {
 	private LabelTextfield forNavnBox;
 	private LabelTextfield efterNavnBox;
 	private LabelTextfield adresseBox;
-	private JFormattedTextField foedselsdatoField;
-	private NumberFormat foedselsdatoFormat;
 	private LabelTextfield foedselsdatoBox;
 	private LabelTextfield telefonBox;
 	private LabelTextfield emailBox;
 	private LabelTextfield navnDoerBox;
-	private JLabel labelBilleder = new JLabel();
 
 	private JComboBox billedeValg;
 	private String[] comboValg = { "Nej", "Ja" };
 	private JLabel foedselsdatoLabel;
 
 	public MedlemGUI() {
-
 		// Tilføjer et panel som alle
 		JPanel content2 = new JPanel(new GridLayout(0, 1));
 
 		// Tilføjer labelTextFields til content2 panel
-		forNavnBox 		= new LabelTextfield("fornavn:"		);
-		efterNavnBox 	= new LabelTextfield("efternavn"	);
-		adresseBox 		= new LabelTextfield("adresse:"		);
+		forNavnBox = new LabelTextfield("fornavn:");
+		efterNavnBox = new LabelTextfield("efternavn");
+		adresseBox = new LabelTextfield("adresse:");
 		foedselsdatoBox = new LabelTextfield("foedselsdato:");
-		telefonBox		= new LabelTextfield("telefon:"		);
-		emailBox 		= new LabelTextfield("email"		);
-		navnDoerBox 	= new LabelTextfield("navn på doer:");
+		telefonBox = new LabelTextfield("telefon:");
+		emailBox = new LabelTextfield("email");
+		navnDoerBox = new LabelTextfield("navn på doer:");
 
 		billedeValg = new JComboBox(comboValg);
 		billedeValg.setSelectedIndex(0);
@@ -72,7 +62,7 @@ public class MedlemGUI extends MainGUI {
 		btn_visMember.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btn_visMember.addActionListener(this);
 
-		//Tilføjer content til content2 panelet
+		// Tilføjer content til content2 panelet
 		content2.add(forNavnBox);
 		content2.add(efterNavnBox);
 		content2.add(adresseBox);
@@ -85,11 +75,13 @@ public class MedlemGUI extends MainGUI {
 		content2.add(btn_visMember);
 		content2.setBackground(Color.WHITE);
 
-		//Tilføjer al contentet fra content2 panelet, til main GUI center panelet for denne klasse
+		// Tilføjer al contentet fra content2 panelet, til main GUI center
+		// panelet for denne klasse
 		Panel_Content.add(content2);
 	}
 
-	//Rydder alle tekstFields for tekst
+	// For at rydde tekstfields når medlem er oprettet
+	// Gør det letter for bruger, hurtigt at oprette nye medlemmer
 	public void clearAll() {
 		forNavnBox.setText(null);
 		efterNavnBox.setText(null);
@@ -98,6 +90,20 @@ public class MedlemGUI extends MainGUI {
 		telefonBox.setText(null);
 		emailBox.setText(null);
 		navnDoerBox.setText(null);
+	}
+
+	public boolean validateInput() {
+		if 		(  !forNavnBox.getInputText().equals(null)
+				&& !efterNavnBox.getInputText().equals(null)
+				&& !adresseBox.getInputText().equals(null)
+				&& !foedselsdatoBox.getInputText().equals(null)
+				&& !telefonBox.getInputText().equals(null)
+				&& !emailBox.getInputText().equals(null)
+				&& !navnDoerBox.getInputText().equals(null)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -109,24 +115,37 @@ public class MedlemGUI extends MainGUI {
 			fornavn = forNavnBox.getInputText();
 			efternavn = efterNavnBox.getInputText();
 			adresse = adresseBox.getInputText();
-			foedselsdato = Integer.parseInt(foedselsdatoBox.getInputText());
+			try {
+				foedselsdato = Integer.parseInt(foedselsdatoBox.getInputText());
+			} catch (NumberFormatException e1) {
+				JOptionPane.showMessageDialog(frame,"Der skal indtastes en fødselsdato af formaten 121295");
+			}
+			try {
 			telefon = Integer.parseInt(telefonBox.getInputText());
+			} catch (NumberFormatException e1) {
+				JOptionPane.showMessageDialog(frame,"Der skal indtastes et telefon nummer på 8 cifre af formaten 12345678");
+			}
 			email = emailBox.getInputText();
 			navnDoer = navnDoerBox.getInputText();
-			
+
 			if (billedeValg.getSelectedItem() == "Ja") {
 				billeder = 1;
 			} else {
 				billeder = 0;
 			}
 			
-			// Går igennem controller klassen for at kalde opretMedlem
-			// funktionen i Databasen.
-			Medlem m = new Medlem(0, fornavn, efternavn, adresse, foedselsdato,	telefon, email, navnDoer, billeder);
-			new Control().opretMedlem(m);
-
-			JOptionPane.showMessageDialog(frame, "Medlemmet: " + m.getFornavn()	+ " er nu tilføjet til databasen med ID: " + m.getId());
-			clearAll();
+			if(!validateInput()){
+				Medlem m = new Medlem(0, fornavn, efternavn, adresse, foedselsdato,
+						telefon, email, navnDoer, billeder);
+				new Control().opretMedlem(m);
+				JOptionPane.showMessageDialog(frame, "Medlemmet: " + m.getFornavn()
+						+ " er nu tilføjet til databasen med ID: " + m.getId());
+				clearAll();
+			}
+			else{
+				JOptionPane.showMessageDialog(frame,"Et eller flere felter er ikke blevet udfyldt. Udfyld alle felter, og prøv igen.");
+			}
+			
 		}
 
 		if (e.getSource() == btn_aktivitet) {

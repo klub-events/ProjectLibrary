@@ -24,11 +24,9 @@ public class MedlemTabel implements ActionListener {
 	private JPanel southPanel;
 	private JPanel centerPanel;
 	private ArrayList<String> data = new ArrayList<String>();
-	private JPanel eastPanel;
 	private int rowSet;
 	private JButton btn_opdater = new JButton("Opdater Medlemmer");
 	private JButton btn_slet = new JButton("Slet Medlem");
-	private Control con;
 	private int selectedRow;
 
 	
@@ -40,7 +38,6 @@ public class MedlemTabel implements ActionListener {
 	      northPanel = new JPanel();
 	      southPanel = new JPanel();
 	      centerPanel = new JPanel();
-	      eastPanel = new JPanel();
 	      
 	      //Table of content
 	      table = new JTable();
@@ -72,14 +69,12 @@ public class MedlemTabel implements ActionListener {
 	      btn_opdater.setCursor(new Cursor(Cursor.HAND_CURSOR));
 	      btn_opdater.addActionListener(this);
 	      southPanel.add(btn_opdater);
-	      
+	  
 	      btn_slet.setCursor(new Cursor(Cursor.HAND_CURSOR));
 	      btn_slet.addActionListener(this);
 	      southPanel.add(btn_slet);
-			  
-	      // call the method updateJTable()
+
 	      updateJTable();
-	      
 	      frame.setVisible(true);
 	   }
 	
@@ -97,15 +92,15 @@ public class MedlemTabel implements ActionListener {
 	   	// Foreach loop to loop through the ArrayList. One row (person) at a
 	   	// time
 	      for (Medlem medlem : medlemmer) {
-	         model.setValueAt(medlem.getId(), rowSet, 0);
-	         model.setValueAt(medlem.getFornavn(), rowSet, 1);
-	         model.setValueAt(medlem.getEfternavn(), rowSet, 2);
-	         model.setValueAt(medlem.getAdresse(), rowSet, 3);
-	         model.setValueAt(medlem.getFødselsdato(), rowSet, 4);
-	         model.setValueAt(medlem.getTelefon(), rowSet, 5);
-	         model.setValueAt(medlem.getEmail(), rowSet, 6);
-	         model.setValueAt(medlem.getNavnPåDør(), rowSet, 7);
-	         model.setValueAt(medlem.getBilleder(), rowSet, 8);
+	         model.setValueAt(medlem.getId(), 			rowSet, 0);
+	         model.setValueAt(medlem.getFornavn(), 		rowSet, 1);
+	         model.setValueAt(medlem.getEfternavn(),	rowSet, 2);
+	         model.setValueAt(medlem.getAdresse(), 		rowSet, 3);
+	         model.setValueAt(medlem.getFødselsdato(),	rowSet, 4);
+	         model.setValueAt(medlem.getTelefon(), 		rowSet, 5);
+	         model.setValueAt(medlem.getEmail(), 		rowSet, 6);
+	         model.setValueAt(medlem.getNavnPåDør(), 	rowSet, 7);
+	         model.setValueAt(medlem.getBilleder(), 	rowSet, 8);
 	         rowSet++;
 	      }
 	   	// add the DefaultTableModel to the JTable
@@ -131,11 +126,11 @@ public class MedlemTabel implements ActionListener {
 			}
 			 new Control().updateDB(opdateMedlemmer);
 		}
+		
 			if (e.getSource() == btn_slet){
 				selectedRow = table.getSelectedRow();
 				int identifier = (int) model.getValueAt(selectedRow,0);
 				model.removeRow(selectedRow);
-				System.out.println(identifier);
 				new Control().sletMedlem(identifier);
 				
 			}
