@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import Domain.Control;
 //For dan
 public class BarBogGUI extends MainGUI implements ActionListener
 {
@@ -23,12 +22,10 @@ public class BarBogGUI extends MainGUI implements ActionListener
 		
 		//JPanel Labels
 		JPanel center3 = new JPanel(new GridLayout(10,1));
-	
-		//Navne ud for textfield
-		String labelTekstSaldo = "Saldo";
+
 		
 		//adder navn og tekstfield til vinduet
-		saldoBox = new LabelTextfield(labelTekstSaldo);
+		saldoBox = new LabelTextfield("Saldo");
 		center3.add(saldoBox);	
 		
 		Panel_Content.add(center3);

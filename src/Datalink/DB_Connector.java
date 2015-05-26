@@ -85,7 +85,6 @@ public class DB_Connector {
 
 		try {
 			String sql = "INSERT INTO medlemmer VALUES("+medlem.toString()+");";
-			System.out.println(sql);
 			PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			statement.executeUpdate();
 	        try (ResultSet generatedKeys = statement.getGeneratedKeys()) {

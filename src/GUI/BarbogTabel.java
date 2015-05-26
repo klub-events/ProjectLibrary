@@ -2,7 +2,6 @@ package GUI;
 import javax.swing.*;
 
 import java.awt.*;
-import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,7 +9,6 @@ import javax.swing.table.DefaultTableModel;
 
 import Domain.Barbog;
 import Domain.Control;
-import Domain.Medlem;
 
 import java.util.*;
 
@@ -22,7 +20,6 @@ public class BarbogTabel implements ActionListener {
 	private JPanel northPanel;
 	private JPanel southPanel;
 	private JPanel centerPanel;
-	private JPanel eastPanel;
 	private JButton btn_opdater = new JButton("Opdater");
 
 	
@@ -34,7 +31,7 @@ public class BarbogTabel implements ActionListener {
 	      northPanel = new JPanel();
 	      southPanel = new JPanel();
 	      centerPanel = new JPanel();
-	      eastPanel = new JPanel();
+	      new JPanel();
 	      
 	      //Table of content
 	      table = new JTable();
