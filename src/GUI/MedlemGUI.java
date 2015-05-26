@@ -92,8 +92,8 @@ public class MedlemGUI extends MainGUI {
 		telefonBox.setText(null);
 		emailBox.setText(null);
 		navnDoerBox.setText(null);
-		}
-	
+	}
+
 	public boolean validateInput() {
 		if 		(  !forNavnBox.getInputText().equals(null)
 				&& !efterNavnBox.getInputText().equals(null)
@@ -109,79 +109,67 @@ public class MedlemGUI extends MainGUI {
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btn_opretMedlem) {
 
-		if (e.getSource() == btn_opretMedlem) 
-		{
+			// Anskaffer input tekst fra hver af TekstFieldsne.
+			// Anvender selvkreeret getInputText() for at få input
+			// er at finde i LabelTextField klassen.
+			fornavn = forNavnBox.getInputText();
+			efternavn = efterNavnBox.getInputText();
+			adresse = adresseBox.getInputText();
+			try {
+				foedselsdato = Integer.parseInt(foedselsdatoBox.getInputText());
+			} catch (NumberFormatException e1) {
+				JOptionPane.showMessageDialog(frame,"Der skal indtastes en fødselsdato af formaten 121295");
+			}
+			try {
+				telefon = Integer.parseInt(telefonBox.getInputText());
+			} catch (NumberFormatException e1) {
+				JOptionPane.showMessageDialog(frame,"Der skal indtastes et telefon nummer på 8 cifre af formaten 12345678");
+			}
+			email = emailBox.getInputText();
+			navnDoer = navnDoerBox.getInputText();
 
-			// Hvis en tekstbox er tom bliver der ikke addet til databasen
-			if(forNavnBox.getInputText().equals(""))
-			{
-				JOptionPane.showMessageDialog(frame,
-						"UPS alle tekstbokse skal være udfyldt");	
+			if (billedeValg.getSelectedItem() == "Ja") {
+				billeder = 1;
+			} else {
+				billeder = 0;
 
-				if (e.getSource() == btn_opretMedlem) {
-
-					// Anskaffer input tekst fra hver af TekstFieldsne.
-					// Anvender selvkreeret getInputText() for at få input
-					// er at finde i LabelTextField klassen.
-					fornavn = forNavnBox.getInputText();
-					efternavn = efterNavnBox.getInputText();
-					adresse = adresseBox.getInputText();
-					try {
-						foedselsdato = Integer.parseInt(foedselsdatoBox.getInputText());
-					} catch (NumberFormatException e1) {
-						JOptionPane.showMessageDialog(frame,"Der skal indtastes en fødselsdato af formaten 121295");
-					}
-					try {
-						telefon = Integer.parseInt(telefonBox.getInputText());
-					} catch (NumberFormatException e1) {
-						JOptionPane.showMessageDialog(frame,"Der skal indtastes et telefon nummer på 8 cifre af formaten 12345678");
-					}
-					email = emailBox.getInputText();
-					navnDoer = navnDoerBox.getInputText();
-
-					if (billedeValg.getSelectedItem() == "Ja") {
-						billeder = 1;
-					} else {
-						billeder = 0;
-
-						if(!validateInput()){
-							Medlem m = new Medlem(0, fornavn, efternavn, adresse, foedselsdato,
-									telefon, email, navnDoer, billeder);
-							new Control().opretMedlem(m);
-							JOptionPane.showMessageDialog(frame, "Medlemmet: " + m.getFornavn()
-									+ " er nu tilføjet til databasen med ID: " + m.getId());
-							clearAll();
-						}
-						else{
-							JOptionPane.showMessageDialog(frame,"Et eller flere felter er ikke blevet udfyldt. Udfyld alle felter, og prøv igen.");
-						}
-					}
-
-					if (e.getSource() == btn_aktivitet) {
-						new AktivitetGUI();
-
-						frame.dispose();
-					}
-
-					if (e.getSource() == btn_saldo) {
-						new BarBogGUI();
-
-						frame.dispose();
-					}
-
-					if (e.getSource() == btn_tilmeld) {
-						new TilmeldAktivitetGUI();
-
-						frame.dispose();
-					}
-
-					if (e.getSource() == btn_visMember) {
-						new MedlemTabel();
-					}
-
+				if(!validateInput()){
+					Medlem m = new Medlem(0, fornavn, efternavn, adresse, foedselsdato,
+							telefon, email, navnDoer, billeder);
+					new Control().opretMedlem(m);
+					JOptionPane.showMessageDialog(frame, "Medlemmet: " + m.getFornavn()
+							+ " er nu tilføjet til databasen med ID: " + m.getId());
+					clearAll();
+				}
+				else{
+					JOptionPane.showMessageDialog(frame,"Et eller flere felter er ikke blevet udfyldt. Udfyld alle felter, og prøv igen.");
 				}
 			}
+
+			if (e.getSource() == btn_aktivitet) {
+				new AktivitetGUI();
+
+				frame.dispose();
+			}
+
+			if (e.getSource() == btn_saldo) {
+				new BarBogGUI();
+
+				frame.dispose();
+			}
+
+			if (e.getSource() == btn_tilmeld) {
+				new TilmeldAktivitetGUI();
+
+				frame.dispose();
+			}
+
+			if (e.getSource() == btn_visMember) {
+				new MedlemTabel();
+			}
+
 		}
 	}
 }
