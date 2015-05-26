@@ -103,28 +103,40 @@ public class MedlemGUI extends MainGUI implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btn_opretMedlem) {
-			fornavn = forNavnBox.getInputText();
-			efternavn = efterNavnBox.getInputText();
-			adresse = adresseBox.getInputText();
-			foedselsdato = Integer.parseInt(foedselsdatoBox.getInputText());
-			telefon = Integer.parseInt(telefonBox.getInputText());
-			email = emailBox.getInputText();
-			navnDoer = navnDoerBox.getInputText();
-			if (billedeValg.getSelectedItem() == "Ja") {
-				billeder = 1;
-			} else {
-				billeder = 0;
+		if (e.getSource() == btn_opretMedlem) 
+		{
+			
+		// Hvis en tekstbox er tom bliver der ikke addet til databasen
+			if(forNavnBox.getInputText().equals(""))
+			{
+				JOptionPane.showMessageDialog(frame,
+						"UPS alle tekstbokse skal være udfyldt");	
 			}
-			Medlem m = new Medlem(0, fornavn, efternavn, adresse, foedselsdato,
-					telefon, email, navnDoer, billeder);
-			System.out.println(m.toString());
-			new Control().opretMedlem(m);
+			else
+			{
+				
+				fornavn = forNavnBox.getInputText();
+				efternavn = efterNavnBox.getInputText();
+				adresse = adresseBox.getInputText();
+				foedselsdato = Integer.parseInt(foedselsdatoBox.getInputText());
+				telefon = Integer.parseInt(telefonBox.getInputText());
+				email = emailBox.getInputText();
+				navnDoer = navnDoerBox.getInputText();
+				if (billedeValg.getSelectedItem() == "Ja") {
+					billeder = 1;
+				} else {
+					billeder = 0;
+				}
+				Medlem m = new Medlem(0, fornavn, efternavn, adresse, foedselsdato,
+						telefon, email, navnDoer, billeder);
+				System.out.println(m.toString());
+				new Control().opretMedlem(m);
 
-			JOptionPane.showMessageDialog(frame,
-					"Medlemmet er nu tilføjet til databasen");
-
-			clearAll();
+				JOptionPane.showMessageDialog(frame,
+						"Medlemmet er nu tilføjet til databasen");
+				clearAll();
+			}
+			
 		}
 
 		if (e.getSource() == btn_aktivitet) {
