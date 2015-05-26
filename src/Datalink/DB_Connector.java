@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.mysql.jdbc.Statement;
+
 import Domain.Barbog;
 import Domain.Medlem;
 
@@ -53,10 +55,18 @@ public class DB_Connector {
 	public void opretMedlem(Medlem medlem) {
 
 		try {
-			String sql = "INSERT INTO medlemmer VALUES(" + medlem.toString()
-					+ ");";
-			System.out.println(sql);
-			conn.createStatement().executeUpdate(sql);
+			String sql = "INSERT INTO medlemmer VALUES("+medlem.toString()+");";
+			PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			statement.executeUpdate();
+	        try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+	            if (generatedKeys.next()) {
+	                medlem.setId(generatedKeys.getInt(1));
+	            }
+	            else {
+	            	System.out.println("No keys generated - hvor er mit medlem?");
+	            }
+	        }
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -97,17 +107,23 @@ public class DB_Connector {
 		return medlemmer;	
 		
 	}
-	
+	/**
+	 *       String query ="SELECT fname,lname,isbn from author 
+      inner join books on author.AUTHORID = books.AUTHORID";
+	 * @return
+	 */
 	public ArrayList<Barbog> hentBarbog(){
 		ArrayList<Barbog> barbogs = new ArrayList<Barbog>();
 		try{
-		String sql = "SELECT * FROM barbog ORDER BY barbog.id ASC;";
+			String sql = "SELECT m.ID, m.fornavn, b.vigtignote, b.saldo FROM medlemmer m, barbog b WHERE m.ID = b.ID ORDER BY b.ID ASC;";
+		//String sql = "SELECT * FROM barbog ORDER BY barbog.id ASC;";
 		rs = conn.createStatement().executeQuery(sql);
 		while(rs.next()){
 			int id = rs.getInt("ID");
+			String navn = rs.getString("fornavn");
 			String vigtigNote = rs.getString("vigtigNote");
 			int saldo = rs.getInt("saldo");
-			barbogs.add(new Barbog (id, vigtigNote,saldo));
+			barbogs.add(new Barbog (id, navn, vigtigNote,saldo));
 			}
 	} catch(Exception e){
 		e.printStackTrace();

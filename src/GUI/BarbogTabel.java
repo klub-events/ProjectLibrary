@@ -2,7 +2,6 @@ package GUI;
 import javax.swing.*;
 
 import java.awt.*;
-import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,7 +9,6 @@ import javax.swing.table.DefaultTableModel;
 
 import Domain.Barbog;
 import Domain.Control;
-import Domain.Medlem;
 
 import java.util.*;
 
@@ -22,7 +20,6 @@ public class BarbogTabel implements ActionListener {
 	private JPanel northPanel;
 	private JPanel southPanel;
 	private JPanel centerPanel;
-	private JPanel eastPanel;
 	private JButton btn_opdater = new JButton("Opdater");
 
 	
@@ -34,7 +31,7 @@ public class BarbogTabel implements ActionListener {
 	      northPanel = new JPanel();
 	      southPanel = new JPanel();
 	      centerPanel = new JPanel();
-	      eastPanel = new JPanel();
+	      new JPanel();
 	      
 	      //Table of content
 	      table = new JTable();
@@ -78,7 +75,7 @@ public class BarbogTabel implements ActionListener {
 		//Henter Barbogs værdier fra db
 		ArrayList<Barbog> barbogs = new Control().hentBarbog();
 	   	// add the column names
-	      model.setColumnIdentifiers(new String[] { "ID","VigtigNote", "Saldo" });
+	      model.setColumnIdentifiers(new String[] { "ID", "Navn", "VigtigNote", "Saldo" });
 	   
 	   	// set how many rows will be in the table
 	      model.setRowCount(barbogs.size());
@@ -90,8 +87,9 @@ public class BarbogTabel implements ActionListener {
 	   	// time
 	      for (Barbog barbog : barbogs) {
 	         model.setValueAt(barbog.getId(), rowSet, 0);
-	         model.setValueAt(barbog.getVigtigNote(), rowSet, 1);
-	         model.setValueAt(barbog.getSaldo(), rowSet, 2);
+	         model.setValueAt(barbog.getNavn(), rowSet, 1);
+	         model.setValueAt(barbog.getVigtigNote(), rowSet, 2);
+	         model.setValueAt(barbog.getSaldo(), rowSet, 3);
 
 	         rowSet++;
 	      }
@@ -110,8 +108,8 @@ public class BarbogTabel implements ActionListener {
 				for(column = 0; column < model.getColumnCount(); column++){
 				data.add(model.getValueAt(row, column).toString());					
 				}
-					//				Barbog-objekts values:		int id,  	String vigtigNote, 	int saldo
-				opdateBarbog.add(new Barbog(Integer.parseInt(data.get(0)), data.get(1), Integer.parseInt(data.get(2))));
+					//				Barbog-objekts values:		int id,  	String navn, 		String vigtigNote, 	int saldo
+				opdateBarbog.add(new Barbog(Integer.parseInt(data.get(0)), data.get(1), data.get(2), Integer.parseInt(data.get(3))));
 				System.out.println(data);
 				data.clear();
 			}
