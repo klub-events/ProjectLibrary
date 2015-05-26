@@ -2,31 +2,35 @@ package Domain;
 
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import Datalink.*;
+import GUI.MedlemGUI;
 
 public class Control {
+
+
 	//private DB_Connector;
 	private DB_Connector db;
 	public Control(){
 		db = DB_Connector.getInstance();
 	}
-	
+
 	public Medlem findMedlem(String identifier) {
 		return db.findMedlem(identifier);
 	}
-	
+
 	//MedlemsDB controls
 	//Bruges til at kalde funktionen, som henter arraylisten, som bliver fyldt med medlemmer fra databasen
 	public ArrayList<Medlem> hentMedlemmer(){
 		return db.hentMedlemmer();
 	}
-	
+
 	//Bruges til at kalde funktionen der opretter nye medlemmer i databasen, ud fra et medlems objekt
 	public void opretMedlem(Medlem medlem){
-		db.opretMedlem(medlem);
-		//updateGUI med nye oplysninger
+			db.opretMedlem(medlem);
 	}
-	
+
 	//Bruges til at kalde funktionen der opdatere alle felter i databasen, med værdier
 	//hentet fra en arrayliste, fyldt med medlemmer, der komemr fra gui - JTablet.
 	public void updateDB(ArrayList <Medlem> opdateMedlem){
@@ -36,20 +40,20 @@ public class Control {
 	//for at slette et medlem i databasen, på angivet id's plads
 	public void sletMedlem(int identifier) {
 		db.sletMedlem(identifier);
-		
+
 	}
-		
+
 	//BarbogsDB Controls
 	//Bruges til at kalde funktionen, som henter arraylisten, som bliver fyldt med "barbøger" fra databasen
 	public ArrayList<Barbog> hentBarbog(){
 		return db.hentBarbog();
 	}
-		
+
 	//Bruges til at kalde funktionen der opretter nye barbøger i databasen, ud fra et barbog objekt
 	public void opretBarbog(Barbog barbog){
 		db.opretBarbog(barbog);
 	}
-	
+
 	public void opdaterBarbog(ArrayList<Barbog> opdateBarbog){
 		db.opdaterBarbog(opdateBarbog);
 	}

@@ -32,7 +32,7 @@ public class MainGUI implements ActionListener
 	{
 		
 		//standard gui settings
-		 frame.setSize(960, 790);
+		 frame.setSize(860, 660);
 	     frame.setLocationRelativeTo(null);
 	     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	     frame.setLayout(new BorderLayout());
@@ -45,7 +45,7 @@ public class MainGUI implements ActionListener
 	     
 	     Panel_Top.setBackground(Color.darkGray);
 	     Panel_Content.setBackground(Color.GRAY);
-	     Panel_Top.setPreferredSize(new Dimension(100, 100));
+	     Panel_Top.setPreferredSize(new Dimension(50, 50));
 	     Panel_Content.setPreferredSize(new Dimension(860, 690));
 	     
 	     //opretter knapper med actionlisteners, alle til toppen af menu
