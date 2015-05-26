@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.mysql.jdbc.Statement;
+
 import Domain.Varer;
 import Domain.Barbog;
 import Domain.Medlem;
@@ -137,14 +138,7 @@ public class DB_Connector {
 		return medlemmer;	
 		
 	}
-	/**
-SELECT Customers.CustomerName, Orders.OrderID
-FROM Customers
-INNER JOIN Orders
-ON Customers.CustomerID=Orders.CustomerID
-ORDER BY Customers.CustomerName;
-	 * @return
-	 */
+
 	public ArrayList<Barbog> hentBarbog(){
 		ArrayList<Barbog> barbogs = new ArrayList<Barbog>();
 		try{
@@ -229,6 +223,63 @@ public void sletMedlem(int identifier) {
 			e.printStackTrace();
 		}
 	}
+/**	
+	public Varer findVare(String identifier) {
+		return db.findVare(identifier);
+	}
+**/
+	public void sletVare(int identifier) {
+		try{
+			String statementToQuery = "DELETE FROM varer WHERE id = ?";
+			//String statementToQuery = "DELETE FROM barbog WHERE id = ?";
+			PreparedStatement ps = conn.prepareStatement(statementToQuery);
+			ps.setInt(1, identifier);
+			ps.executeUpdate();
+			
+			} catch(Exception e){
+				e.printStackTrace();
+			}
+		
+		}
+	
+	public ArrayList<Varer> hentVarer(){
+		ArrayList<Varer> varer = new ArrayList<Varer>();
+		try{
+		String sql = "SELECT * FROM varer ORDER BY varer.id ASC;";
+		rs = conn.createStatement().executeQuery(sql);
+		while(rs.next()){
+			int id = rs.getInt("ID");
+			int pris = rs.getInt("pris");
+			String navn = rs.getString("navn");
+			int tilgængelig = rs.getInt("tilgængelig");
+			int antal = rs.getInt("lagertal");
+			varer.add(new Varer (id, pris, navn, tilgængelig, antal));
+			}
+	} catch(Exception e){
+		e.printStackTrace();
+	}
+		return varer;	
+		
+	}
+
+	public void opdaterDBVarer(ArrayList <Varer> opdaterVare){
+		try{
+			for (Varer vare : opdaterVare) {
+				String statementToQuery = "UPDATE varer"
+			  + " SET pris = ?, navn = ?,  = ?, tilgængelig = ?, antal = ?"
+			  + " WHERE id = ?";
+				PreparedStatement ps = conn.prepareStatement(statementToQuery);
+				ps.setInt(9, vare.getId());
+				ps.setInt(1,vare.getPris());
+				ps.setString(2,vare.getNavn());
+				ps.setInt(3,vare.getTilgængelig());
+				ps.setInt(4,vare.getAntal());
+				ps.executeUpdate();
+					}
+				} catch(Exception e){
+					e.printStackTrace();
+				}
+			}
 
 
 }

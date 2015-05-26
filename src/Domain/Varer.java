@@ -12,14 +12,14 @@ antal int (6) NOT NULL);
 public class Varer {
 	int id;
 	int pris;
-	String vare;
-	int tilgængelig;
+	String navn;
+	int tilgængelig;//hvilket tidspunkt på dagen de må sælges (1= altid, 0 = aften)
 	int antal;
 	
-	public Varer(int id, int pris, String vare, int tilgængelig, int antal){
+	public Varer(int id, int pris, String navn, int tilgængelig, int antal){
 		this.id = id;
 		this.pris =pris;
-		this.vare = vare;
+		this.navn = navn;
 		this.tilgængelig = tilgængelig;
 		this.antal = antal;
 	}
@@ -40,12 +40,12 @@ public class Varer {
 		this.pris = pris;
 	}
 
-	public String getVare() {
-		return vare;
+	public String getNavn() {
+		return navn;
 	}
 
-	public void setVare(String vare) {
-		this.vare = vare;
+	public void setNavn(String navn) {
+		this.navn = navn;
 	}
 
 	public int getTilgængelig() {
