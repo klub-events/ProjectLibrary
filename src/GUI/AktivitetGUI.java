@@ -7,7 +7,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
+import Domain.Control;
 public class AktivitetGUI extends MainGUI implements ActionListener
 {
 	private JButton btn_opret = new JButton("OPRET");	
@@ -60,7 +62,7 @@ public class AktivitetGUI extends MainGUI implements ActionListener
 	
 	public void actionPerformed(ActionEvent e)
 	{
-		if(e.getSource() == btn_tilmeld)
+		if(e.getSource() == btn_opret)
 		{
 			new TilmeldAktivitetGUI();
 			

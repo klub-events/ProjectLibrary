@@ -11,6 +11,10 @@ public class Control {
 		db = DB_Connector.getInstance();
 	}
 	
+	public Medlem findMedlem(String identifier) {
+		return db.findMedlem(identifier);
+	}
+	
 	//MedlemsDB controls
 	//Bruges til at kalde funktionen, som henter arraylisten, som bliver fyldt med medlemmer fra databasen
 	public ArrayList<Medlem> hentMedlemmer(){
@@ -50,7 +54,9 @@ public class Control {
 		db.opdaterBarbog(opdateBarbog);
 	}
 
-	
+	public void opretVare(Varer vare){
+		db.opretVare(vare);
+	}
 }
 
 
