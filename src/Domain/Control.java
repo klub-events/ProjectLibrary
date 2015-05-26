@@ -39,7 +39,7 @@ public class Control {
 	//kalder funktionen slet medlem i databasen, med en identifier, altså id, fra et medlem
 	//for at slette et medlem i databasen, på angivet id's plads
 	public void sletMedlem(int identifier) {
-		db.sletMedlem(identifier);
+		db.sletMedlem(identifier);	
 
 	}
 
@@ -57,9 +57,24 @@ public class Control {
 	public void opdaterBarbog(ArrayList<Barbog> opdateBarbog){
 		db.opdaterBarbog(opdateBarbog);
 	}
-
+	//vare-kontrol
 	public void opretVare(Varer vare){
 		db.opretVare(vare);
+	}
+	public void sletVare(int identifier) {
+		db.sletVare(identifier);
+	}
+/**
+	public Varer findVare(String identifier) {
+		return db.findVare(identifier);
+	}
+**/
+	
+	public ArrayList<Varer> hentVarer(){
+		return db.hentVarer();
+	}
+	public void opdaterDBVarer(ArrayList <Varer> opdaterVare){
+		db.opdaterDBVarer(opdaterVare);
 	}
 }
 
