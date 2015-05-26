@@ -138,14 +138,18 @@ public class DB_Connector {
 		
 	}
 	/**
-	 *       String query ="SELECT fname,lname,isbn from author 
-      inner join books on author.AUTHORID = books.AUTHORID";
+SELECT Customers.CustomerName, Orders.OrderID
+FROM Customers
+INNER JOIN Orders
+ON Customers.CustomerID=Orders.CustomerID
+ORDER BY Customers.CustomerName;
 	 * @return
 	 */
 	public ArrayList<Barbog> hentBarbog(){
 		ArrayList<Barbog> barbogs = new ArrayList<Barbog>();
 		try{
-			String sql = "SELECT m.ID, m.fornavn, b.vigtignote, b.saldo FROM medlemmer m, barbog b WHERE m.ID = b.ID ORDER BY b.ID ASC;";
+			//String sql = "SELECT m.ID, m.fornavn, b.vigtignote, b.saldo FROM medlemmer m, barbog b WHERE m.ID = b.ID ORDER BY b.ID ASC;";
+			String sql = "SELECT medlemmer.ID, medlemmer.fornavn, barbog.vigtignote, barbog.saldo FROM medlemmer INNER JOIN barbog WHERE medlemmer.ID = barbog.ID ORDER BY barbog.ID ASC;";
 		//String sql = "SELECT * FROM barbog ORDER BY barbog.id ASC;";
 		rs = conn.createStatement().executeQuery(sql);
 		while(rs.next()){
