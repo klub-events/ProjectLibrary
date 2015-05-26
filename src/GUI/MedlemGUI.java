@@ -50,7 +50,7 @@ public class MedlemGUI extends MainGUI {
 		telefonBox = new LabelTextfield("telefon:");
 		emailBox = new LabelTextfield("email");
 		navnDoerBox = new LabelTextfield("navn på doer:");
-
+     
 		billedeValg = new JComboBox(comboValg);
 		billedeValg.setSelectedIndex(0);
 		billedeValg.setBackground(Color.white);
@@ -147,6 +147,7 @@ public class MedlemGUI extends MainGUI {
 					JOptionPane.showMessageDialog(frame,"Et eller flere felter er ikke blevet udfyldt. Udfyld alle felter, og prøv igen.");
 				}
 			}
+		}
 
 			if (e.getSource() == btn_aktivitet) {
 				new AktivitetGUI();
@@ -170,6 +171,6 @@ public class MedlemGUI extends MainGUI {
 				new MedlemTabel();
 			}
 
-		}
+		
 	}
 }

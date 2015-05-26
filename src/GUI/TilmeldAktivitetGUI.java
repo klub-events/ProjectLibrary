@@ -8,6 +8,13 @@ public class TilmeldAktivitetGUI extends MainGUI implements ActionListener
 {
 	public TilmeldAktivitetGUI()
 	{
+		
+		//dropdown med aktiviteter
+		//dropdown med medlemmer
+	    // gem knap og oversigt
+		
+		
+		
 		btn_tilmeld.setBackground(Color.white);
 	}//constructor slutter
 
