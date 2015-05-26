@@ -12,6 +12,10 @@ public class Control {
 		db = DB_Connector.getInstance();
 	}
 	
+	public Medlem findMedlem(String identifier) {
+		return db.findMedlem(identifier);
+	}
+	
 	//MedlemsDB controls
 	public ArrayList<Medlem> hentMedlemmer(){
 		return db.hentMedlemmer();
@@ -42,6 +46,9 @@ public class Control {
 	public void sletMedlem(int identifier) {
 		db.sletMedlem(identifier);
 		
+	}
+	public void opretVare(Varer vare){
+		db.opretVare(vare);
 	}
 }
 

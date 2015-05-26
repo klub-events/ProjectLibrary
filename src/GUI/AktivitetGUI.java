@@ -13,6 +13,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import Domain.Control;
 //For dan
 public class AktivitetGUI extends MainGUI implements ActionListener
 {
@@ -66,7 +68,7 @@ public class AktivitetGUI extends MainGUI implements ActionListener
 	
 	public void actionPerformed(ActionEvent e)
 	{
-		if(e.getSource() == btn_tilmeld)
+		if(e.getSource() == btn_opret)
 		{
 			new TilmeldAktivitetGUI();
 			

@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.mysql.jdbc.Statement;
-
+import Domain.Varer;
 import Domain.Barbog;
 import Domain.Medlem;
 
@@ -51,7 +51,36 @@ public class DB_Connector {
 		}
 		return database;
 	}
-
+	
+	public Medlem findMedlem(String identifier){
+		Medlem medlem = null;
+		try{
+			String statementToQuery = "SELECT FROM medlemmer WHERE name = ?";
+			PreparedStatement ps = conn.prepareStatement(statementToQuery);
+			ps.setString(1, identifier);
+			//ps.setString(1, identifier);
+			ps.executeUpdate();
+			while(rs.next()){
+				int id = rs.getInt("ID");
+				String fornavn = rs.getString("fornavn");
+				String efternavn = rs.getString("efternavn");
+				String adresse = rs.getString("adresse");
+				int fødselsdato = rs.getInt("fødselsdato");
+				int telefon = rs.getInt("telefon");
+				String email = rs.getString("email");
+				String navnPåDør = rs.getString("navnPåDør");
+				int billeder = rs.getInt("billeder");
+				medlem = new Medlem (id, fornavn, efternavn, adresse, fødselsdato, telefon, email, navnPåDør, billeder);
+			}
+			
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		return medlem;
+		
+		}
+		
+	
 	public void opretMedlem(Medlem medlem) {
 
 		try {
@@ -83,6 +112,7 @@ public class DB_Connector {
 			e.printStackTrace();
 		}
 	}
+	
 	
 	public ArrayList<Medlem> hentMedlemmer(){
 		ArrayList<Medlem> medlemmer = new ArrayList<Medlem>();
@@ -176,13 +206,26 @@ public void opdaterMedlemmer(ArrayList<Medlem> opdateretMedlemmer){
 public void sletMedlem(int identifier) {
 	try{
 		String statementToQuery = "DELETE FROM medlemmer WHERE id = ?";
+		//String statementToQuery = "DELETE FROM barbog WHERE id = ?";
 		PreparedStatement ps = conn.prepareStatement(statementToQuery);
 		ps.setInt(1, identifier);
 		ps.executeUpdate();
 		
-	} catch(Exception e){
-		e.printStackTrace();
-	}
+		} catch(Exception e){
+			e.printStackTrace();
+		}
 	
 	}
+	
+	public void opretVare(Varer vare) {
+		try {
+			String sql = "INSERT INTO Varer VALUES(" + vare.toString() + ");";
+			System.out.println(sql);
+			conn.createStatement().executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+
 }

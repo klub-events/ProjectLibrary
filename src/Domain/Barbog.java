@@ -40,5 +40,9 @@ public class Barbog {
 	public void setSaldo(int saldo) {
 		this.saldo = saldo;
 	}
+	//unsure if proper style
+	public void changeSaldo(int saldo) {
+		this.saldo = this.saldo + saldo;
+	}
 	
 }
