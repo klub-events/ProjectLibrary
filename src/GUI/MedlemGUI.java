@@ -50,7 +50,7 @@ public class MedlemGUI extends MainGUI {
 		telefonBox = new LabelTextfield("telefon:");
 		emailBox = new LabelTextfield("email");
 		navnDoerBox = new LabelTextfield("navn på doer:");
-     
+
 		billedeValg = new JComboBox(comboValg);
 		billedeValg.setSelectedIndex(0);
 		billedeValg.setBackground(Color.white);
@@ -133,49 +133,50 @@ public class MedlemGUI extends MainGUI {
 			email = emailBox.getInputText();
 			navnDoer = navnDoerBox.getInputText();
 
-			if (billedeValg.getSelectedItem() == "Ja") {
+			if (billedeValg.getSelectedItem().equals("Ja")) {
 				billeder = 1;
 			} else {
 				billeder = 0;
-
-				if(validateInput()){
-					Medlem medlem = new Medlem(0, fornavn, efternavn, adresse, foedselsdato,
-							telefon, email, navnDoer, billeder);
-					new Control().opretMedlem(medlem);
-					Barbog barbog = new Barbog(medlem.getId(),"null","null",0);
-					new Control().opretBarbog(barbog,medlem);
-					JOptionPane.showMessageDialog(frame, "Medlemmet: " + medlem.getFornavn()
-							+ " er nu tilføjet til databasen med ID: " + medlem.getId());
-					clearAll();
-				}
-				else{
-					JOptionPane.showMessageDialog(frame,"Et eller flere felter er ikke blevet udfyldt korrekt. Udfyld alle felter, og prøv igen.");
-				}
+			}
+			if(validateInput()){
+				Medlem medlem = new Medlem(0, fornavn, efternavn, adresse, foedselsdato,
+						telefon, email, navnDoer, billeder);
+				new Control().opretMedlem(medlem);
+				Barbog barbog = new Barbog(medlem.getId(),"null","null",0);
+				new Control().opretBarbog(barbog,medlem);
+				JOptionPane.showMessageDialog(frame, "Medlemmet: " + medlem.getFornavn()
+						+ " er nu tilføjet til databasen med ID: " + medlem.getId());
+				clearAll();
+			}
+			else{
+				JOptionPane.showMessageDialog(frame,"Et eller flere felter er ikke blevet udfyldt korrekt. Udfyld alle felter, og prøv igen.");
 			}
 		}
+	
 
-			if (e.getSource() == btn_aktivitet) {
-				new AktivitetGUI();
+	if (e.getSource() == btn_aktivitet) {
+		new AktivitetGUI();
 
-				frame.dispose();
-			}
+		frame.dispose();
+	}
 
-			if (e.getSource() == btn_saldo) {
-				new BarBogGUI();
+	if (e.getSource() == btn_saldo) {
+		new BarBogGUI();
 
-				frame.dispose();
-			}
+		frame.dispose();
+	}
 
-			if (e.getSource() == btn_tilmeld) {
-				new TilmeldAktivitetGUI();
+	if (e.getSource() == btn_tilmeld) {
+		new TilmeldAktivitetGUI();
 
-				frame.dispose();
-			}
+		frame.dispose();
+	}
 
-			if (e.getSource() == btn_visMember) {
-				new MedlemTabel();
-			}
-
-		
+	if (e.getSource() == btn_visMember) {
+		new MedlemTabel();
 	}
 }
+
+
+}
+
