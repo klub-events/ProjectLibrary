@@ -20,13 +20,13 @@ public class Medlem{
 	private String fornavn;
 	private String efternavn;
 	private String adresse;
-	private int fødselsdato;
-	private int telefon;
+	private String fødselsdato;
+	private String telefon;
 	private String email;
 	private String navnPåDør;
 	private	int billeder;
 
-	public Medlem(int id, String fornavn, String efternavn, String adresse, int fødselsdato, int telefon, String email, String navnPåDør, int billeder){
+	public Medlem(int id, String fornavn, String efternavn, String adresse, String fødselsdato, String telefon, String email, String navnPåDør, int billeder){
 		this.id = id;
 		this.fornavn = fornavn;
 		this.efternavn = efternavn;
@@ -36,6 +36,7 @@ public class Medlem{
 		this.email = email;
 		this.navnPåDør = navnPåDør;
 		this.billeder = billeder;
+		
 	}
 
 	public String toString(){
@@ -74,19 +75,19 @@ public class Medlem{
 		this.adresse = adresse;
 	}
 
-	public int getFødselsdato() {
+	public String getFødselsdato() {
 		return fødselsdato;
 	}
 
-	public void setFødselsdato(int fødselsdato) {
+	public void setFødselsdato(String fødselsdato) {
 		this.fødselsdato = fødselsdato;
 	}
 
-	public int getTelefon() {
+	public String getTelefon() {
 		return telefon;
 	}
 
-	public void setTelefon(int telefon) {
+	public void setTelefon(String telefon) {
 		this.telefon = telefon;
 	}
 

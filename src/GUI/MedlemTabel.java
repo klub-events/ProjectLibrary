@@ -24,7 +24,8 @@ public class MedlemTabel implements ActionListener {
 	private JPanel centerPanel;
 	private int rowSet;
 	private int selectedRow;
-
+	private MedlemGUI medlemGUI;
+	
 	private JTextField search = new JTextField();
 	private JButton btn_opdater = new JButton("Opdater Medlemmer");
 	private JButton btn_slet = new JButton("Slet Medlem");
@@ -32,9 +33,9 @@ public class MedlemTabel implements ActionListener {
 	private DefaultTableModel model = new DefaultTableModel();
 
 
-	public MedlemTabel(){
+	public MedlemTabel(MedlemGUI medlemGUI){
 		frame = new JFrame ();
-
+		this.medlemGUI = medlemGUI;
 		northPanel = new JPanel();
 		southPanel = new JPanel();
 		centerPanel = new JPanel();
@@ -122,11 +123,12 @@ public class MedlemTabel implements ActionListener {
 				for(column = 0; column < model.getColumnCount(); column++){
 					data.add(model.getValueAt(row, column).toString());					
 				}
-				opdateMedlemmer.add(new Medlem(Integer.parseInt(data.get(0)), data.get(1), data.get(2), data.get(3), Integer.parseInt(data.get(4)), Integer.parseInt(data.get(5)), data.get(6), data.get(7), Integer.parseInt(data.get(8))));
+				opdateMedlemmer.add(new Medlem(Integer.parseInt(data.get(0)), data.get(1), data.get(2), data.get(3), data.get(4), data.get(5), data.get(6), data.get(7), Integer.parseInt(data.get(8))));
 				System.out.println(data);
 				data.clear();
 			}
 			new Control().updateDB(opdateMedlemmer);
+			medlemGUI.updateJTable();
 		}
 
 		if (e.getSource() == btn_slet){
@@ -139,7 +141,7 @@ public class MedlemTabel implements ActionListener {
 			}catch(ArrayIndexOutOfBoundsException e1){
 				JOptionPane.showMessageDialog(frame,"Du har ikke valgt et medlem.");
 			}
-
+			medlemGUI.updateJTable();
 		}
 	} 
 }

@@ -66,8 +66,8 @@ public class DB_Connector {
 				String fornavn = rs.getString("fornavn");
 				String efternavn = rs.getString("efternavn");
 				String adresse = rs.getString("adresse");
-				int fødselsdato = rs.getInt("fødselsdato");
-				int telefon = rs.getInt("telefon");
+				String fødselsdato = rs.getString("fødselsdato");
+				String telefon = rs.getString("telefon");
 				String email = rs.getString("email");
 				String navnPåDør = rs.getString("navnPåDør");
 				int billeder = rs.getInt("billeder");
@@ -134,8 +134,8 @@ public class DB_Connector {
 				String fornavn = rs.getString("fornavn");
 				String efternavn = rs.getString("efternavn");
 				String adresse = rs.getString("adresse");
-				int fødselsdato = rs.getInt("fødselsdato");
-				int telefon = rs.getInt("telefon");
+				String fødselsdato = rs.getString("fødselsdato");
+				String telefon = rs.getString("telefon");
 				String email = rs.getString("email");
 				String navnPåDør = rs.getString("navnPåDør");
 				int billeder = rs.getInt("billeder");
@@ -197,8 +197,8 @@ public class DB_Connector {
 				ps.setString(1,medlem.getFornavn());
 				ps.setString(2,medlem.getEfternavn());
 				ps.setString(3,medlem.getAdresse());
-				ps.setInt(4,medlem.getFødselsdato());
-				ps.setInt(5,medlem.getTelefon());
+				ps.setString(4,medlem.getFødselsdato());
+				ps.setString(5,medlem.getTelefon());
 				ps.setString(6,medlem.getEmail());
 				ps.setString(7,medlem.getNavnPåDør());
 				ps.setInt(8,medlem.getBilleder());
