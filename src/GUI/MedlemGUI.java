@@ -17,7 +17,10 @@ public class MedlemGUI extends MainGUI {
 	}
 	private JButton btn_opretMedlem;
 	private JButton btn_visMember;
-	private JButton searchBtn;
+	private JButton btn_search;
+	//DETTE ER EN TEST KNAP ----------------------------------------
+	private JButton test;
+	//DETTE ER EN TEST KNAP ----------------------------------------
 
 	// Værdier for indtastede oplysnigner
 	private String fornavn;
@@ -28,15 +31,6 @@ public class MedlemGUI extends MainGUI {
 	private String email;
 	private String navnDoer;
 	private int billeder;
-
-	// Text-label fields created
-	//	private LabelTextfield forNavnBox;
-	//	private LabelTextfield efterNavnBox;
-	//	private LabelTextfield adresseBox;
-	//	private LabelTextfield foedselsdatoBox;
-	//	private LabelTextfield telefonBox;
-	//	private LabelTextfield emailBox;
-	//	private LabelTextfield navnDoerBox;
 
 	private JTextField fornavnField;
 	private JTextField efternavnField;
@@ -70,7 +64,7 @@ public class MedlemGUI extends MainGUI {
 
 	public MedlemGUI() {
 		// Tilføjer et panel som alle
-		JPanel content2 = new JPanel(null);
+		JPanel content = new JPanel(null);
 
 		fornavnField = new JTextField(); fornavnField.setBounds							(fieldBorder, 50,  fieldWidth, fieldHeight);
 		efternavnField = new JTextField();efternavnField.setBounds						(fieldBorder, 110, fieldWidth, fieldHeight);
@@ -102,10 +96,28 @@ public class MedlemGUI extends MainGUI {
 		btn_visMember.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btn_visMember.addActionListener(this);
 
-		searchBtn = new JButton("SØG");searchBtn.setBounds									(580, 20, 60, 30);
-		searchBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		searchBtn.addActionListener(this);
+		btn_search = new JButton("SØG");btn_search.setBounds									(580, 20, 60, 30);
+		btn_search.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btn_search.addActionListener(this);
 
+		/*-------------------------------------------------------------
+		 * 
+		 * 
+		 * DETTE ER EN TEST KNAP, FJERN NÅR SYSTEM SKAL AFLEVERES
+		 *  
+		 * 
+		 */
+		 test = new JButton("TEST");
+		 test.setBounds(550,530 , 20,20);
+		 content.add(test);
+		 test.addActionListener(this);
+		/*
+		 * 
+		 * 
+		 * DETTE ER EN TEST KNAP, FJERN NÅR SYSTEM SKAL AFLEVERES
+		 *  
+		 * 
+		 -----------------------------------------------------------*/
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(580, 50, 250, 500); // x, y, width, height
 		table = new JTable();
@@ -118,22 +130,22 @@ public class MedlemGUI extends MainGUI {
 
 
 		// Tilføjer content til content2 panelet
-		content2.add(fornavnField);content2.add(fornavnLabel);
-		content2.add(efternavnField);content2.add(efternavnLabel);
-		content2.add(adresseField);content2.add(adresseLabel);
-		content2.add(foedselsdatoField);content2.add(foedselsdatoLabel);
-		content2.add(telefonField);content2.add(telefonLabel);
-		content2.add(emailField);content2.add(emailLabel);
-		content2.add(navndoerField);content2.add(navndoerLabel);
-		content2.add(billedeValg);content2.add(billedeLabel);
-		content2.add(scrollPane);content2.add(searchField);
+		content.add(fornavnField);content.add(fornavnLabel);
+		content.add(efternavnField);content.add(efternavnLabel);
+		content.add(adresseField);content.add(adresseLabel);
+		content.add(foedselsdatoField);content.add(foedselsdatoLabel);
+		content.add(telefonField);content.add(telefonLabel);
+		content.add(emailField);content.add(emailLabel);
+		content.add(navndoerField);content.add(navndoerLabel);
+		content.add(billedeValg);content.add(billedeLabel);
+		content.add(scrollPane);content.add(searchField);
 
-		content2.add(btn_opretMedlem);
-		content2.add(btn_visMember);
-		content2.add(searchBtn);
-		content2.setBackground(Color.LIGHT_GRAY.brighter());
+		content.add(btn_opretMedlem);
+		content.add(btn_visMember);
+		content.add(btn_search);
+		content.setBackground(Color.LIGHT_GRAY.brighter());
 
-		Panel_Content.add(content2);
+		Panel_Content.add(content);
 		clearAll();
 		updateJTable();
 	}
@@ -179,9 +191,26 @@ public class MedlemGUI extends MainGUI {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == searchBtn){
+		/*----------------------------
+		 * 
+		 * DETTE ER EN TEST FUNKTION
+		 * 
+		 */
+		if(e.getSource() == test){
+			Medlem medlem = new Medlem(0, "test", "test", "test", "123",
+					"123", "test", "test", 1);
+			new Control().opretMedlem(medlem);
+			Barbog barbog = new Barbog(medlem.getId(),"null","null",0);
+			new Control().opretBarbog(barbog,medlem);
+		}
+		/*
+		 * 
+		 * DETTE ER EN TEST FUNKTION
+		 * 
+		 ---------------------------*/
+		
+		if(e.getSource() == btn_search){
 			String text = searchField.getText();
-			System.out.println("were");
 			if (text.length() == 0) {
 				rowSorter.setRowFilter(null);
 			} else {

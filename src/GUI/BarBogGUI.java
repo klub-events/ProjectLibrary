@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.NumberFormat;
@@ -10,21 +11,25 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import Domain.Barbog;
 import Domain.Control;
 
-public class BarBogGUI extends MainGUI implements ActionListener{
+public class BarBogGUI extends MainGUI implements ActionListener {
 	private JTable table;
 
 	private JButton btnTraek = new JButton("Træk");
 	private JButton btnIndsaet = new JButton("Indsæt");
 	private JButton btnKoeb = new JButton("KØB");
 	private JButton btnNote = new JButton(" Opdater");
+	private JButton btn_search;
 
 	private JTextField searchField = new JTextField();
 	private JTextField beloebField = new JTextField();
 	private JTextField indsaetField = new JTextField();
+
 
 	private JTextField idField = new JTextField();
 	private JTextField navnField = new JTextField();
@@ -38,58 +43,61 @@ public class BarBogGUI extends MainGUI implements ActionListener{
 	private JLabel beloebLabel = new JLabel("Beløb til behandling");
 
 	private MyTableModel model = new MyTableModel();
+	private TableRowSorter<TableModel> rowSorter;
 	private int selectedRow;
 	private boolean isListenerActive = true;
 
-	public BarBogGUI(){
+	public BarBogGUI() {
 		JPanel center3 = new JPanel();
 		center3.setLayout(null);
 
-		//Buttons
+		// Buttons
 		btnIndsaet.setBounds(50, 100, 100, 60);
 		btnIndsaet.addActionListener(this);
-		
+
 		btnTraek.setBounds(50, 170, 100, 60);
 		btnTraek.addActionListener(this);
-		
-		btnKoeb.setBounds(300,300,200,150);
+
+		btnKoeb.setBounds(300, 300, 200, 150);
 		btnKoeb.addActionListener(this);
-		
+
 		btnNote.setBounds(50, 460, 100, 30);
 		btnNote.addActionListener(this);
 		btnNote.setToolTipText("Åbner et vindue hvori du kan opdatere den vigtige note.");
-		
-		
 
-		//Edit TextFields	
+		btn_search = new JButton("SØG");btn_search.setBounds									(580, 20, 60, 30);
+		btn_search.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btn_search.addActionListener(this);
+
+		// Edit TextFields
 		beloebField.setBounds(170, 140, 120, 60);
+		searchField.setBounds(640, 20, 190, 30);
 
-
-		//Non-edit TextFields
-		idField.setBounds(50,50,25,20);
+		// Non-edit TextFields
+		idField.setBounds(50, 50, 25, 20);
 		idField.setEditable(false);
 		idField.setText("N/A");
 
-		navnField.setBounds(110,50,50,20);
+		navnField.setBounds(110, 50, 50, 20);
 		navnField.setEditable(false);
 		navnField.setText("N/A");
 
-		saldoField.setBounds(170,50,50,20);
+		saldoField.setBounds(170, 50, 50, 20);
 		saldoField.setEditable(false);
 		saldoField.setText("N/A");
 
-		noteField.setBounds(50,300,200,150);
+		noteField.setBounds(50, 300, 200, 150);
 		noteField.setEditable(false);
 		noteField.setText("N/A");
 
-		//Labels
-		idLabel.setBounds(50,30,20,20 );
-		navnLabel.setBounds(110,30,50,20 );
-		saldoLabel.setBounds(170,30,50,20 );
-		noteLabel.setBounds(50,270,100,20 );
+		// Labels
+		idLabel.setBounds(50, 30, 20, 20);
+		navnLabel.setBounds(110, 30, 50, 20);
+		saldoLabel.setBounds(170, 30, 50, 20);
+		noteLabel.setBounds(50, 270, 100, 20);
 		beloebLabel.setBounds(170, 120, 120, 20);
 
-		//Indsætter content til framen, til framen.
+		// Indsætter content til framen, til framen.
 		center3.add(noteLabel);
 		center3.add(saldoLabel);
 		center3.add(idLabel);
@@ -106,7 +114,10 @@ public class BarBogGUI extends MainGUI implements ActionListener{
 		center3.add(beloebLabel);
 		center3.add(btnNote);
 		center3.add(btnKoeb);
-		//Jtable
+		center3.add(searchField);
+		center3.add(btn_search);
+
+		// Jtable
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(580, 50, 250, 500); // x, y, width, height
 		table = new JTable();
@@ -115,138 +126,160 @@ public class BarBogGUI extends MainGUI implements ActionListener{
 		table.setFillsViewportHeight(true);
 		table.setModel(model);
 		center3.add(scrollPane);
-		TableColumn column = null;
+		rowSorter = new TableRowSorter<>((table.getModel()));
+		table.setRowSorter(rowSorter);
+		
+		System.out.println();
 
-		//tilføj content til gui
+		// tilføj content til gui
 		Panel_Content.add(center3);
 		center3.setBackground(Color.WHITE);
 
 		/*
 		 * 
-		 * En List Selection Listener. Checker på mouseinput, om selectedRow er selected..
-		 * Hvis en row bliver selected udfører den var.setText(var) tingene..
+		 * En List Selection Listener. Checker på mouseinput, om selectedRow er
+		 * selected.. Hvis en row bliver selected udfører den var.setText(var)
+		 * tingene..
 		 */
-		table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
-			public void valueChanged(ListSelectionEvent event){
-				if(isListenerActive){
-					int selectedRow;
-					selectedRow = table.getSelectedRow();
-					String id = String.valueOf((int) model.getValueAt(selectedRow,0));
-					String navn = (String) model.getValueAt(selectedRow, 1);
-					String saldo = String.valueOf((int)model.getValueAt(selectedRow,2));
-					String note = (String) model.getValueAt(selectedRow,3);
-					idField.setText(id);
-					navnField.setText(navn);
-					saldoField.setText(saldo);
-					noteField.setText(note);
-				}
-			}
-		});
+		table.getSelectionModel().addListSelectionListener(
+
+				new ListSelectionListener() {
+					public void valueChanged(ListSelectionEvent event) {
+						if (isListenerActive) {
+							try{
+								int selectedRow;
+								selectedRow = table.getSelectedRow();
+								String id = String.valueOf((int) model.getValueAt(
+										selectedRow, 0));
+								String navn = (String) model.getValueAt(
+										selectedRow, 1);
+								String saldo = String.valueOf((int) model
+										.getValueAt(selectedRow, 2));
+								String note = (String) model.getValueAt(
+										selectedRow, 3);
+								idField.setText(id);
+								navnField.setText(navn);
+								saldoField.setText(saldo);
+								noteField.setText(note);
+							}catch(ArrayIndexOutOfBoundsException e1){
+								
+							}
+						}
+					}
+
+				});
 		updateJTable();
 	}
 
-	public void updateJTable(){
-		//Henter Barbogs værdier fra db
+	public void updateJTable() {
+		// Henter Barbogs værdier fra db
 		ArrayList<Barbog> barbogs = new Control().hentBarbog();
 
 		model.setColumnIdentifiers(new String[] { "ID", "Navn", "Saldo","VigtigNote" });
+		//Da list Listener lytter på hvilket row der er selected.
+		for (int i = 0; i < model.getColumnCount(); i++){
+			rowSorter.setSortable(i, false);}
 		for (Barbog barbog : barbogs) {
-			model.addRow(new Object[] { barbog.getId(),barbog.getNavn(), barbog.getSaldo(),barbog.getVigtigNote()});
+			model.addRow(new Object[] { barbog.getId(), barbog.getNavn(),
+					barbog.getSaldo(), barbog.getVigtigNote() });
 		}
 		barbogs.clear();
 	}
 
-	public void actionPerformed(ActionEvent e){
-		if(e.getSource() == btn_aktivitet)
-		{
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == btn_search){
+			String text = searchField.getText();
+			if (text.length() == 0) {
+				rowSorter.setRowFilter(null);
+			} else {
+				rowSorter.setRowFilter(RowFilter.regexFilter(text));
+			}
+		}
+		if (e.getSource() == btn_aktivitet) {
 			new AktivitetGUI();
 
 			frame.dispose();
 		}
 
-		if(e.getSource() == btn_medlem )
-		{
+		if (e.getSource() == btn_medlem) {
 			new MedlemGUI();
 
 			frame.dispose();
 		}
 
-		if(e.getSource() == btn_tilmeld)
-		{
+		if (e.getSource() == btn_tilmeld) {
 			new TilmeldAktivitetGUI();
 
 			frame.dispose();
 		}
-		
-		if(e.getSource() == btnNote){
-			
+
+		if (e.getSource() == btnNote) {
+
 		}
-		
-		if(e.getSource() == btnKoeb){
-			
+
+		if (e.getSource() == btnKoeb) {
+
 		}
-		
-		if(e.getSource()==btnIndsaet){
+
+		if (e.getSource() == btnIndsaet) {
 			int input = 0;
 			int saldo = 0;
 			int id = 0;
 			selectedRow = table.getSelectedRow();
 
-			try{
+			try {
 				input = Integer.parseInt(beloebField.getText());
-			}catch(NumberFormatException|ArrayIndexOutOfBoundsException e1){
-				JOptionPane.showMessageDialog(frame,"Forket indtastet beløb.");
+			} catch (NumberFormatException | ArrayIndexOutOfBoundsException e1) {
+				JOptionPane.showMessageDialog(frame, "Forket indtastet beløb.");
 			}
-			try{
-				id = (int)( model.getValueAt(selectedRow,0));
+			try {
+				id = (int) (model.getValueAt(selectedRow, 0));
 				saldo = Integer.parseInt(saldoField.getText());
-			}catch(NumberFormatException|ArrayIndexOutOfBoundsException e1){
-				JOptionPane.showMessageDialog(frame,"Intet medlem er valgt.");
+			} catch (NumberFormatException | ArrayIndexOutOfBoundsException e1) {
+				JOptionPane.showMessageDialog(frame, "Intet medlem er valgt.");
 			}
 
 			beloebField.setText(null);
 			if (table.getSelectedRow() >= 0) {
-				new Control().indsaetBeloeb(saldo,input, id);
+				new Control().indsaetBeloeb(saldo, input, id);
 				isListenerActive = false;
 				model.setRowCount(0);
 				updateJTable();
 				model.fireTableDataChanged();
 				isListenerActive = true;
-				table.addRowSelectionInterval(selectedRow,selectedRow);
+				table.addRowSelectionInterval(selectedRow, selectedRow);
 			}
 		}
 
-		if(e.getSource()==btnTraek){
+		if (e.getSource() == btnTraek) {
 			int id = 0;
 			int input = 0;
-			int saldo = 0;			
+			int saldo = 0;
 			selectedRow = table.getSelectedRow();
 
-			try{
+			try {
 				input = Integer.parseInt(beloebField.getText());
-			}catch(NumberFormatException|ArrayIndexOutOfBoundsException e1){
-				JOptionPane.showMessageDialog(frame,"Forket indtastet beløb.");
+			} catch (NumberFormatException | ArrayIndexOutOfBoundsException e1) {
+				JOptionPane.showMessageDialog(frame, "Forket indtastet beløb.");
 			}
-			try{
-				id = (int)( model.getValueAt(selectedRow,0));
+			try {
+				id = (int) (model.getValueAt(selectedRow, 0));
 				saldo = Integer.parseInt(saldoField.getText());
-			}catch(NumberFormatException|ArrayIndexOutOfBoundsException e1){
-				JOptionPane.showMessageDialog(frame,"Intet medlem er valgt.");
+			} catch (NumberFormatException | ArrayIndexOutOfBoundsException e1) {
+				JOptionPane.showMessageDialog(frame, "Intet medlem er valgt.");
 			}
-			beloebField.setText(null);		
+			beloebField.setText(null);
 
 			if (table.getSelectedRow() >= 0) {
 				isListenerActive = false;
 				model.setRowCount(0);
-				new Control().traekBeloeb(saldo,input, id);
+				new Control().traekBeloeb(saldo, input, id);
 				updateJTable();
 				model.fireTableDataChanged();
 				isListenerActive = true;
-				table.addRowSelectionInterval(selectedRow,selectedRow);
+				table.addRowSelectionInterval(selectedRow, selectedRow);
 			}
 
 		}
 	}
-}	
-
-
+}

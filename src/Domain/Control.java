@@ -13,6 +13,7 @@ public class Control {
 	private Udregning math;
 	public Control(){
 		db = DB_Connector.getInstance();
+		math = new Udregning();
 	}
 
 	public Medlem findMedlem(String identifier) {
@@ -83,7 +84,7 @@ public class Control {
 	}
 
 	public void indsaetBeloeb(int saldo, int input ,int id) {
-		 int total = math.adder(saldo, input);
+		int total = math.adder(saldo, input);
 		db.indsaetBeloeb(total,id);	
 		db.hentBarbog();
 	}
