@@ -133,11 +133,10 @@ public class MedlemGUI extends MainGUI {
 			email = emailBox.getInputText();
 			navnDoer = navnDoerBox.getInputText();
 
-			if (billedeValg.getSelectedItem().equals("Ja")) {
+			if (billedeValg.getSelectedItem() == "Ja") {
 				billeder = 1;
-			} else if (billedeValg.getSelectedItem().equals("Nej")) {
+			} else {
 				billeder = 0;
-			}
 
 				if(validateInput()){
 					Medlem medlem = new Medlem(0, fornavn, efternavn, adresse, foedselsdato,
@@ -153,7 +152,7 @@ public class MedlemGUI extends MainGUI {
 					JOptionPane.showMessageDialog(frame,"Et eller flere felter er ikke blevet udfyldt korrekt. Udfyld alle felter, og prøv igen.");
 				}
 			}
-		
+		}
 
 			if (e.getSource() == btn_aktivitet) {
 				new AktivitetGUI();
