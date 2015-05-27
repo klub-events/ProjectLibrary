@@ -80,6 +80,7 @@ public class MedlemGUI extends MainGUI {
 		// Tilføjer al contentet fra content2 panelet, til main GUI content
 		// panelet for denne klasse
 		Panel_Content.add(content2);
+		clearAll();
 	}
 
 	// For at rydde tekstfields når medlem er oprettet
@@ -95,13 +96,13 @@ public class MedlemGUI extends MainGUI {
 	}
 
 	public boolean validateInput() {
-		if 		(  !forNavnBox.getInputText().equals(null)
-				&& !efterNavnBox.getInputText().equals(null)
-				&& !adresseBox.getInputText().equals(null)
-				&& !foedselsdatoBox.getInputText().equals(null)
-				&& !telefonBox.getInputText().equals(null)
-				&& !emailBox.getInputText().equals(null)
-				&& !navnDoerBox.getInputText().equals(null)) {
+		if 		(  !forNavnBox.getInputText().equals("")
+				&& !efterNavnBox.getInputText().equals("")
+				&& !adresseBox.getInputText().equals("")
+				&& !foedselsdatoBox.getInputText().equals("")
+				&& !telefonBox.getInputText().equals("")
+				&& !emailBox.getInputText().equals("")
+				&& !navnDoerBox.getInputText().equals("")) {
 			return true;
 		} else {
 			return false;
