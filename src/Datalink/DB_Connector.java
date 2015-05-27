@@ -1,6 +1,6 @@
 package Datalink;
 
-import java.sql.Connection;
+import java.sql.Connection; 
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import com.mysql.jdbc.Statement;
 
+import Domain.Tilmeld;
 import Domain.Varer;
 import Domain.Barbog;
 import Domain.Medlem;
@@ -104,14 +105,25 @@ public class DB_Connector {
 
 	public void opretBarbog(Barbog barbog, Medlem medlem) {
 		try {
-			String sql = "INSERT INTO barbog VALUES("+ barbog.toString() +");";
-			PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			statement.executeUpdate();
+			String sql = "INSERT INTO barbog VALUES(" + barbog.toString()+");";
+					
+			System.out.println(sql);
+			conn.createStatement().executeUpdate(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-
+	
+	public void opretTilmelding(Tilmeld tilmeld) {
+		try {
+			String sql = "INSERT INTO tilmeld VALUES(" + tilmeld.toString() 
+					+ ");";
+			System.out.println(sql);
+			conn.createStatement().executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public ArrayList<Medlem> hentMedlemmer(){
 		ArrayList<Medlem> medlemmer = new ArrayList<Medlem>();

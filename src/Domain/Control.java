@@ -30,6 +30,12 @@ public class Control {
 	public void opretMedlem(Medlem medlem){
 			db.opretMedlem(medlem);
 	}
+	
+	//bruges til at kalde funktioner der opretter nye tilmeldinger 
+	 public void opretTilmelding(Tilmeld tilmeld)
+	 {
+	 	db.opretTilmelding(tilmeld);
+	 }
 
 	//Bruges til at kalde funktionen der opdatere alle felter i databasen, med værdier
 	//hentet fra en arrayliste, fyldt med medlemmer, der komemr fra gui - JTablet.

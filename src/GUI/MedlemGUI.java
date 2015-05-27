@@ -77,7 +77,7 @@ public class MedlemGUI extends MainGUI {
 		content2.add(btn_visMember);
 		content2.setBackground(Color.WHITE);
 
-		// Tilføjer al contentet fra content2 panelet, til main GUI center
+		// Tilføjer al contentet fra content2 panelet, til main GUI content
 		// panelet for denne klasse
 		Panel_Content.add(content2);
 	}
