@@ -104,8 +104,8 @@ public class TilmeldAktivitetGUI extends MainGUI implements ActionListener
 	       frame.dispose();
 	    }
 		
-		if(e.getSource() == btn_gem)
-		{
+		if(e.getSource() == btn_gem){
+			try{
 			if (aktivitet.getSelectedItem() == "fodbold") {
 				fk_aktivitetID = 1;
 			} else {
@@ -121,12 +121,10 @@ public class TilmeldAktivitetGUI extends MainGUI implements ActionListener
 			new Control().opretTilmelding(m);
 			System.out.println("her til");
 			
-		}
-		else{
+		}catch(Exception e1){
 			JOptionPane.showMessageDialog(frame,"Et eller flere felter er ikke blevet udfyldt. Udfyld alle felter, og prøv igen.");
 		}
-		
-		
-		
+		}
+			
 	}
 }//public class slutter

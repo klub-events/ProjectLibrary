@@ -1,9 +1,12 @@
 package GUI;
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.table.DefaultTableModel;
+
 import Domain.Control;
 import Domain.Medlem;
 
@@ -127,10 +130,15 @@ public class MedlemTabel implements ActionListener {
 		}
 
 		if (e.getSource() == btn_slet){
+			int identifier = 0;
 			selectedRow = table.getSelectedRow();
-			int identifier = (int) model.getValueAt(selectedRow,0);
+			try{
+			identifier = (int) model.getValueAt(selectedRow,0);
 			model.removeRow(selectedRow);
 			new Control().sletMedlem(identifier);
+			}catch(ArrayIndexOutOfBoundsException e1){
+				JOptionPane.showMessageDialog(frame,"Du har ikke valgt et medlem.");
+			}
 
 		}
 	} 

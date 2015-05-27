@@ -102,7 +102,9 @@ public class MedlemGUI extends MainGUI {
 				&& !foedselsdatoBox.getInputText().equals("")
 				&& !telefonBox.getInputText().equals("")
 				&& !emailBox.getInputText().equals("")
-				&& !navnDoerBox.getInputText().equals("")) {
+				&& !navnDoerBox.getInputText().equals("")
+				&& !(foedselsdato==0)
+				&& !(telefon==0)) {
 			return true;
 		} else {
 			return false;
@@ -147,7 +149,7 @@ public class MedlemGUI extends MainGUI {
 					clearAll();
 				}
 				else{
-					JOptionPane.showMessageDialog(frame,"Et eller flere felter er ikke blevet udfyldt. Udfyld alle felter, og prøv igen.");
+					JOptionPane.showMessageDialog(frame,"Et eller flere felter er ikke blevet udfyldt korrekt. Udfyld alle felter, og prøv igen.");
 				}
 			}
 		}
