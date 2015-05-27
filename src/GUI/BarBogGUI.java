@@ -20,7 +20,7 @@ public class BarBogGUI extends MainGUI implements ActionListener{
 	private JButton btnTraek = new JButton("Træk");
 	private JButton btnIndsaet = new JButton("Indsæt");
 	private JButton btnKoeb = new JButton("KØB");
-	private JButton btnSomething = new JButton(" do something");
+	private JButton btnNote = new JButton(" Opdater");
 
 	private JTextField searchField = new JTextField();
 	private JTextField beloebField = new JTextField();
@@ -40,7 +40,7 @@ public class BarBogGUI extends MainGUI implements ActionListener{
 	private MyTableModel model = new MyTableModel();
 	private int selectedRow;
 	private boolean isListenerActive = true;
-	
+
 	public BarBogGUI(){
 		JPanel center3 = new JPanel();
 		center3.setLayout(null);
@@ -48,13 +48,23 @@ public class BarBogGUI extends MainGUI implements ActionListener{
 		//Buttons
 		btnIndsaet.setBounds(50, 100, 100, 60);
 		btnIndsaet.addActionListener(this);
+		
 		btnTraek.setBounds(50, 170, 100, 60);
 		btnTraek.addActionListener(this);
 		
+		btnKoeb.setBounds(300,300,200,150);
+		btnKoeb.addActionListener(this);
+		
+		btnNote.setBounds(50, 460, 100, 30);
+		btnNote.addActionListener(this);
+		btnNote.setToolTipText("Åbner et vindue hvori du kan opdatere den vigtige note.");
+		
+		
+
 		//Edit TextFields	
 		beloebField.setBounds(170, 140, 120, 60);
-		
-		
+
+
 		//Non-edit TextFields
 		idField.setBounds(50,50,25,20);
 		idField.setEditable(false);
@@ -71,9 +81,6 @@ public class BarBogGUI extends MainGUI implements ActionListener{
 		noteField.setBounds(50,300,200,150);
 		noteField.setEditable(false);
 		noteField.setText("N/A");
-
-		
-		
 
 		//Labels
 		idLabel.setBounds(50,30,20,20 );
@@ -97,7 +104,8 @@ public class BarBogGUI extends MainGUI implements ActionListener{
 		center3.add(indsaetField);
 		center3.add(beloebField);
 		center3.add(beloebLabel);
-		
+		center3.add(btnNote);
+		center3.add(btnKoeb);
 		//Jtable
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(580, 50, 250, 500); // x, y, width, height
@@ -121,16 +129,16 @@ public class BarBogGUI extends MainGUI implements ActionListener{
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
 			public void valueChanged(ListSelectionEvent event){
 				if(isListenerActive){
-				int selectedRow;
-				selectedRow = table.getSelectedRow();
-				String id = String.valueOf((int) model.getValueAt(selectedRow,0));
-				String navn = (String) model.getValueAt(selectedRow, 1);
-				String saldo = String.valueOf((int)model.getValueAt(selectedRow,2));
-				String note = (String) model.getValueAt(selectedRow,3);
-				idField.setText(id);
-				navnField.setText(navn);
-				saldoField.setText(saldo);
-				noteField.setText(note);
+					int selectedRow;
+					selectedRow = table.getSelectedRow();
+					String id = String.valueOf((int) model.getValueAt(selectedRow,0));
+					String navn = (String) model.getValueAt(selectedRow, 1);
+					String saldo = String.valueOf((int)model.getValueAt(selectedRow,2));
+					String note = (String) model.getValueAt(selectedRow,3);
+					idField.setText(id);
+					navnField.setText(navn);
+					saldoField.setText(saldo);
+					noteField.setText(note);
 				}
 			}
 		});
@@ -169,38 +177,47 @@ public class BarBogGUI extends MainGUI implements ActionListener{
 
 			frame.dispose();
 		}
+		
+		if(e.getSource() == btnNote){
+			
+		}
+		
+		if(e.getSource() == btnKoeb){
+			
+		}
+		
 		if(e.getSource()==btnIndsaet){
 			int input=0;
 			int saldo=0;
 			int id = 0;
 			int total;
 			selectedRow = table.getSelectedRow();
-			
+
 			try{
-			input = Integer.parseInt(beloebField.getText());
+				input = Integer.parseInt(beloebField.getText());
 			}catch(NumberFormatException|ArrayIndexOutOfBoundsException e1){
 				JOptionPane.showMessageDialog(frame,"Forket indtastet beløb.");
 			}
 			try{
-			id = (int)( model.getValueAt(selectedRow,0));
-			saldo = Integer.parseInt(saldoField.getText());
+				id = (int)( model.getValueAt(selectedRow,0));
+				saldo = Integer.parseInt(saldoField.getText());
 			}catch(NumberFormatException|ArrayIndexOutOfBoundsException e1){
 				JOptionPane.showMessageDialog(frame,"Intet medlem er valgt.");
 			}
-			
+
 			total = input+saldo;
 			beloebField.setText(null);
 			if (table.getSelectedRow() >= 0) {
-			new Control().indsaetBeloeb(total, id);
-			isListenerActive = false;
-			model.setRowCount(0);
-			updateJTable();
-			model.fireTableDataChanged();
-			isListenerActive = true;
-			table.addRowSelectionInterval(selectedRow,selectedRow);
+				new Control().indsaetBeloeb(total, id);
+				isListenerActive = false;
+				model.setRowCount(0);
+				updateJTable();
+				model.fireTableDataChanged();
+				isListenerActive = true;
+				table.addRowSelectionInterval(selectedRow,selectedRow);
 			}
 		}
-		
+
 		if(e.getSource()==btnTraek){
 			int id = 0;
 			int input=0;
@@ -209,20 +226,19 @@ public class BarBogGUI extends MainGUI implements ActionListener{
 			selectedRow = table.getSelectedRow();
 
 			try{
-			input = Integer.parseInt(beloebField.getText());
+				input = Integer.parseInt(beloebField.getText());
 			}catch(NumberFormatException|ArrayIndexOutOfBoundsException e1){
 				JOptionPane.showMessageDialog(frame,"Forket indtastet beløb.");
 			}
 			try{
-			id = (int)( model.getValueAt(selectedRow,0));
-			saldo = Integer.parseInt(saldoField.getText());
+				id = (int)( model.getValueAt(selectedRow,0));
+				saldo = Integer.parseInt(saldoField.getText());
 			}catch(NumberFormatException|ArrayIndexOutOfBoundsException e1){
 				JOptionPane.showMessageDialog(frame,"Intet medlem er valgt.");
 			}
 			total = saldo-input;
 			beloebField.setText(null);		
-			
-			
+
 			if (table.getSelectedRow() >= 0) {
 				isListenerActive = false;
 				model.setRowCount(0);
@@ -232,7 +248,7 @@ public class BarBogGUI extends MainGUI implements ActionListener{
 				isListenerActive = true;
 				table.addRowSelectionInterval(selectedRow,selectedRow);
 			}
-			
+
 		}
 	}
 }	
