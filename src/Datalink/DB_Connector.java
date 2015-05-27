@@ -60,7 +60,6 @@ public class DB_Connector {
 			String statementToQuery = "SELECT FROM medlemmer WHERE name = ?";
 			PreparedStatement ps = conn.prepareStatement(statementToQuery);
 			ps.setString(1, identifier);
-			//ps.setString(1, identifier);
 			ps.executeUpdate();
 			while(rs.next()){
 				int id = rs.getInt("ID");
@@ -213,7 +212,20 @@ public class DB_Connector {
 
 	public void sletMedlem(int identifier) {
 		try{
-			String statementToQuery = "DELETE FROM medlemmer WHERE id = ?";
+			String statementToQuery = "DELETE FROM medlemmer WHERE id = ?;";
+			//String statementToQuery = "DELETE FROM barbog WHERE id = ?";
+			PreparedStatement ps = conn.prepareStatement(statementToQuery);
+			ps.setInt(1, identifier);
+			ps.executeUpdate();
+
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		sletBarbog(identifier);
+	}
+	public void sletBarbog(int identifier) {
+		try{
+			String statementToQuery =  "DELETE FROM barbog WHERE barbog.id = ?;";
 			//String statementToQuery = "DELETE FROM barbog WHERE id = ?";
 			PreparedStatement ps = conn.prepareStatement(statementToQuery);
 			ps.setInt(1, identifier);
