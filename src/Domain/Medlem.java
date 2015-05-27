@@ -1,7 +1,21 @@
 package Domain;
 
 public class Medlem{
-
+	/**
+	 *  Database-koden for varer-table
+	   	CREATE TABLE medlemmer(
+		ID int NOT NULL AUTO_INCREMENT,
+	 	Fornavn varchar(255) NOT NULL,
+		Efternavn varchar(255) NOT NULL,
+	  	Adresse varchar (255),
+	  	Fødselsdato int(6) NOT NULL,
+		Telefon int (10),
+		Email varchar (255),
+		NavnPåDør varchar (255),
+		Billeder TINYINT (1),
+		PRIMARY KEY (ID)
+		)
+* **/
 	private int id;
 	private String fornavn;
 	private String efternavn;

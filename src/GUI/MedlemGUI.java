@@ -135,12 +135,14 @@ public class MedlemGUI extends MainGUI {
 			} else {
 				billeder = 0;
 
-				if(!validateInput()){
-					Medlem m = new Medlem(0, fornavn, efternavn, adresse, foedselsdato,
+				if(validateInput()){
+					Medlem medlem = new Medlem(0, fornavn, efternavn, adresse, foedselsdato,
 							telefon, email, navnDoer, billeder);
-					new Control().opretMedlem(m);
-					JOptionPane.showMessageDialog(frame, "Medlemmet: " + m.getFornavn()
-							+ " er nu tilføjet til databasen med ID: " + m.getId());
+					new Control().opretMedlem(medlem);
+					Barbog barbog = new Barbog(medlem.getId(),"null","null",0);
+					new Control().opretBarbog(barbog,medlem);
+					JOptionPane.showMessageDialog(frame, "Medlemmet: " + medlem.getFornavn()
+							+ " er nu tilføjet til databasen med ID: " + medlem.getId());
 					clearAll();
 				}
 				else{

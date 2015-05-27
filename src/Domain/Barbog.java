@@ -2,29 +2,33 @@ package Domain;
 
 public class Barbog {
 	int id;
-	String navn;
 	String vigtigNote;
 	int saldo;
+	String navn;
 	
 	public Barbog(int id, String navn, String vigtigNote, int saldo) {
 		super();
-		this.id = id;
 		this.navn = navn;
+		this.id = id;
 		this.vigtigNote = vigtigNote;
 		this.saldo = saldo;
 	}
+	public String toString(){
+		return (String) ("'"+this.id+"'" + ", " + "'"+this.vigtigNote+"'" + ", " + "'"+this.saldo+"'");
+	}
 
+	public String getNavn(){
+		return navn;
+	}
+	
+	public void setNavn(String navn){
+		this.navn = navn;
+	}
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
-	}
-	public String getNavn(){
-		return navn;
-	}
-	public void setNavn(String navn){
-		this.navn = navn;
 	}
 
 	public String getVigtigNote() {

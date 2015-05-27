@@ -50,8 +50,8 @@ public class Control {
 	}
 
 	//Bruges til at kalde funktionen der opretter nye barbøger i databasen, ud fra et barbog objekt
-	public void opretBarbog(Barbog barbog){
-		db.opretBarbog(barbog);
+	public void opretBarbog(Barbog barbog, Medlem medlem){
+		db.opretBarbog(barbog,medlem);
 	}
 
 	public void opdaterBarbog(ArrayList<Barbog> opdateBarbog){
@@ -76,6 +76,16 @@ public class Control {
 	public void opdaterDBVarer(ArrayList <Varer> opdaterVare){
 		db.opdaterDBVarer(opdaterVare);
 	}
+
+	public void indsaetBeloeb(int total,int id) {
+		db.indsaetBeloeb(total,id);	
+		db.hentBarbog();
+	}
+
+	public void traekBeloeb(int total,int id) {
+		db.traekBeloeb(total,id);
+		db.hentBarbog();
+		}
 }
 
 

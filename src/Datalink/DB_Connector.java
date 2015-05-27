@@ -26,7 +26,7 @@ public class DB_Connector {
 	private static DB_Connector database;
 
 	private DB_Connector() { // Private constructor to prevent outside
-							// instantiation.. Singleton
+		// instantiation.. Singleton
 		try {
 
 			Class.forName(JDCB_DRIVER);
@@ -52,7 +52,7 @@ public class DB_Connector {
 		}
 		return database;
 	}
-	
+
 	public Medlem findMedlem(String identifier){
 		Medlem medlem = null;
 		try{
@@ -73,70 +73,69 @@ public class DB_Connector {
 				int billeder = rs.getInt("billeder");
 				medlem = new Medlem (id, fornavn, efternavn, adresse, fødselsdato, telefon, email, navnPåDør, billeder);
 			}
-			
+
 		} catch(Exception e){
 			e.printStackTrace();
 		}
 		return medlem;
-		
-		}
-		
-	
+
+	}
+
+
 	public void opretMedlem(Medlem medlem) {
 
 		try {
 			String sql = "INSERT INTO medlemmer VALUES("+medlem.toString()+");";
 			PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			statement.executeUpdate();
-	        try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
-	            if (generatedKeys.next()) {
-	                medlem.setId(generatedKeys.getInt(1));
-	            }
-	            else {
-	            	System.out.println("No keys generated - hvor er mit medlem?");
-	            }
-	        }
-			
+			try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+				if (generatedKeys.next()) {
+					medlem.setId(generatedKeys.getInt(1));
+				}
+				else {
+					System.out.println("No keys generated - hvor er mit medlem?");
+				}
+			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void opretBarbog(Barbog barbog) {
+	public void opretBarbog(Barbog barbog, Medlem medlem) {
 		try {
-			String sql = "INSERT INTO barbog VALUES(" + barbog.toString()
-					+ ");";
-			System.out.println(sql);
-			conn.createStatement().executeUpdate(sql);
+			String sql = "INSERT INTO barbog VALUES("+ barbog.toString() +");";
+			PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
+
 	public ArrayList<Medlem> hentMedlemmer(){
 		ArrayList<Medlem> medlemmer = new ArrayList<Medlem>();
 		try{
-		String sql = "SELECT * FROM medlemmer ORDER BY medlemmer.id ASC;";
-		rs = conn.createStatement().executeQuery(sql);
-		while(rs.next()){
-			int id = rs.getInt("ID");
-			String fornavn = rs.getString("fornavn");
-			String efternavn = rs.getString("efternavn");
-			String adresse = rs.getString("adresse");
-			int fødselsdato = rs.getInt("fødselsdato");
-			int telefon = rs.getInt("telefon");
-			String email = rs.getString("email");
-			String navnPåDør = rs.getString("navnPåDør");
-			int billeder = rs.getInt("billeder");
-			medlemmer.add(new Medlem (id, fornavn, efternavn, adresse, fødselsdato, telefon, email, navnPåDør, billeder));
+			String sql = "SELECT * FROM medlemmer ORDER BY medlemmer.id ASC;";
+			rs = conn.createStatement().executeQuery(sql);
+			while(rs.next()){
+				int id = rs.getInt("ID");
+				String fornavn = rs.getString("fornavn");
+				String efternavn = rs.getString("efternavn");
+				String adresse = rs.getString("adresse");
+				int fødselsdato = rs.getInt("fødselsdato");
+				int telefon = rs.getInt("telefon");
+				String email = rs.getString("email");
+				String navnPåDør = rs.getString("navnPåDør");
+				int billeder = rs.getInt("billeder");
+				medlemmer.add(new Medlem (id, fornavn, efternavn, adresse, fødselsdato, telefon, email, navnPåDør, billeder));
 			}
-	}
-	catch(Exception e){
-		e.printStackTrace();
-	}
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
 		return medlemmer;	
-		
+
 	}
 
 	public ArrayList<Barbog> hentBarbog(){
@@ -144,76 +143,76 @@ public class DB_Connector {
 		try{
 			//String sql = "SELECT m.ID, m.fornavn, b.vigtignote, b.saldo FROM medlemmer m, barbog b WHERE m.ID = b.ID ORDER BY b.ID ASC;";
 			String sql = "SELECT medlemmer.ID, medlemmer.fornavn, barbog.vigtignote, barbog.saldo FROM medlemmer INNER JOIN barbog WHERE medlemmer.ID = barbog.ID ORDER BY barbog.ID ASC;";
-		//String sql = "SELECT * FROM barbog ORDER BY barbog.id ASC;";
-		rs = conn.createStatement().executeQuery(sql);
-		while(rs.next()){
-			int id = rs.getInt("ID");
-			String navn = rs.getString("fornavn");
-			String vigtigNote = rs.getString("vigtigNote");
-			int saldo = rs.getInt("saldo");
-			barbogs.add(new Barbog (id, navn, vigtigNote,saldo));
+			//String sql = "SELECT * FROM barbog ORDER BY barbog.id ASC;";
+			rs = conn.createStatement().executeQuery(sql);
+			while(rs.next()){
+				int id = rs.getInt("ID");
+				String navn = rs.getString("fornavn");
+				String vigtigNote = rs.getString("vigtigNote");
+				int saldo = rs.getInt("saldo");
+				barbogs.add(new Barbog (id, navn, vigtigNote,saldo));
 			}
-	} catch(Exception e){
-		e.printStackTrace();
-	}
+		} catch(Exception e){
+			e.printStackTrace();
+		}
 		return barbogs;	
-		
+
 	}
 
 	public void opdaterBarbog(ArrayList<Barbog> opdateretBarbog) {
 		try{
-		for (Barbog barbog : opdateretBarbog) {
-			String statementToQuery = "UPDATE barbog"
-		  + " SET vigtigNote = ?, saldo = ?"
-		  + " WHERE id = ?";
-			PreparedStatement ps = conn.prepareStatement(statementToQuery);
-			ps.setInt(3, barbog.getId());
-			ps.setString(1,barbog.getVigtigNote());
-			ps.setInt(2,barbog.getSaldo());
-			ps.executeUpdate();
-		  }
+			for (Barbog barbog : opdateretBarbog) {
+				String statementToQuery = "UPDATE barbog"
+						+ " SET vigtigNote = ?, saldo = ?"
+						+ " WHERE id = ?";
+				PreparedStatement ps = conn.prepareStatement(statementToQuery);
+				ps.setInt(3, barbog.getId());
+				ps.setString(1,barbog.getVigtigNote());
+				ps.setInt(2,barbog.getSaldo());
+				ps.executeUpdate();
+			}
 		} catch(Exception e){
 			e.printStackTrace();
 		}
 	}
-public void opdaterMedlemmer(ArrayList<Medlem> opdateretMedlemmer){
-	try{
-	for (Medlem medlem : opdateretMedlemmer) {
-		String statementToQuery = "UPDATE medlemmer"
-	  + " SET fornavn = ?, efternavn = ?, adresse = ?, fødselsdato = ?, telefon = ?, Email = ?, navnpådør = ?, billeder = ?"
-	  + " WHERE id = ?";
-		PreparedStatement ps = conn.prepareStatement(statementToQuery);
-		ps.setInt(9, medlem.getId());
-		ps.setString(1,medlem.getFornavn());
-		ps.setString(2,medlem.getEfternavn());
-		ps.setString(3,medlem.getAdresse());
-		ps.setInt(4,medlem.getFødselsdato());
-		ps.setInt(5,medlem.getTelefon());
-		ps.setString(6,medlem.getEmail());
-		ps.setString(7,medlem.getNavnPåDør());
-		ps.setInt(8,medlem.getBilleder());
-		
-		ps.executeUpdate();
+	public void opdaterMedlemmer(ArrayList<Medlem> opdateretMedlemmer){
+		try{
+			for (Medlem medlem : opdateretMedlemmer) {
+				String statementToQuery = "UPDATE medlemmer"
+						+ " SET fornavn = ?, efternavn = ?, adresse = ?, fødselsdato = ?, telefon = ?, Email = ?, navnpådør = ?, billeder = ?"
+						+ " WHERE id = ?";
+				PreparedStatement ps = conn.prepareStatement(statementToQuery);
+				ps.setInt(9, medlem.getId());
+				ps.setString(1,medlem.getFornavn());
+				ps.setString(2,medlem.getEfternavn());
+				ps.setString(3,medlem.getAdresse());
+				ps.setInt(4,medlem.getFødselsdato());
+				ps.setInt(5,medlem.getTelefon());
+				ps.setString(6,medlem.getEmail());
+				ps.setString(7,medlem.getNavnPåDør());
+				ps.setInt(8,medlem.getBilleder());
+
+				ps.executeUpdate();
 			}
 		} catch(Exception e){
 			e.printStackTrace();
 		}
 	}
 
-public void sletMedlem(int identifier) {
-	try{
-		String statementToQuery = "DELETE FROM medlemmer WHERE id = ?";
-		//String statementToQuery = "DELETE FROM barbog WHERE id = ?";
-		PreparedStatement ps = conn.prepareStatement(statementToQuery);
-		ps.setInt(1, identifier);
-		ps.executeUpdate();
-		
+	public void sletMedlem(int identifier) {
+		try{
+			String statementToQuery = "DELETE FROM medlemmer WHERE id = ?";
+			//String statementToQuery = "DELETE FROM barbog WHERE id = ?";
+			PreparedStatement ps = conn.prepareStatement(statementToQuery);
+			ps.setInt(1, identifier);
+			ps.executeUpdate();
+
 		} catch(Exception e){
 			e.printStackTrace();
 		}
-	
+
 	}
-	
+
 	public void opretVare(Varer vare) {
 		try {
 			String sql = "INSERT INTO Varer VALUES(" + vare.toString() + ");";
@@ -223,11 +222,11 @@ public void sletMedlem(int identifier) {
 			e.printStackTrace();
 		}
 	}
-/**	
+	/**	
 	public Varer findVare(String identifier) {
 		return db.findVare(identifier);
 	}
-**/
+	 **/
 	public void sletVare(int identifier) {
 		try{
 			String statementToQuery = "DELETE FROM varer WHERE id = ?";
@@ -235,39 +234,39 @@ public void sletMedlem(int identifier) {
 			PreparedStatement ps = conn.prepareStatement(statementToQuery);
 			ps.setInt(1, identifier);
 			ps.executeUpdate();
-			
-			} catch(Exception e){
-				e.printStackTrace();
-			}
-		
+
+		} catch(Exception e){
+			e.printStackTrace();
 		}
-	
+
+	}
+
 	public ArrayList<Varer> hentVarer(){
 		ArrayList<Varer> varer = new ArrayList<Varer>();
 		try{
-		String sql = "SELECT * FROM varer ORDER BY varer.id ASC;";
-		rs = conn.createStatement().executeQuery(sql);
-		while(rs.next()){
-			int id = rs.getInt("ID");
-			int pris = rs.getInt("pris");
-			String navn = rs.getString("navn");
-			int tilgængelig = rs.getInt("tilgængelig");
-			int antal = rs.getInt("lagertal");
-			varer.add(new Varer (id, pris, navn, tilgængelig, antal));
+			String sql = "SELECT * FROM varer ORDER BY varer.id ASC;";
+			rs = conn.createStatement().executeQuery(sql);
+			while(rs.next()){
+				int id = rs.getInt("ID");
+				int pris = rs.getInt("pris");
+				String navn = rs.getString("navn");
+				int tilgængelig = rs.getInt("tilgængelig");
+				int antal = rs.getInt("lagertal");
+				varer.add(new Varer (id, pris, navn, tilgængelig, antal));
 			}
-	} catch(Exception e){
-		e.printStackTrace();
-	}
+		} catch(Exception e){
+			e.printStackTrace();
+		}
 		return varer;	
-		
+
 	}
 
 	public void opdaterDBVarer(ArrayList <Varer> opdaterVare){
 		try{
 			for (Varer vare : opdaterVare) {
 				String statementToQuery = "UPDATE varer"
-			  + " SET pris = ?, navn = ?,  = ?, tilgængelig = ?, antal = ?"
-			  + " WHERE id = ?";
+						+ " SET pris = ?, navn = ?,  = ?, tilgængelig = ?, antal = ?"
+						+ " WHERE id = ?";
 				PreparedStatement ps = conn.prepareStatement(statementToQuery);
 				ps.setInt(9, vare.getId());
 				ps.setInt(1,vare.getPris());
@@ -275,11 +274,40 @@ public void sletMedlem(int identifier) {
 				ps.setInt(3,vare.getTilgængelig());
 				ps.setInt(4,vare.getAntal());
 				ps.executeUpdate();
-					}
-				} catch(Exception e){
-					e.printStackTrace();
-				}
 			}
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+
+	public void indsaetBeloeb(int total, int id) {
+		try {	
+			String statementToQuery = "UPDATE barbog"
+					+ " SET saldo = ?  WHERE id = ?";
+			PreparedStatement ps = conn.prepareStatement(statementToQuery);
+			ps.setInt(1, total);
+			ps.setInt(2, id);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+					
+
+	}
+
+	public void traekBeloeb(int total, int id) {
+		try {	
+			String statementToQuery = "UPDATE barbog"
+					+ " SET saldo = ?  WHERE id = ?";
+			PreparedStatement ps = conn.prepareStatement(statementToQuery);
+			ps.setInt(1, total);
+			ps.setInt(2, id);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
 
 
 }
