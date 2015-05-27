@@ -8,10 +8,9 @@ import Datalink.*;
 import GUI.MedlemGUI;
 
 public class Control {
-
-
 	//private DB_Connector;
 	private DB_Connector db;
+	private Udregning math;
 	public Control(){
 		db = DB_Connector.getInstance();
 	}
@@ -83,12 +82,14 @@ public class Control {
 		db.opdaterDBVarer(opdaterVare);
 	}
 
-	public void indsaetBeloeb(int total,int id) {
+	public void indsaetBeloeb(int saldo, int input ,int id) {
+		 int total = math.adder(saldo, input);
 		db.indsaetBeloeb(total,id);	
 		db.hentBarbog();
 	}
 
-	public void traekBeloeb(int total,int id) {
+	public void traekBeloeb(int saldo, int input,int id) {
+		int total = math.substract(saldo, input);
 		db.traekBeloeb(total,id);
 		db.hentBarbog();
 		}

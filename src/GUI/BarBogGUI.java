@@ -187,10 +187,9 @@ public class BarBogGUI extends MainGUI implements ActionListener{
 		}
 		
 		if(e.getSource()==btnIndsaet){
-			int input=0;
-			int saldo=0;
+			int input = 0;
+			int saldo = 0;
 			int id = 0;
-			int total;
 			selectedRow = table.getSelectedRow();
 
 			try{
@@ -205,10 +204,9 @@ public class BarBogGUI extends MainGUI implements ActionListener{
 				JOptionPane.showMessageDialog(frame,"Intet medlem er valgt.");
 			}
 
-			total = input+saldo;
 			beloebField.setText(null);
 			if (table.getSelectedRow() >= 0) {
-				new Control().indsaetBeloeb(total, id);
+				new Control().indsaetBeloeb(saldo,input, id);
 				isListenerActive = false;
 				model.setRowCount(0);
 				updateJTable();
@@ -220,9 +218,8 @@ public class BarBogGUI extends MainGUI implements ActionListener{
 
 		if(e.getSource()==btnTraek){
 			int id = 0;
-			int input=0;
-			int saldo=0;
-			int total;			
+			int input = 0;
+			int saldo = 0;			
 			selectedRow = table.getSelectedRow();
 
 			try{
@@ -236,13 +233,12 @@ public class BarBogGUI extends MainGUI implements ActionListener{
 			}catch(NumberFormatException|ArrayIndexOutOfBoundsException e1){
 				JOptionPane.showMessageDialog(frame,"Intet medlem er valgt.");
 			}
-			total = saldo-input;
 			beloebField.setText(null);		
 
 			if (table.getSelectedRow() >= 0) {
 				isListenerActive = false;
 				model.setRowCount(0);
-				new Control().traekBeloeb(total, id);
+				new Control().traekBeloeb(saldo,input, id);
 				updateJTable();
 				model.fireTableDataChanged();
 				isListenerActive = true;
