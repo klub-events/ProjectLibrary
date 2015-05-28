@@ -1,5 +1,12 @@
 package Domain;
-
+/**
+ * CREATE TABLE barbog 
+	(ID int primary key AUTO_INCREMENT,
+    vigtignote varchar (255),
+    saldo int (10));
+ * @author dolph
+ *
+ */
 public class Barbog {
 	int id;
 	String vigtigNote;
