@@ -1,5 +1,9 @@
 package Domain;
 
+/*SELECT `tilmeldinger`.`fk_medlemNavn`,
+`tilmeldinger`.`fk_aktivitetID`
+FROM `borupclub`.`tilmeldinger`;*/
+
 public class Tilmeld 
 {
 	String fk_medlemNavn;
