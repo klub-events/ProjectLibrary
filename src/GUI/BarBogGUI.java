@@ -114,6 +114,7 @@ public class BarBogGUI extends MainGUI implements ActionListener {
 		// tilføj content til gui
 		Panel_Content.add(center3);
 		center3.setBackground(Color.WHITE);
+		btn_saldo.setBackground(Color.GRAY);
 
 		/*
 		 * 

@@ -68,7 +68,9 @@ public class MedlemGUI extends MainGUI {
 	public MedlemGUI() {
 		// Tilføjer et panel som alle
 		JPanel content = new JPanel(null);
-
+        
+		//knap active
+		btn_medlem.setBackground(Color.GRAY);
 		fornavnField = new JTextField(); fornavnField.setBounds							(fieldBorder, 50,  fieldWidth, fieldHeight);
 		efternavnField = new JTextField();efternavnField.setBounds						(fieldBorder, 110, fieldWidth, fieldHeight);
 		adresseField = new JTextField();adresseField.setBounds							(fieldBorder, 170, fieldWidth, fieldHeight);
