@@ -53,7 +53,7 @@ public class MedlemGUI extends MainGUI {
 	private JLabel navndoerLabel;
 	private JLabel billedeLabel;
 
-	private MyTableModel model = new MyTableModel();
+	private ClosedCellTableModel model = new ClosedCellTableModel();
 	private JTable table;
 	private TableRowSorter<TableModel> rowSorter;
 

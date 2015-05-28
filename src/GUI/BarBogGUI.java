@@ -38,7 +38,7 @@ public class BarBogGUI extends MainGUI implements ActionListener {
 	private JLabel saldoLabel = new JLabel("Saldo");
 	private JLabel beloebLabel = new JLabel("Beløb til behandling");
 
-	private MyTableModel model = new MyTableModel();
+	private ClosedCellTableModel model = new ClosedCellTableModel();
 	private TableRowSorter<TableModel> rowSorter;
 	private int selectedRow;
 	private boolean isListenerActive = true;
@@ -107,7 +107,7 @@ public class BarBogGUI extends MainGUI implements ActionListener {
 		center3.add(scrollPane);
 		rowSorter = new TableRowSorter<>((table.getModel()));
 		table.setRowSorter(rowSorter);
-
+		
 		System.out.println();
 
 		// tilføj content til gui
@@ -135,9 +135,6 @@ public class BarBogGUI extends MainGUI implements ActionListener {
 										selectedRow, 1);
 								String saldo = String.valueOf((int) model
 										.getValueAt(selectedRow, 2));
-								String note = (String) model.getValueAt(
-										selectedRow, 3);
-								
 								idField.setText(id);
 								navnField.setText(navn);
 								saldoField.setText(saldo);
@@ -153,7 +150,6 @@ public class BarBogGUI extends MainGUI implements ActionListener {
 
 	public boolean validateInput() {
 		String noget = beloebField.getText();
-		System.out.println(noget);
 		boolean valid = noget.matches("[0-9]+");
 		return valid;
 	}
