@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.table.DefaultTableModel;
 
+import Domain.ClosedColumnTableModel;
 import Domain.Control;
 import Domain.Medlem;
 
@@ -30,7 +31,7 @@ public class MedlemTabel implements ActionListener {
 	private JButton btn_opdater = new JButton("Opdater Medlemmer");
 	private JButton btn_slet = new JButton("Slet Medlem");
 
-	private DefaultTableModel model = new DefaultTableModel();
+	private ClosedColumnTableModel model = new ClosedColumnTableModel();
 
 
 	public MedlemTabel(MedlemGUI medlemGUI){

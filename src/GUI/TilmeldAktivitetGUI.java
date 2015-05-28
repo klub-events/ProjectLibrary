@@ -38,7 +38,7 @@ public class TilmeldAktivitetGUI extends MainGUI implements ActionListener
 	private int fk_aktivitetID;
 
 	private JTable table;
-	private MyTableModel model = new MyTableModel();
+	private ClosedCellTableModel model = new ClosedCellTableModel();
 	private TableRowSorter<TableModel> rowSorter;
 	private int selectedRow;
 	private boolean isListenerActive = true;
