@@ -253,7 +253,7 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 					 * kodestykket herunder er fundet ved hjælp af siden
 					 * http://stackoverflow.com/questions/8396870/joptionpane-yes-or-no-window
 					 */
-					int reply = JOptionPane.showConfirmDialog(frame,"Er du sikker på du sætte\n " +input +"kr." + " \nind på "+ model.getValueAt(selectedRow, 1) + "'s saldo?","Bekræft fratrækkelse", JOptionPane.YES_NO_OPTION);
+					int reply = JOptionPane.showConfirmDialog(frame,"Er du sikker på du sætte\n " +input +"kr." + " \nind på "+ model.getValueAt(selectedRow, 1) + "'s saldo?","Bekræft indsættelse", JOptionPane.YES_NO_OPTION);
 					if(reply==0){
 					isListenerActive = false;
 					model.setRowCount(0);

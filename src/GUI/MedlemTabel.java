@@ -140,8 +140,10 @@ public class MedlemTabel implements ActionListener,KeyListener {
 		}
 
 		if (e.getSource() == btn_slet){
-			int identifier = 0;
 			selectedRow = table.getSelectedRow();
+			int reply = JOptionPane.showConfirmDialog(frame,"Er du sikker på, at du vil slette "+ model.getValueAt(selectedRow, 1) +"?","Bekræft sletning", JOptionPane.YES_NO_OPTION);
+			if(reply==0){
+			int identifier = 0;
 			try{
 			identifier = (int) model.getValueAt(selectedRow,0);
 			model.removeRow(selectedRow);
@@ -150,6 +152,7 @@ public class MedlemTabel implements ActionListener,KeyListener {
 				JOptionPane.showMessageDialog(frame,"Du har ikke valgt et medlem.");
 			}
 			medlemGUI.updateJTable();
+		}
 		}
 	}
 

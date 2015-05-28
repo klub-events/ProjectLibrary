@@ -7,12 +7,10 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
+import java.util.TimeZone;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -20,8 +18,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
-
-import Datalink.DB_Connector;
 
 public class MainGUI extends Thread implements ActionListener
 {
@@ -43,7 +39,7 @@ public class MainGUI extends Thread implements ActionListener
 	protected static JTextField timeField = new JTextField();
 	protected static Calendar cal;
 	protected static Date date = new Date();
-	protected static SimpleDateFormat df = new SimpleDateFormat("hh:mm:ss");
+	protected static SimpleDateFormat df = new SimpleDateFormat("KK:mm");
 	protected static TimeThread tt = TimeThread.getInstance();
 	protected static Object toilet = new Object();
 
@@ -125,7 +121,7 @@ public class MainGUI extends Thread implements ActionListener
 				date = cal.getTime();
 				timeField.setText(df.format(date));
 				try {
-					Thread.sleep(1000);
+					Thread.sleep(20000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
