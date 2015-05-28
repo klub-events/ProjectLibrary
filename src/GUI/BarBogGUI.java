@@ -281,5 +281,16 @@ public class BarBogGUI extends MainGUI implements ActionListener {
 			}
 
 		}
+		if (e.getSource() == btnNote){
+			String input = "";
+			try {
+				input = noteField.getText();
+			} catch ( ArrayIndexOutOfBoundsException e1) {
+				JOptionPane.showMessageDialog(frame, "Forket indtastet beløb.");
+			}
+				
+			
+		
+		}
 	}
 }
