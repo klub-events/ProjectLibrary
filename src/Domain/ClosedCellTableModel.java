@@ -1,4 +1,4 @@
-package GUI;
+package Domain;
 
 import javax.swing.table.DefaultTableModel;
 

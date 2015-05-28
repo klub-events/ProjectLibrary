@@ -15,6 +15,7 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 import Domain.Barbog;
+import Domain.ClosedCellTableModel;
 import Domain.Control;
 
 public class BarBogGUI extends MainGUI implements ActionListener {
