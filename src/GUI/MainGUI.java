@@ -113,13 +113,11 @@ public class MainGUI extends Thread implements ActionListener
 				cal = Calendar.getInstance();
 				date = cal.getTime();
 				timeField.setText(df.format(date));
-				System.out.println(timeField.getText());
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				System.out.println(date.toString());
 			}
 		}
 	}

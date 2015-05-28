@@ -171,6 +171,13 @@ public class BarBogGUI extends MainGUI implements ActionListener {
 		updateJTable();
 	}
 
+	public boolean validateInput() {
+		String noget = beloebField.getText();
+		System.out.println(noget);
+		boolean valid = noget.matches("[0-9]+");
+		return valid;
+	}
+
 	public void updateJTable() {
 		// Henter Barbogs værdier fra db
 		ArrayList<Barbog> barbogs = new Control().hentBarbog();
@@ -240,14 +247,18 @@ public class BarBogGUI extends MainGUI implements ActionListener {
 			}
 
 			beloebField.setText(null);
-			if (table.getSelectedRow() >= 0) {
-				new Control().indsaetBeloeb(saldo, input, id);
-				isListenerActive = false;
-				model.setRowCount(0);
-				updateJTable();
-				model.fireTableDataChanged();
-				isListenerActive = true;
-				table.addRowSelectionInterval(selectedRow, selectedRow);
+			Boolean result = validateInput();
+			System.out.println(result);
+			if(result){
+				if (table.getSelectedRow() >= 0) {
+					new Control().indsaetBeloeb(saldo, input, id);
+					isListenerActive = false;
+					model.setRowCount(0);
+					updateJTable();
+					model.fireTableDataChanged();
+					isListenerActive = true;
+					table.addRowSelectionInterval(selectedRow, selectedRow);
+				}
 			}
 		}
 
