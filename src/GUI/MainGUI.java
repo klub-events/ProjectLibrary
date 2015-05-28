@@ -19,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 
 import Datalink.DB_Connector;
 
@@ -47,7 +48,16 @@ public class MainGUI extends Thread implements ActionListener
 	protected static Object toilet = new Object();
 
 	public MainGUI()
-	{		
+	{
+		//Sætter GUIen til en anden subclasse og ændre layout.
+		try
+		{
+		 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		}
+		catch (Exception e)
+		{
+		 e.printStackTrace();
+		}	
 		//standard gui settings
 		frame.setSize(860, 660);
 		frame.setLocationRelativeTo(null);
@@ -99,7 +109,8 @@ public class MainGUI extends Thread implements ActionListener
 		frame.setVisible(true);
 
 	}//Construtor MainGUI slutter
-
+	
+	
 	public static class TimeThread extends Thread implements Runnable{
 		public static TimeThread getInstance() {
 			if (tt == null) {
