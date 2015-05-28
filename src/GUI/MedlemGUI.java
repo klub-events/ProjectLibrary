@@ -213,11 +213,11 @@ public class MedlemGUI extends MainGUI {
 		 ---------------------------*/
 		
 		if(e.getSource() == btn_search){
-			String text = searchField.getText();
+			String text = searchField.getText().toLowerCase();
 			if (text.length() == 0) {
 				rowSorter.setRowFilter(null);
 			} else {
-				rowSorter.setRowFilter(RowFilter.regexFilter(text));
+				rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" +text));
 			}
 		}
 
