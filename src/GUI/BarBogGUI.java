@@ -4,13 +4,14 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.NumberFormat;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.regex.PatternSyntaxException;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -18,7 +19,7 @@ import Domain.Barbog;
 import Domain.ClosedCellTableModel;
 import Domain.Control;
 
-public class BarBogGUI extends MainGUI implements ActionListener {
+public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 	private JTable table;
 
 	private JButton btnTraek = new JButton("Træk");
@@ -62,6 +63,7 @@ public class BarBogGUI extends MainGUI implements ActionListener {
 		// Edit TextFields
 		beloebField.setBounds(170, 140, 120, 60);
 		searchField.setBounds(640, 20, 190, 30);
+		searchField.addKeyListener(this);
 
 		// Non-edit TextFields
 		idField.setBounds(50, 50, 25, 20);
@@ -108,7 +110,7 @@ public class BarBogGUI extends MainGUI implements ActionListener {
 		center3.add(scrollPane);
 		rowSorter = new TableRowSorter<>((table.getModel()));
 		table.setRowSorter(rowSorter);
-		
+
 		System.out.println();
 
 		// tilføj content til gui
@@ -117,7 +119,6 @@ public class BarBogGUI extends MainGUI implements ActionListener {
 		btn_saldo.setBackground(Color.GRAY);
 
 		/*
-		 * 
 		 * En List Selection Listener. Checker på mouseinput, om selectedRow er
 		 * selected.. Hvis en row bliver selected udfører den var.setText(var)
 		 * tingene..
@@ -130,12 +131,9 @@ public class BarBogGUI extends MainGUI implements ActionListener {
 							try{
 								int selectedRow;
 								selectedRow = table.getSelectedRow();
-								String id = String.valueOf((int) model.getValueAt(
-										selectedRow, 0));
-								String navn = (String) model.getValueAt(
-										selectedRow, 1);
-								String saldo = String.valueOf((int) model
-										.getValueAt(selectedRow, 2));
+								String id = String.valueOf((int) model.getValueAt(selectedRow, 0));
+								String navn = (String) model.getValueAt(selectedRow, 1);
+								String saldo = String.valueOf((int) model.getValueAt(selectedRow, 2));
 								idField.setText(id);
 								navnField.setText(navn);
 								saldoField.setText(saldo);
@@ -156,22 +154,52 @@ public class BarBogGUI extends MainGUI implements ActionListener {
 	}
 
 	public void updateJTable() {
-		// Henter Barbogs værdier fra db
 		ArrayList<Barbog> barbogs = new Control().hentBarbog();
 
 		model.setColumnIdentifiers(new String[] { "ID", "Navn", "Saldo" });
-		//Da list Listener lytter på hvilket row der er selected.
 		for (int i = 0; i < model.getColumnCount(); i++){
 			rowSorter.setSortable(i, false);}
 		for (Barbog barbog : barbogs) {
-			model.addRow(new Object[] { barbog.getId(), barbog.getNavn(),
-					barbog.getSaldo(), });
+			model.addRow(new Object[] { barbog.getId(), barbog.getNavn(),barbog.getSaldo(), });
 		}
 		barbogs.clear();
 	}
 
+	@Override
+	public void keyPressed(KeyEvent e) {
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		if(e.getSource()==searchField){
+			if(e.getKeyCode() == KeyEvent.VK_ENTER){
+				String text = searchField.getText().toLowerCase();
+				if (text.length() == 0) {
+					rowSorter.setRowFilter(null);
+				} else {
+					/*
+					 * kodestykket herunder er fundet fra siden
+					 * https://community.oracle.com/thread/1354225
+					 * fra bruger 843806 - regexFilter sørger for at 
+					 * der ikke tages højde for store/små bostaver når der søges.
+					 */
+					try{
+						rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" +text));
+					}catch(PatternSyntaxException e1){
+					}
+				}
+			}
+		}
+	}
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
 	public void actionPerformed(ActionEvent e) {
-		
+
 		if(e.getSource() == btn_search){
 			String text = searchField.getText().toLowerCase();
 			if (text.length() == 0) {
@@ -221,13 +249,20 @@ public class BarBogGUI extends MainGUI implements ActionListener {
 			System.out.println(result);
 			if(result){
 				if (table.getSelectedRow() >= 0) {
-					new Control().indsaetBeloeb(saldo, input, id);
+					/*
+					 * kodestykket herunder er fundet ved hjælp af siden
+					 * http://stackoverflow.com/questions/8396870/joptionpane-yes-or-no-window
+					 */
+					int reply = JOptionPane.showConfirmDialog(frame,"Er du sikker på du sætte\n " +input +"kr." + " \nind på "+ model.getValueAt(selectedRow, 1) + "'s saldo?","Bekræft fratrækkelse", JOptionPane.YES_NO_OPTION);
+					if(reply==0){
 					isListenerActive = false;
 					model.setRowCount(0);
+					new Control().indsaetBeloeb(saldo, input, id);
 					updateJTable();
 					model.fireTableDataChanged();
 					isListenerActive = true;
 					table.addRowSelectionInterval(selectedRow, selectedRow);
+					}
 				}
 			}
 			else{
@@ -240,7 +275,6 @@ public class BarBogGUI extends MainGUI implements ActionListener {
 			int input = 0;
 			int saldo = 0;
 			selectedRow = table.getSelectedRow();
-
 			try {
 				input = Integer.parseInt(beloebField.getText());
 			} catch (NumberFormatException | ArrayIndexOutOfBoundsException e1) {
@@ -254,8 +288,14 @@ public class BarBogGUI extends MainGUI implements ActionListener {
 			}
 			Boolean result = validateInput();
 			beloebField.setText(null);
-			if(result){
+			if (result){
 				if (table.getSelectedRow() >= 0) {
+					/*
+					 * kodestykket herunder er fundet ved hjælp af siden
+					 * http://stackoverflow.com/questions/8396870/joptionpane-yes-or-no-window
+					 */
+					int reply = JOptionPane.showConfirmDialog(frame,"Er du sikker på du vil trække\n " +input +"kr." + " \nfra medlemmet: "+ model.getValueAt(selectedRow, 1),"Bekræft fratrækkelse", JOptionPane.YES_NO_OPTION);
+					if(reply==0){
 					isListenerActive = false;
 					model.setRowCount(0);
 					new Control().traekBeloeb(saldo, input, id);
@@ -263,11 +303,13 @@ public class BarBogGUI extends MainGUI implements ActionListener {
 					model.fireTableDataChanged();
 					isListenerActive = true;
 					table.addRowSelectionInterval(selectedRow, selectedRow);
+					}
 				}
 			}
 			else{
 				JOptionPane.showMessageDialog(frame, "syntaksen på beløbet er forkert");
 			}
+			
 
 		}
 	}

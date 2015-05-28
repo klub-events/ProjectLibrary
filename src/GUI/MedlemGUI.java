@@ -2,10 +2,13 @@ package GUI;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.regex.PatternSyntaxException;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -14,7 +17,7 @@ import javax.swing.table.TableRowSorter;
 
 import Domain.*;
 
-public class MedlemGUI extends MainGUI {
+public class MedlemGUI extends MainGUI implements KeyListener {
 	{
 		btn_medlem.setBackground(Color.white);
 	}
@@ -79,7 +82,8 @@ public class MedlemGUI extends MainGUI {
 		emailField = new JTextField();emailField.setBounds								(fieldBorder, 350, fieldWidth, fieldHeight);
 		navndoerField = new JTextField();navndoerField.setBounds						(fieldBorder, 410, fieldWidth, fieldHeight);
 		searchField = new JTextField();searchField.setBounds							(640, 20, 190, 30);
-
+		searchField.addKeyListener(this);
+		
 		fornavnLabel = new JLabel("Fornavn:");fornavnLabel.setBounds					(labelBorder, 50,  fieldWidth, fieldHeight);
 		efternavnLabel = new JLabel("Efternavn:");efternavnLabel.setBounds				(labelBorder, 110, fieldWidth, fieldHeight);
 		adresseLabel = new JLabel("Adresse:");adresseLabel.setBounds					(labelBorder, 170, fieldWidth, fieldHeight);
@@ -195,6 +199,42 @@ public class MedlemGUI extends MainGUI {
 		medlemmer.clear();
 	}
 
+	@Override
+	public void keyPressed(KeyEvent e) {
+		
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		if(e.getSource()==searchField){
+			if(e.getKeyCode() == KeyEvent.VK_ENTER){
+				String text = searchField.getText().toLowerCase();
+				if (text.length() == 0) {
+					rowSorter.setRowFilter(null);
+				} else {
+					/*
+					 * kodestykket herunder er fundet fra siden
+					 * https://community.oracle.com/thread/1354225
+					 * fra bruger 843806 - regexFilter sørger for at 
+					 * der ikke tages højde for store/små bostaver når der søges.
+					 */
+					try{
+					rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" +text));
+					}catch(PatternSyntaxException e1){
+						
+					}
+				}
+			}
+		}
+	}
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	public void actionPerformed(ActionEvent e) {
 		/*----------------------------
 		 * 

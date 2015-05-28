@@ -8,10 +8,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-
-import Domain.Control;
-import GUI.MainGUI.TimeThread;
 public class AktivitetGUI extends MainGUI implements ActionListener
 {
 	private JButton btn_opret = new JButton("OPRET");	
