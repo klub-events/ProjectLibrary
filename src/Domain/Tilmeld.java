@@ -1,8 +1,19 @@
 package Domain;
 
-/*SELECT `tilmeldinger`.`fk_medlemNavn`,
-`tilmeldinger`.`fk_aktivitetID`
-FROM `borupclub`.`tilmeldinger`;*/
+/*
+ * Statement for oprettelse af tilmeld table
+ * 
+  CREATE TABLE `tilmeld` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `fk_medlemNavn` varchar(50) NOT NULL,
+  `aktivitetID` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+	)
+
+ *
+ *@Author PeterRaasthøj, PatrickRavnholt
+ *
+ */
 
 public class Tilmeld 
 {

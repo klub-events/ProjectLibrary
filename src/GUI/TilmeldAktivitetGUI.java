@@ -34,11 +34,6 @@ public class TilmeldAktivitetGUI extends MainGUI implements ActionListener
 	private String[] aktivitetValg = {"fodbold"};
 
 	JButton btn_gem = new JButton("GEM");
-
-	private int id;
-	private String fk_medlemNavn;
-	private int fk_aktivitetID;
-
 	private JTable table;
 	private ClosedCellTableModel model = new ClosedCellTableModel();
 	private TableRowSorter<TableModel> rowSorter;

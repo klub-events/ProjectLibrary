@@ -150,6 +150,11 @@ public class DB_Connector {
 
 	}
 	
+	public ArrayList<Tilmeld> hentTilmeldinger(){
+		//SELECT tilmeld.id, tilmeld.fk_medlemNavn, aktiviteter.navn FROM tilmeld LEFT JOIN aktiviteter ON tilmeld.aktivitetID = aktiviteter.id ORDER BY tilmeld.id ASC;
+		return null;
+	}
+	
 	public ArrayList<Aktivitet> hentAktiviteter(){
 		ArrayList<Aktivitet> aktiviteter = new ArrayList<Aktivitet>();
 		try{
