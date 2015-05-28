@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import com.mysql.jdbc.Statement;
 
+import Domain.Aktivitet;
 import Domain.Tilmeld;
 import Domain.Varer;
 import Domain.Barbog;
@@ -148,7 +149,27 @@ public class DB_Connector {
 		return medlemmer;	
 
 	}
+	
+	public ArrayList<Aktivitet> hentAktiviteter(){
+		ArrayList<Aktivitet> aktiviteter = new ArrayList<Aktivitet>();
+		try{
+			String sql = "SELECT * FROM aktiviteter ORDER BY aktiviteter.id ASC;";
+			rs = conn.createStatement().executeQuery(sql);
+			while(rs.next()){
+				int id = rs.getInt("id");
+				String navn = rs.getString("navn");
+				String antal = rs.getString("antal");
+				String dato = rs.getString("dato");
+				aktiviteter.add(new Aktivitet (id, navn, antal, dato));
+				
+			}
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		return aktiviteter;	
 
+	}
 	public ArrayList<Barbog> hentBarbog(){
 		ArrayList<Barbog> barbogs = new ArrayList<Barbog>();
 		try{

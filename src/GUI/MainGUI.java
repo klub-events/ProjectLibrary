@@ -161,7 +161,6 @@ public class MainGUI extends Thread implements ActionListener
 		if(e.getSource() == btn_tilmeld)
 		{
 			new TilmeldAktivitetGUI();
-			TilmeldAktivitetGUI.startThread();
 			frame.dispose();
 		}
 		if(e.getSource() == btn_saldo){
