@@ -252,6 +252,7 @@ public class MedlemGUI extends MainGUI {
 				model.setRowCount(0);
 				updateJTable();
 				model.fireTableDataChanged();
+				System.out.println(medlem.getFødselsdato());
 			}
 			else{
 				JOptionPane.showMessageDialog(frame,"Et eller flere felter er ikke blevet udfyldt korrekt. Udfyld alle felter, og prøv igen.");
