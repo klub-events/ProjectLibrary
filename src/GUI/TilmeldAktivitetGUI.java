@@ -26,7 +26,7 @@ public class TilmeldAktivitetGUI extends MainGUI implements ActionListener
 	private JComboBox medlem;
 	private String[] medlemValg = {"svend"};
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({ "rawtypes" })
 
 	//combobox aktivitet
 	private JComboBox aktivitet;
@@ -40,14 +40,13 @@ public class TilmeldAktivitetGUI extends MainGUI implements ActionListener
 	private JTable table;
 	private MyTableModel model = new MyTableModel();
 	private TableRowSorter<TableModel> rowSorter;
-	private int selectedRow;
-	private boolean isListenerActive = true;
+	
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public TilmeldAktivitetGUI()
 	{
-
-
+       // MANGLER DB DATA I DROP DOWN OG BEGGE SKAL VÆRE INT OG DE SKAL JOINES OG DATA SKAL I JTABLE
+		// fejl ved upload pga hardcoded shit men det kommer i db
 		JPanel panel2 = new JPanel(new GridLayout(0, 1));
 
 
@@ -98,7 +97,9 @@ public class TilmeldAktivitetGUI extends MainGUI implements ActionListener
 		Panel_Content.add(panel2);
 		panel2.add(panel3);		
 
-		btn_tilmeld.setBackground(Color.white);
+		btn_tilmeld.setBackground(Color.GRAY);
+		
+		
 	}//constructor slutter
 
 	public void actionPerformed(ActionEvent e)

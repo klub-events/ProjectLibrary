@@ -49,7 +49,7 @@ public class AktivitetGUI extends MainGUI implements ActionListener
 		
 		Panel_Content.add(content1);
 		content1.setBackground(Color.WHITE);
-		btn_aktivitet.setBackground(Color.WHITE);
+		btn_aktivitet.setBackground(Color.GRAY);
 		
 		btn_opret.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		
