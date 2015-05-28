@@ -7,6 +7,7 @@ public class Program
 	
 	public static void main(String[] args)
 	{
-		new MainGUI();
+		MainGUI mainGUI = new MainGUI();
+		mainGUI.startThread();
 	}
 }

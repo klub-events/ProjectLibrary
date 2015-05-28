@@ -3,11 +3,16 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -15,7 +20,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class MainGUI extends Thread implements ActionListener 
+public class MainGUI extends Thread implements ActionListener
 {
 	//Laver vinduet
 	protected JFrame frame = new JFrame("Administration");
@@ -30,11 +35,15 @@ public class MainGUI extends Thread implements ActionListener
 	protected JButton  btn_medlem = new JButton("MEDLEM");
 	protected JButton  btn_aktivitet = new JButton("AKTIVITET"); 
 	protected JButton  btn_tilmeld = new JButton("TILMELD AKTIVITET");
+
+	//clock API
 	protected JTextField timeField = new JTextField();
 	protected Calendar cal;
-	protected Date date;
+	protected Date date = new Date();
+	protected SimpleDateFormat df = new SimpleDateFormat("hh:mm:ss");
 	protected TimeThread tt = new TimeThread();
 	protected Object toilet = new Object();
+
 	public MainGUI()
 	{		
 		//standard gui settings
@@ -77,30 +86,29 @@ public class MainGUI extends Thread implements ActionListener
 		btn_tilmeld.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
 		Panel_Top.add(timeField);
-		tt.start();
-
+		timeField.setEditable(false);
+		timeField.setFocusable(false);
+		timeField.setFont(new Font("SansSerif", Font.BOLD, 20));
+		timeField.setHorizontalAlignment(JTextField.CENTER);
+		
 
 		Panel_Top.setBorder(BorderFactory.createEmptyBorder(1,1,1,1));// border
 
 		frame.setVisible(true);
 
-
-
 	}//Construtor MainGUI slutter
 
-	public class TimeThread extends Thread{
+	public class TimeThread extends Thread implements Runnable{
 		public void run(){
 			while(true){
 				synchronized(toilet){
 					cal = Calendar.getInstance();
 					date = cal.getTime();
-					timeField.setText(date.toString());
-					timeField.validate();
-					timeField.repaint();
+					timeField.setText(df.format(date));
+					System.out.println(timeField.getText());
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					System.out.println(date.toString());
@@ -109,36 +117,37 @@ public class MainGUI extends Thread implements ActionListener
 		}
 	}
 
+	public void startThread(){
+		tt.start();
+	}
+	public void stopThread(){
+		tt.stop();
+	}
+	
+	//Actions til knapper
+	public void actionPerformed(ActionEvent e)
+	{	  
+		if(e.getSource() == btn_aktivitet)
+		{
+			new AktivitetGUI();
+			frame.dispose();
+		}
 
+		if(e.getSource() == btn_medlem )
+		{
+			new MedlemGUI();
+			frame.dispose();
+		}
 
-		//Actions til knapper
-		public void actionPerformed(ActionEvent e)
-		{	  
-			if(e.getSource() == btn_aktivitet)
-			{
-				new AktivitetGUI();
+		if(e.getSource() == btn_tilmeld)
+		{
+			new TilmeldAktivitetGUI();
+			frame.dispose();
+		}
+		if(e.getSource() == btn_saldo){
+			new BarBogGUI();
+			frame.dispose();
+		}
 
-				frame.dispose();
-			}
-
-			if(e.getSource() == btn_medlem )
-			{
-				new MedlemGUI();
-
-				frame.dispose();
-			}
-
-			if(e.getSource() == btn_tilmeld)
-			{
-				new TilmeldAktivitetGUI();
-
-				frame.dispose();
-			}
-			if(e.getSource() == btn_saldo){
-				new BarBogGUI();
-
-				frame.dispose();
-			}
-
-		}//actionPerformed slutter
+	}//actionPerformed slutter
 }//MainGUI slutter

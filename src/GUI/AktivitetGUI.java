@@ -5,11 +5,13 @@ import java.awt.Cursor;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import Domain.Control;
+import GUI.MainGUI.TimeThread;
 public class AktivitetGUI extends MainGUI implements ActionListener
 {
 	private JButton btn_opret = new JButton("OPRET");	
@@ -59,7 +61,7 @@ public class AktivitetGUI extends MainGUI implements ActionListener
 	
 		content1.add(btn_visAktiviteter);
 	}//constructor slutter
-	
+
 	public void actionPerformed(ActionEvent e)
 	{
 		if(e.getSource() == btn_opret)

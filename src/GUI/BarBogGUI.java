@@ -128,7 +128,7 @@ public class BarBogGUI extends MainGUI implements ActionListener {
 		center3.add(scrollPane);
 		rowSorter = new TableRowSorter<>((table.getModel()));
 		table.setRowSorter(rowSorter);
-		
+
 		System.out.println();
 
 		// tilføj content til gui
@@ -162,7 +162,7 @@ public class BarBogGUI extends MainGUI implements ActionListener {
 								saldoField.setText(saldo);
 								noteField.setText(note);
 							}catch(ArrayIndexOutOfBoundsException e1){
-								
+
 							}
 						}
 					}
