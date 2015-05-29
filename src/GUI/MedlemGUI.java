@@ -159,6 +159,9 @@ public class MedlemGUI extends MainGUI implements KeyListener {
 
 	// For at rydde tekstfields når medlem er oprettet
 	// Gør det letter for bruger, hurtigt at oprette nye medlemmer
+	/**
+	 * 
+	 */
 	public void clearAll() {
 		fornavnField.setText(null);
 		efternavnField.setText(null);
@@ -308,6 +311,9 @@ public class MedlemGUI extends MainGUI implements KeyListener {
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.KeyListener#keyReleased(java.awt.event.KeyEvent)
+	 */
 	@Override
 	public void keyReleased(KeyEvent e) {
 		if(e.getSource()==searchField){

@@ -41,11 +41,6 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 
 	private JTextField searchField = new JTextField();
 
-	private JTextField beloebField = new JTextField();
-	private JTextField indsaetField = new JTextField();
-
-
-
 	private JTextField idField = new JTextField();
 	private JTextField navnField = new JTextField();
 
@@ -165,8 +160,6 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 		center3.add(navnField);
 		center3.add(idField);
 
-		center3.add(indsaetField);
-		center3.add(beloebField);
 		center3.add(btnKoldskål);
 		center3.add(btnKakaomælk);
 		center3.add(btnIste);
