@@ -38,7 +38,7 @@ public class Control {
 	 }
 	 
      //bruges til at kalde funktioner der opretter nye aktiviteter 
-	 public void opretAktivitet(AKtivitet aktivitet)
+	 public void opretAktivitet(Aktivitet aktivitet)
 	 {
 	 	db.opretAktivitet(aktivitet);
 	 }
@@ -101,7 +101,7 @@ public class Control {
 		db.hentBarbog();
 		}
 
-	public ArrayList<AKtivitet> hentAktiviteter() {
+	public ArrayList<Aktivitet> hentAktiviteter() {
 		return db.hentAktiviteter();
 	}
 

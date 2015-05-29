@@ -39,7 +39,7 @@ public class TilmeldAktivitetGUI extends MainGUI implements ActionListener
 	private TableRowSorter<TableModel> rowSorter;
 	
 	private ArrayList<Medlem> medlemmer = new Control().hentMedlemmer();
-	private ArrayList<AKtivitet> aktiviteter = new Control().hentAktiviteter();
+	private ArrayList<Aktivitet> aktiviteter = new Control().hentAktiviteter();
 	
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -63,7 +63,7 @@ public class TilmeldAktivitetGUI extends MainGUI implements ActionListener
 
 		//aktivitet dropdown
 		aktivitetBox = new JComboBox();
-		for(AKtivitet aktivitet : aktiviteter){
+		for(Aktivitet aktivitet : aktiviteter){
 			aktivitetBox.addItem(aktivitet);
 			}
 		aktivitetBox.setBackground(Color.white);
@@ -129,7 +129,7 @@ public class TilmeldAktivitetGUI extends MainGUI implements ActionListener
 
 		if(e.getSource() == btn_gem){
 			Medlem m = (Medlem) medlemBox.getSelectedItem();
-			AKtivitet a = (AKtivitet) aktivitetBox.getSelectedItem();
+			Aktivitet a = (Aktivitet) aktivitetBox.getSelectedItem();
 			String fk_medlemNavn = m.getFornavn();
 			int fk_aktivitetID = a.getId();
 			try{

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import com.mysql.jdbc.Statement;
 
-import Domain.AKtivitet;
+import Domain.Aktivitet;
 import Domain.Tilmeld;
 import Domain.Varer;
 import Domain.Barbog;
@@ -125,7 +125,7 @@ public class DB_Connector {
 		}
 	}
 	
-	public void opretAktivitet(AKtivitet aktivitet) {
+	public void opretAktivitet(Aktivitet aktivitet) {
 		
 		try {
 			String sql = "INSERT INTO aktiviteter VALUES(" + aktivitet.toString() 
@@ -168,8 +168,8 @@ public class DB_Connector {
 		return null;
 	}
 	
-	public ArrayList<AKtivitet> hentAktiviteter(){
-		ArrayList<AKtivitet> aktiviteter = new ArrayList<AKtivitet>();
+	public ArrayList<Aktivitet> hentAktiviteter(){
+		ArrayList<Aktivitet> aktiviteter = new ArrayList<Aktivitet>();
 		try{
 			String sql = "SELECT * FROM aktiviteter ORDER BY aktiviteter.id ASC;";
 			rs = conn.createStatement().executeQuery(sql);
@@ -179,7 +179,7 @@ public class DB_Connector {
 				String pris = rs.getString("pris");
 				String antal = rs.getString("antal");
 				String dato = rs.getString("dato");
-				aktiviteter.add(new AKtivitet (id, navn, pris, antal, dato));
+				aktiviteter.add(new Aktivitet (id, navn, pris, antal, dato));
 				
 			}
 		}

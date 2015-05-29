@@ -15,14 +15,14 @@ package Domain;
  *
  *@author PeterRaasthøj
  */
-public class AKtivitet {
+public class Aktivitet {
 	private int id;
 	private String navn;
 	private String pris;
 	private String antal;
 	private String dato;
 	
-	public AKtivitet(int id, String navn,String pris, String antal, String dato) {
+	public Aktivitet(int id, String navn,String pris, String antal, String dato) {
 		this.id = id;
 		this.navn = navn;
 		this.pris = pris;
