@@ -192,13 +192,13 @@ public class MedlemGUI extends MainGUI {
 		}
 		medlemmer.clear();
 	}
-
+/*
 	public void actionPerformed(ActionEvent e) {
 		/*----------------------------
 		 * 
 		 * DETTE ER EN TEST FUNKTION
 		 * 
-		 */
+	
 		if(e.getSource() == test){
 			Medlem medlem = new Medlem(0, "test", "test", "test", "123",
 					"123", "test", "test", 1);
@@ -210,7 +210,7 @@ public class MedlemGUI extends MainGUI {
 		 * 
 		 * DETTE ER EN TEST FUNKTION
 		 * 
-		 ---------------------------*/
+		 ---------------------------
 		
 		if(e.getSource() == btn_search){
 			String text = searchField.getText();
@@ -281,7 +281,7 @@ public class MedlemGUI extends MainGUI {
 			new MedlemTabel(this);
 		}
 	}
-
+*/
 
 }
 
