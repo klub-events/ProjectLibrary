@@ -37,7 +37,7 @@ public class Aktivitet {
 		return (id + ",'"+this.navn+"'" + ", " + "'"+this.pris+"'" + ", " + "'"+this.antal+"'" + ", " + "'"+this.dato+"'");
 	}
 	
-	public int getId() {
+	public int getid() {
 		return id;
 	}
 

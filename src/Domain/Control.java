@@ -2,8 +2,6 @@ package Domain;
 
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
-
 import Datalink.*;
 import GUI.MedlemGUI;
 
