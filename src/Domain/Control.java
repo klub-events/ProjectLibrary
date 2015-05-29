@@ -94,6 +94,11 @@ public class Control {
 		db.traekBeloeb(total,id);
 		db.hentBarbog();
 		}
+
+	public ArrayList<Aktivitet> hentAktiviteter() {
+		return db.hentAktiviteter();
+	}
+
 }
 
 

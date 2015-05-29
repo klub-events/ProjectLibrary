@@ -2,10 +2,13 @@ package GUI;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.regex.PatternSyntaxException;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -14,7 +17,7 @@ import javax.swing.table.TableRowSorter;
 
 import Domain.*;
 
-public class MedlemGUI extends MainGUI {
+public class MedlemGUI extends MainGUI implements KeyListener {
 	{
 		btn_medlem.setBackground(Color.white);
 	}
@@ -53,7 +56,7 @@ public class MedlemGUI extends MainGUI {
 	private JLabel navndoerLabel;
 	private JLabel billedeLabel;
 
-	private MyTableModel model = new MyTableModel();
+	private ClosedCellTableModel model = new ClosedCellTableModel();
 	private JTable table;
 	private TableRowSorter<TableModel> rowSorter;
 
@@ -68,7 +71,9 @@ public class MedlemGUI extends MainGUI {
 	public MedlemGUI() {
 		// Tilføjer et panel som alle
 		JPanel content = new JPanel(null);
-
+        
+		//knap active
+		btn_medlem.setBackground(Color.GRAY);
 		fornavnField = new JTextField(); fornavnField.setBounds							(fieldBorder, 50,  fieldWidth, fieldHeight);
 		efternavnField = new JTextField();efternavnField.setBounds						(fieldBorder, 110, fieldWidth, fieldHeight);
 		adresseField = new JTextField();adresseField.setBounds							(fieldBorder, 170, fieldWidth, fieldHeight);
@@ -77,7 +82,8 @@ public class MedlemGUI extends MainGUI {
 		emailField = new JTextField();emailField.setBounds								(fieldBorder, 350, fieldWidth, fieldHeight);
 		navndoerField = new JTextField();navndoerField.setBounds						(fieldBorder, 410, fieldWidth, fieldHeight);
 		searchField = new JTextField();searchField.setBounds							(640, 20, 190, 30);
-
+		searchField.addKeyListener(this);
+		
 		fornavnLabel = new JLabel("Fornavn:");fornavnLabel.setBounds					(labelBorder, 50,  fieldWidth, fieldHeight);
 		efternavnLabel = new JLabel("Efternavn:");efternavnLabel.setBounds				(labelBorder, 110, fieldWidth, fieldHeight);
 		adresseLabel = new JLabel("Adresse:");adresseLabel.setBounds					(labelBorder, 170, fieldWidth, fieldHeight);
@@ -192,7 +198,16 @@ public class MedlemGUI extends MainGUI {
 		}
 		medlemmer.clear();
 	}
-/*
+
+	
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+
 	public void actionPerformed(ActionEvent e) {
 		/*----------------------------
 		 * 
@@ -213,11 +228,11 @@ public class MedlemGUI extends MainGUI {
 		 ---------------------------
 		
 		if(e.getSource() == btn_search){
-			String text = searchField.getText();
+			String text = searchField.getText().toLowerCase();
 			if (text.length() == 0) {
 				rowSorter.setRowFilter(null);
 			} else {
-				rowSorter.setRowFilter(RowFilter.regexFilter(text));
+				rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" +text));
 			}
 		}
 
@@ -283,5 +298,18 @@ public class MedlemGUI extends MainGUI {
 	}
 */
 
+}
+
+	@Override
+	public void keyPressed(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
 }
 

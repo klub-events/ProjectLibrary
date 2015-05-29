@@ -7,20 +7,17 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
+import java.util.TimeZone;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
-import Datalink.DB_Connector;
+import javax.swing.UIManager;
 
 public class MainGUI extends Thread implements ActionListener
 {
@@ -42,12 +39,21 @@ public class MainGUI extends Thread implements ActionListener
 	protected static JTextField timeField = new JTextField();
 	protected static Calendar cal;
 	protected static Date date = new Date();
-	protected static SimpleDateFormat df = new SimpleDateFormat("hh:mm:ss");
+	protected static SimpleDateFormat df = new SimpleDateFormat("KK:mm");
 	protected static TimeThread tt = TimeThread.getInstance();
 	protected static Object toilet = new Object();
 
 	public MainGUI()
-	{		
+	{
+		//Sætter GUIen til en anden subclasse og ændre layout.
+		try
+		{
+		 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		}
+		catch (Exception e)
+		{
+		 e.printStackTrace();
+		}	
 		//standard gui settings
 		frame.setSize(860, 660);
 		frame.setLocationRelativeTo(null);
@@ -99,7 +105,8 @@ public class MainGUI extends Thread implements ActionListener
 		frame.setVisible(true);
 
 	}//Construtor MainGUI slutter
-
+	
+	
 	public static class TimeThread extends Thread implements Runnable{
 		public static TimeThread getInstance() {
 			if (tt == null) {
@@ -113,13 +120,11 @@ public class MainGUI extends Thread implements ActionListener
 				cal = Calendar.getInstance();
 				date = cal.getTime();
 				timeField.setText(df.format(date));
-				System.out.println(timeField.getText());
 				try {
-					Thread.sleep(1000);
+					Thread.sleep(20000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				System.out.println(date.toString());
 			}
 		}
 	}
@@ -152,7 +157,6 @@ public class MainGUI extends Thread implements ActionListener
 		if(e.getSource() == btn_tilmeld)
 		{
 			new TilmeldAktivitetGUI();
-			TilmeldAktivitetGUI.startThread();
 			frame.dispose();
 		}
 		if(e.getSource() == btn_saldo){
