@@ -299,6 +299,9 @@ public class DB_Connector {
 
 	}
 
+	/**
+	 * @param vare
+	 */
 	public void opretVare(Varer vare) {
 		try {
 			String sql = "INSERT INTO Varer VALUES(" + vare.toString() + ");";
