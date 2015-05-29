@@ -114,12 +114,14 @@ public class DB_Connector {
 		}
 	}
 	
-	public void opretTilmelding(Tilmeld tilmeld) {
+	public void opretTilmelding(int id, String fk_medlemNavn, int fk_aktivitetID) {
 		try {
-			String sql = "INSERT INTO tilmeld VALUES(" + tilmeld.toString() 
-					+ ");";
-			System.out.println(sql);
-			conn.createStatement().executeUpdate(sql);
+			String statementToQuery = "INSERT INTO tilmeld VALUES(?,?,?)";
+			PreparedStatement ps = conn.prepareStatement(statementToQuery);
+			ps.setInt(1, 0);
+			ps.setString(2, fk_medlemNavn);
+			ps.setInt(3,fk_aktivitetID);
+			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -166,13 +166,12 @@ public class TilmeldAktivitetGUI extends MainGUI implements ActionListener
 		if(e.getSource() == btn_gem){
 			Medlem m = (Medlem) medlemBox.getSelectedItem();
 			AKtivitet a = (AKtivitet) aktivitetBox.getSelectedItem();
+			int id = 0;
 			String fk_medlemNavn = m.getFornavn();
 			int fk_aktivitetID = a.getId();
 			try{
 				
-				Tilmeld tilmelding = new Tilmeld(0, fk_medlemNavn, fk_aktivitetID);
-				new Control().opretTilmelding(tilmelding);
-				System.out.println("her til");
+				new Control().opretTilmelding(id, fk_medlemNavn, fk_aktivitetID);
 
 
 			}catch(Exception e1){

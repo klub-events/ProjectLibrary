@@ -32,9 +32,9 @@ public class Control {
 	}
 	
 	//bruges til at kalde funktioner der opretter nye tilmeldinger 
-	 public void opretTilmelding(Tilmeld tilmeld)
+	 public void opretTilmelding(int id , String fk_medlemNavn, int fk_aktivitetID)
 	 {
-	 	db.opretTilmelding(tilmeld);
+	 	db.opretTilmelding(id, fk_medlemNavn, fk_aktivitetID);
 	 }
 	 
      //bruges til at kalde funktioner der opretter nye aktiviteter 
