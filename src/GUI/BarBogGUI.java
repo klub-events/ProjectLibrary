@@ -41,16 +41,25 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 
 	private JTextField searchField = new JTextField();
 
+	private JTextField beloebField = new JTextField();
+	private JTextField indsaetField = new JTextField();
+
+
+
 	private JTextField idField = new JTextField();
 	private JTextField navnField = new JTextField();
+
+	private JTextField saldoField = new JTextField();
+
 	private JTextField barbogField = new JTextField();
 	private JTextField vigtigField = new JTextField();
+
 
 	private JLabel idLabel = new JLabel("ID");
 	private JLabel navnLabel = new JLabel("Navn");
 	private JLabel barbogLabel = new JLabel("Saldo");
 	private JLabel vigtigLabel = new JLabel("Vigtignote");
-	
+
 	private ClosedCellTableModel model = new ClosedCellTableModel();
 	private TableRowSorter<TableModel> rowSorter;
 	private int selectedRow;
@@ -66,50 +75,55 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 
 		btnKakaomælk.setBounds(50, 200, 90, 60);
 		btnKakaomælk.addActionListener(this);
-		
+
 		btnIste.setBounds(150,100,90,60);
 		btnIste.addActionListener(this);
 
+
+		btn_search = new JButton("SØG");
+		btn_search.setBounds(580, 20, 60, 30);
+
 		btnJuice.setBounds(150,200,90,60);
 		btnJuice.addActionListener(this);
-		
+
 		btnSaftevand.setBounds(250,100,90,60);
 		btnSaftevand.addActionListener(this);
-		
+
 		btnSodavand.setBounds(250,200,90,60);
 		btnSodavand.addActionListener(this);
-		
+
 		btnYougurt.setBounds(350,100,90,60);
 		btnYougurt.addActionListener(this);
-		
+
 		btnParisertoast.setBounds(50,350,90,60);
 		btnParisertoast.addActionListener(this);
-		
+
 		btnPariserkalkun.setBounds(150,350,90,60);
 		btnPariserkalkun.addActionListener(this);
-		
+
 		btnSmørtoast.setBounds(250,350,90,60);
 		btnSmørtoast.addActionListener(this);
-		
+
 		btnPastasalat.setBounds(350,350,90,60);
 		btnPastasalat.addActionListener(this);
-		
+
 		btnKrasser.setBounds(50,450,90,60);
 		btnKrasser.addActionListener(this);
-		
+
 		btnFrugt.setBounds(150,450,90,60);
 		btnFrugt.addActionListener(this);
-		
+
 		btnRiskiks.setBounds(250,450,90,60);
 		btnRiskiks.addActionListener(this);
-		
+
 		btnIs.setBounds(350,200,90,60);
 		btnIs.addActionListener(this);
-		
 
-		
-		
+
+
+
 		btn_search = new JButton("SØG");btn_search.setBounds(580, 20, 60, 30);
+
 		btn_search.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btn_search.addActionListener(this);
 
@@ -129,11 +143,11 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 		barbogField.setBounds(170, 50, 50, 20);
 		barbogField.setEditable(false);
 		barbogField.setText("N/A");
-		
+
 		vigtigField.setBounds(230,50,250,20);
 		vigtigField.setEditable(false);
 		vigtigField.setText("N/A");
-		
+
 
 		// Labels
 		idLabel.setBounds(50, 30, 20, 20);
@@ -151,6 +165,9 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 		center3.add(barbogField);
 		center3.add(navnField);
 		center3.add(idField);
+
+		center3.add(indsaetField);
+		center3.add(beloebField);
 		center3.add(btnKoldskål);
 		center3.add(btnKakaomælk);
 		center3.add(btnIste);
@@ -205,11 +222,19 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 								String id = String.valueOf((int) model.getValueAt(selectedRow, 0));
 								String navn = (String) model.getValueAt(selectedRow, 1);
 								String saldo = String.valueOf((int) model.getValueAt(selectedRow, 2));
+
+								//String vigtigNote = (String) model.getValueAt(selectedRow, 3);
+
 								String vigtigNote = (String) model.getValueAt(selectedRow, 3);
+
 								idField.setText(id);
 								navnField.setText(navn);
+
+								saldoField.setText(saldo);
+								//noteField.setText(vigtigNote);
 								barbogField.setText(saldo);
 								vigtigField.setText(vigtigNote);
+
 							}catch(ArrayIndexOutOfBoundsException e1){
 
 							}
@@ -264,10 +289,20 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 
 	}
 
-	public void actionPerformed(ActionEvent e)
-	{	  
-		if(e.getSource() == btn_aktivitet)
-		{
+
+	public void actionPerformed(ActionEvent e) {
+
+		if(e.getSource() == btn_search){
+			String text = searchField.getText().toLowerCase();
+			if (text.length() == 0) {
+				rowSorter.setRowFilter(null);
+			} else {
+				rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));;
+			}
+		}
+
+		if (e.getSource() == btn_aktivitet) {
+
 			new AktivitetGUI();
 			frame.dispose();
 		}
@@ -292,5 +327,27 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 			new BarBogGUI();
 			frame.dispose();
 		}
+
+
+
+
+	}
+	/**
+		if (e.getSource() == btnNote){
+			String input = "";
+			try {
+				input = noteField.getText();
+			} catch ( ArrayIndexOutOfBoundsException e1) {
+				JOptionPane.showMessageDialog(frame, "Forket indtastet beløb.");
+			}
+
+
+
 		}
+
+	 **/
 }
+
+
+
+

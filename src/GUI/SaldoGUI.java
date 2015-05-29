@@ -25,16 +25,19 @@ public class SaldoGUI extends MainGUI implements ActionListener, KeyListener {
 	private JButton btnTraek = new JButton("Træk");
 	private JButton btnIndsaet = new JButton("Indsæt");
 	private JButton btn_search;
+	private JButton btnChangeNote = new JButton("Info");
+	private JButton btnGemChanges = new JButton("Gem");
 
 	private JTextField searchField = new JTextField();
 	private JTextField beloebField = new JTextField();
 	private JTextField indsaetField = new JTextField();
-
+	
 
 	private JTextField idField = new JTextField();
 	private JTextField navnField = new JTextField();
 	private JTextField saldoField = new JTextField();
-
+	private JTextField noteField = new JTextField();
+	
 	private JLabel idLabel = new JLabel("ID");
 	private JLabel navnLabel = new JLabel("Navn");
 	private JLabel saldoLabel = new JLabel("Saldo");
@@ -56,10 +59,15 @@ public class SaldoGUI extends MainGUI implements ActionListener, KeyListener {
 		btnTraek.setBounds(50, 170, 100, 60);
 		btnTraek.addActionListener(this);
 
-		btn_search = new JButton("SØG");btn_search.setBounds									(580, 20, 60, 30);
+		btn_search = new JButton("SØG");
+		btn_search.setBounds(580, 20, 60, 30);
 		btn_search.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btn_search.addActionListener(this);
-
+		
+		btnChangeNote.setBounds(50, 400, 100, 60);
+		btnChangeNote.addActionListener(this);
+		
+		btnGemChanges.setBounds(200, 400, 100, 60);
 		// Edit TextFields
 		beloebField.setBounds(170, 140, 120, 60);
 		searchField.setBounds(640, 20, 190, 30);
@@ -78,6 +86,10 @@ public class SaldoGUI extends MainGUI implements ActionListener, KeyListener {
 		saldoField.setEditable(false);
 		saldoField.setText("N/A");
 
+		noteField.setBounds(50, 270, 300, 100);
+		noteField.setEditable(false);
+		noteField.setText("ingen info");
+		
 		// Labels
 		idLabel.setBounds(50, 30, 20, 20);
 		navnLabel.setBounds(110, 30, 50, 20);
@@ -93,8 +105,11 @@ public class SaldoGUI extends MainGUI implements ActionListener, KeyListener {
 		center3.add(idField);
 		center3.add(btnTraek);
 		center3.add(btnIndsaet);
+		center3.add(btnChangeNote);
+		center3.add(btnGemChanges);
 		center3.add(indsaetField);
 		center3.add(beloebField);
+		center3.add(noteField);
 		center3.add(beloebLabel);
 		center3.add(searchField);
 		center3.add(btn_search);
@@ -134,9 +149,11 @@ public class SaldoGUI extends MainGUI implements ActionListener, KeyListener {
 								String id = String.valueOf((int) model.getValueAt(selectedRow, 0));
 								String navn = (String) model.getValueAt(selectedRow, 1);
 								String saldo = String.valueOf((int) model.getValueAt(selectedRow, 2));
+								//String vigtigNote = (String) model.getValueAt(selectedRow, 3);
 								idField.setText(id);
 								navnField.setText(navn);
 								saldoField.setText(saldo);
+								//noteField.setText(vigtigNote);
 							}catch(ArrayIndexOutOfBoundsException e1){
 
 							}
@@ -207,6 +224,10 @@ public class SaldoGUI extends MainGUI implements ActionListener, KeyListener {
 			} else {
 				rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));;
 			}
+		}
+		if (e.getSource() == btnChangeNote) {
+			noteField.setEditable(true);
+			System.out.println("lol");
 		}
 		if (e.getSource() == btn_aktivitet) {
 			new AktivitetGUI();
@@ -314,7 +335,20 @@ public class SaldoGUI extends MainGUI implements ActionListener, KeyListener {
 				JOptionPane.showMessageDialog(frame, "syntaksen på beløbet er forkert");
 			}
 			
-
 		}
+		/**
+		if (e.getSource() == btnNote){
+			String input = "";
+			try {
+				input = noteField.getText();
+			} catch ( ArrayIndexOutOfBoundsException e1) {
+				JOptionPane.showMessageDialog(frame, "Forket indtastet beløb.");
+			}
+				
+			
+		
+		}
+	
+	**/
 	}
 }
