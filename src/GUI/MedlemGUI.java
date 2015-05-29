@@ -246,6 +246,14 @@ public class MedlemGUI extends MainGUI implements KeyListener {
 			}
 
 			if(validateInput()){
+				if(foedselsdatoField.getText().length()>6){
+					JOptionPane.showMessageDialog(frame, "Din fødselsdato er for lang.");
+					
+				}
+				else if(telefonField.getText().length()>12){
+					JOptionPane.showMessageDialog(frame, "Dit telefon nummer er for langt.");
+				}
+				else{
 				Medlem medlem = new Medlem(0, fornavn, efternavn, adresse, foedselsdato,
 						telefon, email, navnDoer, billeder);
 				new Control().opretMedlem(medlem);
@@ -258,6 +266,7 @@ public class MedlemGUI extends MainGUI implements KeyListener {
 				updateJTable();
 				model.fireTableDataChanged();
 				System.out.println(medlem.getFødselsdato());
+				}
 			}
 			else{
 				JOptionPane.showMessageDialog(frame,"Et eller flere felter er ikke blevet udfyldt korrekt. Udfyld alle felter, og prøv igen.");
@@ -291,7 +300,7 @@ public class MedlemGUI extends MainGUI implements KeyListener {
 		}
 	}
 
-
+	//metoder bruges ikke, da jeg ikke behøver listene på dette
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 		// TODO Auto-generated method stub
@@ -299,9 +308,26 @@ public class MedlemGUI extends MainGUI implements KeyListener {
 	}
 
 	@Override
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void keyReleased(KeyEvent e) {
+		if(e.getSource()==searchField){
+			if(e.getKeyCode() == KeyEvent.VK_ENTER){
+				String text = searchField.getText().toLowerCase();
+				if (text.length() == 0) {
+					rowSorter.setRowFilter(null);
+				} else {
+					/*
+					 * kodestykket herunder er fundet fra siden
+					 * https://community.oracle.com/thread/1354225
+					 * fra bruger 843806 - regexFilter sørger for at 
+					 * der ikke tages højde for store/små bostaver når der søges.
+					 */
+					try{
+						rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" +text));
+						}catch(PatternSyntaxException e1){
+						}
+				}
+			}
+		}
 	}
 }
 
