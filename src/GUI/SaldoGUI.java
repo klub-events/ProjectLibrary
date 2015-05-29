@@ -219,7 +219,11 @@ public class SaldoGUI extends MainGUI implements ActionListener, KeyListener {
 
 			frame.dispose();
 		}
-
+		
+		if(e.getSource() == btn_barbog){
+			new BarBogGUI();
+			frame.dispose();
+		}
 		if (e.getSource() == btn_tilmeld) {
 			new TilmeldAktivitetGUI();
 

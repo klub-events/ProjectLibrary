@@ -288,6 +288,10 @@ public class MedlemGUI extends MainGUI implements KeyListener {
 		if (e.getSource() == btn_visMember) {
 			new MedlemTabel(this);
 		}
+		if(e.getSource() == btn_barbog){
+			new BarBogGUI();
+			frame.dispose();
+		}
 	}
 
 

@@ -264,31 +264,32 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 
 	}
 
-	public void actionPerformed(ActionEvent e) {
-
-		if(e.getSource() == btn_search){
-			String text = searchField.getText().toLowerCase();
-			if (text.length() == 0) {
-				rowSorter.setRowFilter(null);
-			} else {
-				rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));;
-			}
-		}
-		if (e.getSource() == btn_aktivitet) {
+	public void actionPerformed(ActionEvent e)
+	{	  
+		if(e.getSource() == btn_aktivitet)
+		{
 			new AktivitetGUI();
-
 			frame.dispose();
 		}
 
-		if (e.getSource() == btn_medlem) {
+		if(e.getSource() == btn_medlem )
+		{
 			new MedlemGUI();
-
 			frame.dispose();
 		}
 
-		if (e.getSource() == btn_tilmeld) {
+		if(e.getSource() == btn_tilmeld)
+		{
 			new TilmeldAktivitetGUI();
-
+			frame.dispose();
+		}
+		if(e.getSource() == btn_saldo){
+			new SaldoGUI();
+			frame.dispose();
+		}
+		if(e.getSource() == btn_barbog )
+		{
+			new BarBogGUI();
 			frame.dispose();
 		}
 		}

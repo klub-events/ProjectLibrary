@@ -130,6 +130,11 @@ public class TilmeldAktivitetGUI extends MainGUI implements ActionListener
 		{
 			new TilmeldAktivitetGUI();
 			frame.dispose();
+			
+		if(e.getSource() == btn_barbog){
+			new BarBogGUI();
+			frame.dispose();
+			}
 		}
 
 		if(e.getSource() == btn_gem){

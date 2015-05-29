@@ -169,8 +169,7 @@ public class MainGUI extends Thread implements ActionListener
 			new SaldoGUI();
 			frame.dispose();
 		}
-		if(e.getSource() == btn_barbog )
-		{
+		if(e.getSource() == btn_barbog){
 			new BarBogGUI();
 			frame.dispose();
 		}
