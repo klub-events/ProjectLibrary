@@ -17,6 +17,10 @@ import Domain.Varer;
 import Domain.Barbog;
 import Domain.Medlem;
 
+/**
+ * @author Shonix
+ *
+ */
 public class DB_Connector {
 
 	private Connection conn;
@@ -29,8 +33,11 @@ public class DB_Connector {
 
 	private static DB_Connector database;
 
-	private DB_Connector() { // Private constructor to prevent outside
-		// instantiation.. Singleton
+	/**
+	 * Handling all communication with the database.
+	 * The DB_Connector has a private constructor to prevent outside instantiation. 
+	 */
+	private DB_Connector() {
 		try {
 
 			Class.forName(JDCB_DRIVER);
@@ -47,8 +54,11 @@ public class DB_Connector {
 		}
 	}
 
-	// Returns the singleton instance of the DB class; instantiates it if it
-	// is not instantiated yet
+	/**
+	 * Returns the singleton instance of the DB class; instantiates it if it
+	 * is not instantiated yet
+	 * @return new instance of the database
+	 */
 	public static DB_Connector getInstance() {
 		if (database == null) {
 			database = new DB_Connector();
@@ -56,6 +66,14 @@ public class DB_Connector {
 		return database;
 	}
 
+	/**
+	 * A method used for extracting a specific member from the database.
+	 * the method uses the <b>ID</b> of a member, to find it.
+	 * 
+	 * <p>takes an <b>int</b> as parameter.</p>
+	 * @param identifier
+	 * @return A Medlem filled with data gotten directly from the database
+	 */
 	public Medlem findMedlem(String identifier){
 		Medlem medlem = null;
 		try{
@@ -84,6 +102,16 @@ public class DB_Connector {
 	}
 
 
+	/**
+	 * <p>Creates a new Medlem in the database, with data from a Medlem object.<br>
+	 * Uses the Medlem toString() to insert the data, as this has been formatted<br>
+	 * to fit into sql syntax.</p>
+	 * <p>sets the Medlem id = the generated id for Medlemmer in the database, for immediate use.<br>
+	 * This is especially useful for deleting members via their id.</p>
+	 * 
+	 * <p>takes a <b>Medlem</b> as parameter.</p>
+	 * @param medlem
+	 */
 	public void opretMedlem(Medlem medlem) {
 
 		try {
@@ -104,7 +132,15 @@ public class DB_Connector {
 		}
 	}
 
-	public void opretBarbog(Barbog barbog, Medlem medlem) {
+	/**
+	 *  * <p>Creates a new Barbog in the database, with data from a Barbog object.<br>
+	 * Uses the Barbog toString() to insert the data, as this has been formatted<br>
+	 * to fit into sql syntax.</p>
+	 * 
+	 * <p>takes a <b>Barbog</b> as parameter.</p>
+	 * @param barbog
+	 */
+	public void opretBarbog(Barbog barbog) {
 		try {
 			String sql = "INSERT INTO barbog VALUES(" + barbog.toString()+");";
 			conn.createStatement().executeUpdate(sql);
@@ -113,6 +149,16 @@ public class DB_Connector {
 		}
 	}
 	
+	/**
+	 * Creates a new <i>Tilmelding</i> in the <i>tilmeld</i> database. id should be set as 0 if id is set as AutoIncremendet in database.<br>
+	 * fk_medlemNavn and fk_aktivitetID comes from the <i>Medlem</i> class and <i>Aktivitet</i> class via the getters for these attributes.<br>
+	 * used every time a new <i>Member</i> joins a new <i>Aktivitet</i>.
+	 * 
+	 * <p>takes <b>int</b>, <b>String</b>,<b>int</b> as parameters.</p>
+	 * @param id
+	 * @param fk_medlemNavn
+	 * @param fk_aktivitetID
+	 */
 	public void opretTilmelding(int id, String fk_medlemNavn, int fk_aktivitetID) {
 		try {
 			String statementToQuery = "INSERT INTO tilmeld VALUES(?,?,?)";
@@ -126,6 +172,14 @@ public class DB_Connector {
 		}
 	}
 	
+	/**
+	 * Creates a new Aktivitet in the database with the Aktivitet object.<br>
+	 * Uses the Aktivitet toString() to insert the data, as this has been formatted
+	 * to fit into sql syntax.
+	 * 
+	 * <p>Takes an <b>Aktivitet</b> in the constructor</p>
+	 * @param aktivitet
+	 */
 	public void opretAktivitet(Aktivitet aktivitet) {
 		
 		try {
@@ -138,6 +192,13 @@ public class DB_Connector {
 	}
 
 
+	/**
+	 * Sends a select all statement to the database, which selects everything in the member table.<br>
+	 * All of the data from the database then get's saved as a new Medlem and get's added to an Arraylist which is returned.
+	 * 
+	 * <p>Useful for filling up JTable with data, and getting general data from the members, out of the database.
+	 * @return ArrayList filled with members from the database
+	 */
 	public ArrayList<Medlem> hentMedlemmer(){
 		ArrayList<Medlem> medlemmer = new ArrayList<Medlem>();
 		try{
@@ -163,32 +224,38 @@ public class DB_Connector {
 
 	}
 	
+	/**
+	 * Sends a select all statement to the database, which selects everything in the tilmeld table.<br>
+	 * All of the data from the database then get's saved as a new Tilmeld and get's added to an Arraylist which is returned.
+	 * 
+	 * <p>Useful for filling up JTable with data, and getting general data from participants, out of the database.
+	 * @return ArrayList filled with tilmeldninger from the database
+	 */
 	public ArrayList<Tilmeld> hentTilmeldinger(){
 		ArrayList<Tilmeld> tilmeld = new ArrayList<Tilmeld>();
-		try
-		{
+		try{
 			String sql = "SELECT tilmeld.id, tilmeld.fk_medlemNavn, aktiviteter.navn FROM tilmeld LEFT JOIN aktiviteter ON tilmeld.aktivitetID = aktiviteter.id ORDER BY tilmeld.id ASC;";
 			rs = conn.createStatement().executeQuery(sql);
 			while(rs.next()){
 				int id = rs.getInt("tilmeld.id");
 				String aktivitetnavn = rs.getString("aktiviteter.navn");
 				String medlemNavn = rs.getString("tilmeld.fk_medlemNavn");
-			
-				
-				
-				tilmeld.add(new Tilmeld (id, aktivitetnavn, medlemNavn));
-				
+				tilmeld.add(new Tilmeld (id, aktivitetnavn, medlemNavn));	
 			}
 		}
-		
 		catch(Exception e){
 			e.printStackTrace();
 		}
-		
-		
 		return tilmeld;
 	}
 	
+	/**
+	 * Sends a select all statement to the database, which selects everything in the aktivitet table.<br>
+	 * All of the data from the database then get's saved as a new Aktivitet and get's added to an Arraylist which is returned.
+	 * 
+	 * <p>Useful for filling up JTable with data, and getting general data from participants, out of the database.
+	 * @return An ArrayList filled with activities from the database
+	 */
 	public ArrayList<Aktivitet> hentAktiviteter(){
 		ArrayList<Aktivitet> aktiviteter = new ArrayList<Aktivitet>();
 		try{
@@ -201,15 +268,21 @@ public class DB_Connector {
 				String antal = rs.getString("antal");
 				String dato = rs.getString("dato");
 				aktiviteter.add(new Aktivitet (id, navn, pris, antal, dato));
-				
 			}
 		}
 		catch(Exception e){
 			e.printStackTrace();
 		}
-		return aktiviteter;	
-
+		return aktiviteter;
 	}
+	
+	/**
+	 * Sends a select all statement to the database, while inner joining the barbog table with medlem table which selects everything in the barbogs table.<br>
+	 * All of the data from the database then get's saved as a new Barbog and get's added to an Arraylist which is returned.
+	 * 
+	 * <p>Useful when wanting access to a members balance, for use with transactions, or increase/decrease in balance.
+	 * @return An ArrayList with a member's id, balance, important notes, and name.
+	 */
 	public ArrayList<Barbog> hentBarbog(){
 		ArrayList<Barbog> barbogs = new ArrayList<Barbog>();
 		try{
@@ -228,10 +301,17 @@ public class DB_Connector {
 		} catch(Exception e){
 			e.printStackTrace();
 		}
-		return barbogs;	
-
+		return barbogs;
 	}
 
+	/**
+	 * Used when updates has been made to a members balance, or important note. Selects all of the member accounts (barbøger)<br>
+	 * in an ArrayList, and updates their important note, and balance. It finds the update targets based on their id.
+	 * 
+	 * <p>takes an<b>ArrayList</b> of Barbog as parameter. Used when you either want to update a single Barbog, or if you<br>
+	 * want to update all of the Barbog's all together.</p>
+	 * @param opdateretBarbog
+	 */
 	public void opdaterBarbog(ArrayList<Barbog> opdateretBarbog) {
 		try{
 			for (Barbog barbog : opdateretBarbog) {
@@ -248,6 +328,15 @@ public class DB_Connector {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Used when updates has been made to a member Selects all of the members<br>
+	 * in an ArrayList, and updates all of their info. It finds the update targets based on their id.
+	 * 
+	 * <p>takes an<b>ArrayList</b> of Medlem as parameter. Used when you either want to update a single Medlem, or if you<br>
+	 * want to update all of the Medlem's all together.</p>
+	 * @param opdateretMedlemmer
+	 */
 	public void opdaterMedlemmer(ArrayList<Medlem> opdateretMedlemmer){
 		try{
 			for (Medlem medlem : opdateretMedlemmer) {
@@ -264,7 +353,6 @@ public class DB_Connector {
 				ps.setString(6,medlem.getEmail());
 				ps.setString(7,medlem.getNavnPåDør());
 				ps.setInt(8,medlem.getBilleder());
-
 				ps.executeUpdate();
 			}
 		} catch(Exception e){
@@ -272,6 +360,11 @@ public class DB_Connector {
 		}
 	}
 
+	/**
+	 * Used whenever a member needs to get deleted from the database.
+	 * <p>Takes an <b>int</b> as a parameter.
+	 * @param identifier
+	 */
 	public void sletMedlem(int identifier) {
 		try{
 			String statementToQuery = "DELETE FROM medlemmer WHERE id = ?;";
@@ -285,6 +378,11 @@ public class DB_Connector {
 		}
 		sletBarbog(identifier);
 	}
+	/**
+	 * Used whenever a Barbog needs to get deleted from the database.
+	 * <p>Takes an <b>int</b> as a parameter.
+	 * @param identifier
+	 */
 	public void sletBarbog(int identifier) {
 		try{
 			String statementToQuery =  "DELETE FROM barbog WHERE barbog.id = ?;";
@@ -300,6 +398,10 @@ public class DB_Connector {
 	}
 
 	/**
+	 * Creates a new ware (Varer) in the database.
+	 * 
+	 * <p>Takes an <b>int</b> as a parameter.</p>
+	 * 
 	 * @param vare
 	 */
 	public void opretVare(Varer vare) {
@@ -310,11 +412,13 @@ public class DB_Connector {
 			e.printStackTrace();
 		}
 	}
-	/**	
-	public Varer findVare(String identifier) {
-		return db.findVare(identifier);
-	}
-	 **/
+	 
+	
+	/**
+	 * Used whenever a ware needs to get deleted from the database.
+	 * <p>Takes an <b>int</b> as a parameter.
+	 * @param identifier
+	 */
 	public void sletVare(int identifier) {
 		try{
 			String statementToQuery = "DELETE FROM varer WHERE id = ?";
@@ -329,6 +433,10 @@ public class DB_Connector {
 
 	}
 
+	/**
+	 * Used for either ordering the wares, or getting the price of each ware.
+	 * @return ArrayList with wares from the database. Filled with Varer <b>objects</b>.
+	 */
 	public ArrayList<Varer> hentVarer(){
 		ArrayList<Varer> varer = new ArrayList<Varer>();
 		try{
@@ -349,6 +457,11 @@ public class DB_Connector {
 
 	}
 
+	/**
+	 * Updates all of the wares in the database. Usefull for setting the price, or updating available amount, and availability.
+	 * <p>Takes an <b>ArrayList</b> filled with <b>Varer</b> as a parameter.</p>
+	 * @param opdaterVare
+	 */
 	public void opdaterDBVarer(ArrayList <Varer> opdaterVare){
 		try{
 			for (Varer vare : opdaterVare) {
@@ -368,6 +481,12 @@ public class DB_Connector {
 		}
 	}
 
+	/**
+	 * Used for depositing an amount into a members account
+	 * <p>Takes <b>int</b>,<b>int</b> as parameters.</p>
+	 * @param total
+	 * @param id
+	 */
 	public void indsaetBeloeb(int total, int id) {
 		try {	
 			String statementToQuery = "UPDATE barbog"
@@ -383,6 +502,12 @@ public class DB_Connector {
 
 	}
 
+	/**
+	 * Used to withdraw an amount from a members account
+	 * <p>Takes <b>int</b>,<b>int</b> as parameters.</p>
+	 * @param total
+	 * @param id
+	 */
 	public void traekBeloeb(int total, int id) {
 		try {	
 			String statementToQuery = "UPDATE barbog"
@@ -397,6 +522,13 @@ public class DB_Connector {
 
 	}
 
+	/**
+	 * Used when updating the important note for a members account(Barbog).
+	 * 
+	 * <p>Takes <b>int</b>,<b>String</b> as parameters.
+	 * @param identifier
+	 * @param note
+	 */
 	public void updateNote(int identifier, String note) {
 		try {	
 			String statementToQuery = "UPDATE barbog"

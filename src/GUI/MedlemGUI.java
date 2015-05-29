@@ -200,8 +200,6 @@ public class MedlemGUI extends MainGUI implements KeyListener {
 		medlemmer.clear();
 	}
 
-	
-
 	@Override
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
@@ -217,7 +215,7 @@ public class MedlemGUI extends MainGUI implements KeyListener {
 					"123", "test", "test", 1);
 			new Control().opretMedlem(medlem);
 			Barbog barbog = new Barbog(medlem.getId(),"null","null",0);
-			new Control().opretBarbog(barbog,medlem);
+			new Control().opretBarbog(barbog);
 		}
 
 		
@@ -262,7 +260,7 @@ public class MedlemGUI extends MainGUI implements KeyListener {
 						telefon, email, navnDoer, billeder);
 				new Control().opretMedlem(medlem);
 				Barbog barbog = new Barbog(medlem.getId(),"null","null",0);
-				new Control().opretBarbog(barbog,medlem);
+				new Control().opretBarbog(barbog);
 				JOptionPane.showMessageDialog(frame, "Medlemmet: " + medlem.getFornavn()
 						+ " er nu tilføjet til databasen med ID: " + medlem.getId());
 				clearAll();

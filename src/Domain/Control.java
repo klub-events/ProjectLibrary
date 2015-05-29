@@ -60,8 +60,8 @@ public class Control {
 	}
 
 	//Bruges til at kalde funktionen der opretter nye barbøger i databasen, ud fra et barbog objekt
-	public void opretBarbog(Barbog barbog, Medlem medlem){
-		db.opretBarbog(barbog,medlem);
+	public void opretBarbog(Barbog barbog){
+		db.opretBarbog(barbog);
 	}
 
 	public void opdaterBarbog(ArrayList<Barbog> opdateBarbog){
