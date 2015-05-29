@@ -77,6 +77,26 @@ public class AktivitetGUI extends MainGUI implements ActionListener
 		content1.add(btn_visAktiviteter);
 	}//constructor slutter
 
+	public void clearAll() {
+		navnBox.setText(null);
+		prisBox.setText(null);
+		deltagerantalBox.setText(null);
+		datoBox.setText(null);
+		
+	}
+
+
+	public boolean validateInput() {
+		if 		(  !navnBox.getInputText().equals("")
+				&& !prisBox.getInputText().equals("")
+				&& !deltagerantalBox.getInputText().equals("")
+				&& !datoBox.getInputText().equals(""))
+				 {
+			return true;
+		} else {
+			return false;
+		}
+	}
 	public void actionPerformed(ActionEvent e)
 	{
 		if(e.getSource() == btn_opret)
@@ -87,20 +107,25 @@ public class AktivitetGUI extends MainGUI implements ActionListener
 			antal = deltagerantalBox.getInputText();
 			dato = datoBox.getInputText();
 			
+			if(validateInput()){
 			
-			try{
 				
 				
 				Aktivitet aktivitet = new Aktivitet(0, navn, pris, antal, dato);
 				new Control().opretAktivitet(aktivitet);
-//				JOptionPane.showMessageDialog(frame,"Aktivitet oprettet!");
+				JOptionPane.showMessageDialog(frame,"Aktivitet oprettet!");
 
-
-			}catch(Exception e1){
+				clearAll();
+			}
+			
+			else{
 				JOptionPane.showMessageDialog(frame,"Et eller flere felter er ikke blevet udfyldt. Udfyld alle felter, og prøv igen.");
 			}
+			
+				
+			
 									
-						
+			}		
 			
 			new AktivitetGUI();
 			
