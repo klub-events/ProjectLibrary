@@ -128,7 +128,7 @@ public class MedlemTabel implements ActionListener,KeyListener {
 				System.out.println(data);
 				data.clear();
 			}
-			new Control().updateDB(opdateMedlemmer);
+			new Control().opdaterMedlemmer(opdateMedlemmer);
 			medlemGUI.updateJTable();
 		}
 

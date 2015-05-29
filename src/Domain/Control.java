@@ -43,7 +43,7 @@ public class Control {
 
 	//Bruges til at kalde funktionen der opdatere alle felter i databasen, med værdier
 	//hentet fra en arrayliste, fyldt med medlemmer, der komemr fra gui - JTablet.
-	public void updateDB(ArrayList <Medlem> opdateMedlem){
+	public void opdaterMedlemmer(ArrayList <Medlem> opdateMedlem){
 		db.opdaterMedlemmer(opdateMedlem);
 	}
 	//kalder funktionen slet medlem i databasen, med en identifier, altså id, fra et medlem
@@ -105,6 +105,11 @@ public class Control {
 	
 	public ArrayList<Tilmeld> hentTilmeldinger() {
 		return db.hentTilmeldinger();
+	}
+
+	public void updateNote(int identifier, String note) {
+		db.updateNote(identifier, note);
+		
 	}
 
 }

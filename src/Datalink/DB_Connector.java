@@ -397,5 +397,19 @@ public class DB_Connector {
 
 	}
 
+	public void updateNote(int identifier, String note) {
+		try {	
+			String statementToQuery = "UPDATE barbog"
+					+ " SET vigtigNote = ?  WHERE id = ?";
+			PreparedStatement ps = conn.prepareStatement(statementToQuery);
+			ps.setString(1, note);
+			ps.setInt(2, identifier);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
 
 }

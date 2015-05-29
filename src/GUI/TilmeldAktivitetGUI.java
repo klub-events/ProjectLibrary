@@ -157,16 +157,13 @@ public class TilmeldAktivitetGUI extends MainGUI implements ActionListener
 
 			frame.dispose();
 		}
-		if(e.getSource() == btn_tilmeld)
-		{
-			new TilmeldAktivitetGUI();
-			frame.dispose();
+		
 			
 		if(e.getSource() == btn_barbog){
 			new BarBogGUI();
 			frame.dispose();
 			}
-		}
+		
 
 		if(e.getSource() == btn_gem){
 			Medlem m = (Medlem) medlemBox.getSelectedItem();
@@ -174,7 +171,7 @@ public class TilmeldAktivitetGUI extends MainGUI implements ActionListener
 			Aktivitet a = (Aktivitet) aktivitetBox.getSelectedItem();
 			int id = 0;
 			String fk_medlemNavn = m.getFornavn();
-			int fk_aktivitetID = a.getId();
+			int fk_aktivitetID = a.getid();
 			try{
 				
 				new Control().opretTilmelding(id, fk_medlemNavn, fk_aktivitetID);
