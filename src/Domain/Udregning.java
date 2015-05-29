@@ -17,4 +17,7 @@ public class Udregning {
 	public int divider(int input1, int input2){
 		return input1/input2;
 	}
+	public String changeNote(String txt){
+		return txt;
+	}
 }

@@ -199,35 +199,7 @@ public class MedlemGUI extends MainGUI implements KeyListener {
 		medlemmer.clear();
 	}
 
-	@Override
-	public void keyPressed(KeyEvent e) {
-		
-		
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		if(e.getSource()==searchField){
-			if(e.getKeyCode() == KeyEvent.VK_ENTER){
-				String text = searchField.getText().toLowerCase();
-				if (text.length() == 0) {
-					rowSorter.setRowFilter(null);
-				} else {
-					/*
-					 * kodestykket herunder er fundet fra siden
-					 * https://community.oracle.com/thread/1354225
-					 * fra bruger 843806 - regexFilter sørger for at 
-					 * der ikke tages højde for store/små bostaver når der søges.
-					 */
-					try{
-					rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" +text));
-					}catch(PatternSyntaxException e1){
-						
-					}
-				}
-			}
-		}
-	}
+	
 
 	@Override
 	public void keyTyped(KeyEvent arg0) {
@@ -235,12 +207,10 @@ public class MedlemGUI extends MainGUI implements KeyListener {
 		
 	}
 	
+
 	public void actionPerformed(ActionEvent e) {
-		/*----------------------------
-		 * 
-		 * DETTE ER EN TEST FUNKTION
-		 * 
-		 */
+
+	
 		if(e.getSource() == test){
 			Medlem medlem = new Medlem(0, "test", "test", "test", "123",
 					"123", "test", "test", 1);
@@ -248,11 +218,7 @@ public class MedlemGUI extends MainGUI implements KeyListener {
 			Barbog barbog = new Barbog(medlem.getId(),"null","null",0);
 			new Control().opretBarbog(barbog,medlem);
 		}
-		/*
-		 * 
-		 * DETTE ER EN TEST FUNKTION
-		 * 
-		 ---------------------------*/
+
 		
 		if(e.getSource() == btn_search){
 			String text = searchField.getText().toLowerCase();
@@ -325,5 +291,16 @@ public class MedlemGUI extends MainGUI implements KeyListener {
 	}
 
 
+	@Override
+	public void keyPressed(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
 }
 

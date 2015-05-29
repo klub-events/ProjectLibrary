@@ -40,7 +40,7 @@ public class MainGUI extends Thread implements ActionListener
 	protected static JTextField timeField = new JTextField();
 	protected static Calendar cal;
 	protected static Date date = new Date();
-	protected static SimpleDateFormat df = new SimpleDateFormat("KK:mm");
+	protected static SimpleDateFormat df = new SimpleDateFormat("HH:mm");
 	protected static TimeThread tt = TimeThread.getInstance();
 	protected static Object toilet = new Object();
 
@@ -49,11 +49,11 @@ public class MainGUI extends Thread implements ActionListener
 		//Sætter GUIen til en anden subclasse og ændre layout.
 		try
 		{
-		 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		}
 		catch (Exception e)
 		{
-		 e.printStackTrace();
+			e.printStackTrace();
 		}	
 		//standard gui settings
 		frame.setSize(860, 660);
@@ -110,8 +110,8 @@ public class MainGUI extends Thread implements ActionListener
 		frame.setVisible(true);
 
 	}//Construtor MainGUI slutter
-	
-	
+
+
 	public static class TimeThread extends Thread implements Runnable{
 		public static TimeThread getInstance() {
 			if (tt == null) {
@@ -119,21 +119,22 @@ public class MainGUI extends Thread implements ActionListener
 			}
 			return tt;
 		}
-	public void run(){
-		while(true){
-			synchronized(toilet){
-				cal = Calendar.getInstance();
-				date = cal.getTime();
-				timeField.setText(df.format(date));
-				try {
-					Thread.sleep(10000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
+
+		public void run(){
+			while(true){
+				synchronized(toilet){
+					cal = Calendar.getInstance();
+					date = cal.getTime();
+					timeField.setText(df.format(date));
+					try {
+						Thread.sleep(20000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 				}
 			}
 		}
 	}
-}
 
 
 	public static void startThread(){
@@ -170,7 +171,7 @@ public class MainGUI extends Thread implements ActionListener
 		}
 		if(e.getSource() == btn_barbog )
 		{
-			new BarbogGUI();
+			new BarBogGUI();
 			frame.dispose();
 		}
 

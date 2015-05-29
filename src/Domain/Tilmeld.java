@@ -9,10 +9,7 @@ package Domain;
   `aktivitetID` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 	)
-
- *
  *@Author PeterRaasthøj, PatrickRavnholt
- *
  */
 
 public class Tilmeld 

@@ -36,6 +36,12 @@ public class Control {
 	 {
 	 	db.opretTilmelding(tilmeld);
 	 }
+	 
+     //bruges til at kalde funktioner der opretter nye aktiviteter 
+	 public void opretAktivitet(Aktivitet aktivitet)
+	 {
+	 	db.opretAktivitet(aktivitet);
+	 }
 
 	//Bruges til at kalde funktionen der opdatere alle felter i databasen, med værdier
 	//hentet fra en arrayliste, fyldt med medlemmer, der komemr fra gui - JTablet.

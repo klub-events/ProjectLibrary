@@ -124,6 +124,19 @@ public class DB_Connector {
 			e.printStackTrace();
 		}
 	}
+	
+	public void opretAktivitet(Aktivitet aktivitet) {
+		
+		try {
+			String sql = "INSERT INTO aktiviteter VALUES(" + aktivitet.toString() 
+					+ ");";
+			System.out.println(sql);
+			conn.createStatement().executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 
 	public ArrayList<Medlem> hentMedlemmer(){
 		ArrayList<Medlem> medlemmer = new ArrayList<Medlem>();
@@ -143,7 +156,7 @@ public class DB_Connector {
 				medlemmer.add(new Medlem (id, fornavn, efternavn, adresse, fødselsdato, telefon, email, navnPåDør, billeder));
 			}
 		}
-		catch(Exception e){
+		catch(SQLException e){
 			e.printStackTrace();
 		}
 		return medlemmer;	
@@ -163,9 +176,10 @@ public class DB_Connector {
 			while(rs.next()){
 				int id = rs.getInt("id");
 				String navn = rs.getString("navn");
+				String pris = rs.getString("pris");
 				String antal = rs.getString("antal");
 				String dato = rs.getString("dato");
-				aktiviteter.add(new Aktivitet (id, navn, antal, dato));
+				aktiviteter.add(new Aktivitet (id, navn, pris, antal, dato));
 				
 			}
 		}
@@ -178,6 +192,7 @@ public class DB_Connector {
 	public ArrayList<Barbog> hentBarbog(){
 		ArrayList<Barbog> barbogs = new ArrayList<Barbog>();
 		try{
+			//should try to test performance differnce for the actual defense, to see which is better (no time for the report)
 			//String sql = "SELECT m.ID, m.fornavn, b.vigtignote, b.saldo FROM medlemmer m, barbog b WHERE m.ID = b.ID ORDER BY b.ID ASC;";
 			String sql = "SELECT medlemmer.ID, medlemmer.fornavn, barbog.vigtignote, barbog.saldo FROM medlemmer INNER JOIN barbog WHERE medlemmer.ID = barbog.ID ORDER BY barbog.ID ASC;";
 			//String sql = "SELECT * FROM barbog ORDER BY barbog.id ASC;";

@@ -6,13 +6,34 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import Domain.*;
+
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 public class AktivitetGUI extends MainGUI implements ActionListener
 {
 	private JButton btn_opret = new JButton("OPRET");	
 	
 	private JButton btn_visAktiviteter = new JButton("VIS AKTIVITETER");
+
+	private String navn;
+
+	private String pris;
+
+	private String antal;
+
+	private String dato;
+
+	private LabelTextfield navnBox;
+
+	private LabelTextfield prisBox;
+
+	private LabelTextfield deltagerantalBox;
+
+	private LabelTextfield datoBox;
 	
 	public AktivitetGUI()
 	{
@@ -24,20 +45,20 @@ public class AktivitetGUI extends MainGUI implements ActionListener
 		String[] labelTekster = {"navn:", "pris:", "deltagerantal:", "dato:"};
 		
 		//adder navn og tekstfield til vinduet
-		LabelTextfield navnBox = new LabelTextfield(labelTekster[0]);
+		this.navnBox = new LabelTextfield(labelTekster[0]);
 		String navn = navnBox.getInputText();
 		content1.add(navnBox);
 		
-		LabelTextfield prisBox = new LabelTextfield(labelTekster[1]);
+		this.prisBox = new LabelTextfield(labelTekster[1]);
 		String pris = prisBox.getInputText();
 		content1.add(prisBox);
 		
-		LabelTextfield deltagerantalBox = new LabelTextfield(labelTekster[2]);
+		this.deltagerantalBox = new LabelTextfield(labelTekster[2]);
 		String deltagerantal = deltagerantalBox.getInputText();
 		content1.add(deltagerantalBox);
 		
 		//speciel desginet dato api kommer
-		LabelTextfield datoBox = new LabelTextfield(labelTekster[3]);
+		this.datoBox = new LabelTextfield(labelTekster[3]);
 		String dato = datoBox.getInputText();
 		content1.add(datoBox);
 		
@@ -48,7 +69,7 @@ public class AktivitetGUI extends MainGUI implements ActionListener
 		btn_aktivitet.setBackground(Color.GRAY);
 		
 		btn_opret.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		
+		btn_opret.addActionListener(this);
 		content1.add(btn_opret);
 		
 		
@@ -62,7 +83,28 @@ public class AktivitetGUI extends MainGUI implements ActionListener
 	{
 		if(e.getSource() == btn_opret)
 		{
-			new TilmeldAktivitetGUI();
+			
+			navn = navnBox.getInputText();
+			pris = prisBox.getInputText();
+			antal = deltagerantalBox.getInputText();
+			dato = datoBox.getInputText();
+			
+			
+			try{
+				
+				
+				Aktivitet aktivitet = new Aktivitet(0, navn, pris, antal, dato);
+				new Control().opretAktivitet(aktivitet);
+//				JOptionPane.showMessageDialog(frame,"Aktivitet oprettet!");
+
+
+			}catch(Exception e1){
+				JOptionPane.showMessageDialog(frame,"Et eller flere felter er ikke blevet udfyldt. Udfyld alle felter, og prøv igen.");
+			}
+									
+						
+			
+			new AktivitetGUI();
 			
 			frame.dispose();
 		}
