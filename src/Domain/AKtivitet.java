@@ -3,14 +3,16 @@ package Domain;
 /*
  * Oprettelse af aktivitet tabel
  * 
- 	CREATE TABLE aktiviteter (
-	id int(11) NOT NULL,
-	pris varchar(2),
-	navn varchar(255),
-    antal varchar (2),
-    dato varchar (15),
-  	PRIMARY KEY (id)
-	)
+
+	CREATE TABLE `aktiviteter` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `navn` varchar(255) NOT NULL,
+  `pris` varchar(2) NOT NULL,
+  `antal` varchar(15) NOT NULL,
+  `dato` varchar(10) NOT NULL,
+  PRIMARY KEY (`id`)
+)
+
  *
  *@author PeterRaasthøj
  */
