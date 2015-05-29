@@ -5,17 +5,25 @@ import java.awt.Cursor;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import Domain.*;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 public class AktivitetGUI extends MainGUI implements ActionListener
 {
 	private JButton btn_opret = new JButton("OPRET");	
 	
-	private JButton btn_visAktiviteter = new JButton("VIS AKTIVITETER");
+	private JTable table;
+	private ClosedCellTableModel model = new ClosedCellTableModel();
+	private TableRowSorter<TableModel> rowSorter;
+	
 
 	private String navn;
 
@@ -37,7 +45,7 @@ public class AktivitetGUI extends MainGUI implements ActionListener
 	{
 		
 		//JPanel Labels
-		JPanel content1 = new JPanel(new GridLayout(10,1));
+		JPanel content1 = new JPanel(new GridLayout(10, 0));
 		
 		//Navne ud for textfield
 		String[] labelTekster = {"navn:", "pris:", "deltagerantal:", "dato:"};
@@ -70,13 +78,58 @@ public class AktivitetGUI extends MainGUI implements ActionListener
 		btn_opret.addActionListener(this);
 		content1.add(btn_opret);
 		
+		        // Jtable
+				JScrollPane scrollPane = new JScrollPane();
+				scrollPane.setBounds(0, 0, 250, 200); // x, y, width, height
+				table = new JTable();
+				scrollPane.setViewportView(table);
+				table.setRowHeight(20);
+				table.setFillsViewportHeight(true);
+				table.setModel(model);
+				Panel_Content.add(scrollPane);
+				rowSorter = new TableRowSorter<>((table.getModel()));
+				table.setRowSorter(rowSorter);
+
+				rowSorter = new TableRowSorter<>((table.getModel()));
+				table.setRowSorter(rowSorter);
+			    
+				updateJTable();
 		
 		
-		btn_visAktiviteter.setCursor(new Cursor(Cursor.HAND_CURSOR));
-	
-		content1.add(btn_visAktiviteter);
 	}//constructor slutter
 
+	public void updateJTable() {
+		ArrayList<Aktivitet> aktiviteter  = new Control().hentAktiviteter();
+		// add the column names
+		model.setColumnIdentifiers(new String[] { "id", "navn", "pris", "alder", "dato"});
+
+		// Foreach loop to loop through the ArrayList. One row (person) at a
+		// time
+		for (Aktivitet aktivitet : aktiviteter) {
+			model.addRow(new Object[]
+					{
+					
+					aktivitet.getid(), aktivitet.getNavn(), aktivitet.getPris(), aktivitet.getAntal(), aktivitet.getDato() 
+					
+					
+					
+					});	
+		}
+			
+		
+
+		//til patrick
+		//for (Medlem medlem : medlemmer){
+		//arrayList.add(medlem.getFornavn();
+		//}
+
+		//JCombobox aktivitetsMedlemmer(arrayList);
+		// add the DefaultTableModel to the JTable
+		
+	}
+	
+	
+	
 	public void clearAll() {
 		navnBox.setText(null);
 		prisBox.setText(null);
@@ -123,14 +176,14 @@ public class AktivitetGUI extends MainGUI implements ActionListener
 			}
 			
 				
+            new AktivitetGUI();
 			
+			frame.dispose();
 									
 			}		
 			
-			new AktivitetGUI();
 			
-			frame.dispose();
-		}
+		
 		
 		if(e.getSource() == btn_aktivitet)
 		{

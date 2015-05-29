@@ -174,7 +174,7 @@ public class TilmeldAktivitetGUI extends MainGUI implements ActionListener
 			Aktivitet a = (Aktivitet) aktivitetBox.getSelectedItem();
 			int id = 0;
 			String fk_medlemNavn = m.getFornavn();
-			int fk_aktivitetID = a.getId();
+			int fk_aktivitetID = a.getid();
 			try{
 				
 				new Control().opretTilmelding(id, fk_medlemNavn, fk_aktivitetID);
