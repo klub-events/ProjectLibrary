@@ -25,13 +25,13 @@ public class TilmeldAktivitetGUI extends MainGUI implements ActionListener
 	//combobox medlem
 	@SuppressWarnings("rawtypes")
 	private JComboBox medlemBox;
-	private String[] medlemValg = {"svend"};
+	
 
 	@SuppressWarnings({ "rawtypes" })
 
 	//combobox aktivitet
 	private JComboBox aktivitetBox;
-	private String[] aktivitetValg = {"fodbold"};
+	
 
 	JButton btn_gem = new JButton("GEM");
 	private JTable table;
@@ -81,13 +81,13 @@ public class TilmeldAktivitetGUI extends MainGUI implements ActionListener
 
 		// Jtable
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 0, 250, 500); // x, y, width, height
+		scrollPane.setBounds(0, 0, 250, 200); // x, y, width, height
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		table.setRowHeight(20);
 		table.setFillsViewportHeight(true);
 		table.setModel(model);
-		JPanel panel3 = new JPanel(new FlowLayout());
+		JPanel panel3 = new JPanel(new GridLayout(1,1));
 		panel3.add(scrollPane);
 		rowSorter = new TableRowSorter<>((table.getModel()));
 		table.setRowSorter(rowSorter);
@@ -109,7 +109,7 @@ public class TilmeldAktivitetGUI extends MainGUI implements ActionListener
 	public void updateJTable() {
 		ArrayList<Tilmeld> medlemmer = new Control().hentTilmeldinger();
 		// add the column names
-		model.setColumnIdentifiers(new String[] { "id", "fk_medlemNavn", "aktivitetID"});
+		model.setColumnIdentifiers(new String[] { "id", "Aktivitet", "Navn"});
 
 		// Foreach loop to loop through the ArrayList. One row (person) at a
 		// time
