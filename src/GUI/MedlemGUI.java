@@ -274,7 +274,7 @@ public class MedlemGUI extends MainGUI implements KeyListener {
 		}
 
 		if (e.getSource() == btn_saldo) {
-			new BarBogGUI();
+			new SaldoGUI();
 
 			frame.dispose();
 		}
