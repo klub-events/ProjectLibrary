@@ -149,11 +149,12 @@ public class SaldoGUI extends MainGUI implements ActionListener, KeyListener {
 								String id = String.valueOf((int) model.getValueAt(selectedRow, 0));
 								String navn = (String) model.getValueAt(selectedRow, 1);
 								String saldo = String.valueOf((int) model.getValueAt(selectedRow, 2));
+								String vigtigtNote = (String) model.getValueAt(selectedRow, 3);
 								//String vigtigNote = (String) model.getValueAt(selectedRow, 3);
 								idField.setText(id);
 								navnField.setText(navn);
 								saldoField.setText(saldo);
-								//noteField.setText(vigtigNote);
+								noteField.setText(vigtigtNote);
 							}catch(ArrayIndexOutOfBoundsException e1){
 
 							}
@@ -173,11 +174,11 @@ public class SaldoGUI extends MainGUI implements ActionListener, KeyListener {
 	public void updateJTable() {
 		ArrayList<Barbog> barbogs = new Control().hentBarbog();
 
-		model.setColumnIdentifiers(new String[] { "ID", "Navn", "Saldo" });
+		model.setColumnIdentifiers(new String[] { "ID", "Navn", "Saldo","Vigtig note" });
 		for (int i = 0; i < model.getColumnCount(); i++){
 			rowSorter.setSortable(i, false);}
 		for (Barbog barbog : barbogs) {
-			model.addRow(new Object[] { barbog.getId(), barbog.getNavn(),barbog.getSaldo(), });
+			model.addRow(new Object[] { barbog.getId(), barbog.getNavn(),barbog.getSaldo(),barbog.getVigtigNote() });
 		}
 		barbogs.clear();
 	}

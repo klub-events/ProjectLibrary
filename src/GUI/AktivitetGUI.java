@@ -108,9 +108,27 @@ public class AktivitetGUI extends MainGUI implements ActionListener
 			
 			frame.dispose();
 		}
+		
 		if(e.getSource() == btn_aktivitet)
 		{
 			new AktivitetGUI();
+			frame.dispose();
+		}
+
+		if(e.getSource() == btn_medlem )
+		{
+			new MedlemGUI();
+			frame.dispose();
+		}
+
+		if(e.getSource() == btn_tilmeld)
+		{
+			new TilmeldAktivitetGUI();
+			frame.dispose();
+		}
+		if(e.getSource() == btn_saldo){
+			new SaldoGUI();
+
 			frame.dispose();
 		}
 

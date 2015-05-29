@@ -111,13 +111,7 @@ public class MedlemTabel implements ActionListener,KeyListener {
 					medlem.getBilleder()});
 		}
 
-		//til patrick
-		//for (Medlem medlem : medlemmer){
-		//arrayList.add(medlem.getFornavn();
-		//}
-
-		//JCombobox aktivitetsMedlemmer(arrayList);
-		// add the DefaultTableModel to the JTable
+		
 		medlemmer.clear();
 	}
 
