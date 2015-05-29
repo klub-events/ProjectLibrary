@@ -191,8 +191,6 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 		rowSorter = new TableRowSorter<>((table.getModel()));
 		table.setRowSorter(rowSorter);
 
-		System.out.println();
-
 		// tilføj content til gui
 		Panel_Content.add(center3);
 		center3.setBackground(Color.WHITE);

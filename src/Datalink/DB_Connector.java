@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import com.mysql.jdbc.Statement;
 
 import Domain.Aktivitet;
@@ -36,13 +38,12 @@ public class DB_Connector {
 			conn = DriverManager.getConnection(DATABASE_URL, DATABASE_USR,
 					DATABASE_PWD);
 
-			System.out.println("Connected to database");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			System.out.println("Internal error");
+			JOptionPane.showConfirmDialog(null, "Internal error");
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Database error");
+			JOptionPane.showConfirmDialog(null, "Database error");
 		}
 	}
 
@@ -94,7 +95,7 @@ public class DB_Connector {
 					medlem.setId(generatedKeys.getInt(1));
 				}
 				else {
-					System.out.println("No keys generated - hvor er mit medlem?");
+					JOptionPane.showConfirmDialog(null,"No keys generated - hvor er mit medlem?");
 				}
 			}
 
@@ -106,8 +107,6 @@ public class DB_Connector {
 	public void opretBarbog(Barbog barbog, Medlem medlem) {
 		try {
 			String sql = "INSERT INTO barbog VALUES(" + barbog.toString()+");";
-					
-			System.out.println(sql);
 			conn.createStatement().executeUpdate(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -132,7 +131,6 @@ public class DB_Connector {
 		try {
 			String sql = "INSERT INTO aktiviteter VALUES(" + aktivitet.toString() 
 					+ ");";
-			System.out.println(sql);
 			conn.createStatement().executeUpdate(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -304,7 +302,6 @@ public class DB_Connector {
 	public void opretVare(Varer vare) {
 		try {
 			String sql = "INSERT INTO Varer VALUES(" + vare.toString() + ");";
-			System.out.println(sql);
 			conn.createStatement().executeUpdate(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();

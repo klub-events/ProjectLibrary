@@ -269,7 +269,6 @@ public class MedlemGUI extends MainGUI implements KeyListener {
 				model.setRowCount(0);
 				updateJTable();
 				model.fireTableDataChanged();
-				System.out.println(medlem.getFødselsdato());
 				}
 			}
 			else{
