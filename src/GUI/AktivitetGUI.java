@@ -126,11 +126,6 @@ public class AktivitetGUI extends MainGUI implements ActionListener
 			
 									
 			}		
-			
-			new AktivitetGUI();
-			
-			frame.dispose();
-		}
 		
 		if(e.getSource() == btn_aktivitet)
 		{
