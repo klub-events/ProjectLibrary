@@ -93,7 +93,7 @@ public class AktivitetGUI extends MainGUI implements ActionListener
 			try{
 				
 				
-				AKtivitet aktivitet = new AKtivitet(0, navn, pris, antal, dato);
+				Aktivitet aktivitet = new Aktivitet(0, navn, pris, antal, dato);
 				new Control().opretAktivitet(aktivitet);
 //				JOptionPane.showMessageDialog(frame,"Aktivitet oprettet!");
 
@@ -127,7 +127,7 @@ public class AktivitetGUI extends MainGUI implements ActionListener
 			frame.dispose();
 		}
 		if(e.getSource() == btn_saldo){
-			new BarBogGUI();
+			new SaldoGUI();
 			frame.dispose();
 		}
 		

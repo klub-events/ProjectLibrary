@@ -55,5 +55,7 @@ public class Barbog {
 	public void changeSaldo(int saldo) {
 		this.saldo = this.saldo + saldo;
 	}
-	
+	public String getVigtig() {
+		return vigtigNote;
+	}
 }
