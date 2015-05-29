@@ -3,8 +3,17 @@ package Domain;
 import java.util.ArrayList;
 
 import Datalink.*;
-import GUI.MedlemGUI;
 
+/**
+ * Klasse som bruges for at GUI laget kan faa information, og sende information til Datalink og Domain laget.<br>
+ * Bruges for at holde hvert lag adskildt, og opnå tre lags arkitektur.
+ * 
+ * <p>Alle kald fra GUI laget som skal ud ad, eller ind til GUI laget sendes igennem her.<br>
+ * Hver metode i denne klasse findes i DB_Connect, og er beskrevet heri. Da dette blot er en klasse for gennemgang,<br>
+ * er alle metoders funktioner beskrevet i root klassen for hver funktion.</p>
+ * @author PeterRaasthøj
+ *
+ */
 public class Control {
 	//private DB_Connector;
 	private DB_Connector db;
@@ -94,7 +103,7 @@ public class Control {
 	}
 
 	public void traekBeloeb(int saldo, int input,int id) {
-		int total = math.substract(saldo, input);
+		int total = math.substrakter(saldo, input);
 		db.traekBeloeb(total,id);
 		db.hentBarbog();
 		}

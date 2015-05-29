@@ -1,10 +1,19 @@
 package Domain;
-/**
+/*
  * CREATE TABLE barbog 
 	(ID int primary key AUTO_INCREMENT,
     vigtignote varchar (255),
     saldo int (10));
  * @author dolph
+ *
+ */
+
+/**
+ * Barbog objekt. Dette bruges til at holde information fra databasen,<br>
+ * Getters og Setters er tilgængelige for hver værdi.
+ * 
+ * <p>Indeholder toString() override som lader Barbog objekter sættes nemt ind i en mySQL syntax
+ * @author PeterRaasthøj
  *
  */
 public class Barbog {

@@ -18,6 +18,15 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
+/**
+ * Forældre klasse for alle andre GUI klasser. Alle GUI klasser extender MainGUI. MainGUI extender Thread, og implimenterer ActionListener.
+ * <p>Fungerer som startpunktet for systemet. Alle navigations knapper sættes op i denne klasse.<br>
+ * Standard frame size sættes op, og alle andre GUI elementer som skal nedarves sættes.</p>
+ * 
+ * <p>Burde fungerer som en controller imellem hver GUI objekt.</p>
+ * @author PeterRaasthøj
+ *
+ */
 public class MainGUI extends Thread implements ActionListener
 {
 	//Laver vinduet
@@ -41,7 +50,7 @@ public class MainGUI extends Thread implements ActionListener
 	protected static Date date = new Date();
 	protected static SimpleDateFormat df = new SimpleDateFormat("HH:mm");
 	protected static TimeThread tt = TimeThread.getInstance();
-	protected static Object toilet = new Object();
+	protected static Object clock = new Object();
 
 	public MainGUI()
 	{
@@ -112,6 +121,13 @@ public class MainGUI extends Thread implements ActionListener
 	}//Construtor MainGUI slutter
 
 
+	/**
+	 * Klasse der står for at oprette, og sætte tiden på det digitale ur, som der er i systemet.<br>
+	 * Uret bliver opdateret på en tråd, der sleeper i 20 sekunder før det opdaterer, da uret ikke<br>
+	 * behøves kører konstant for at vise tiden ret præcist, da ingen sekunder vises.
+	 * @author PeterRaasthøj
+	 *
+	 */
 	public static class TimeThread extends Thread implements Runnable{
 		public static TimeThread getInstance() {
 			if (tt == null) {
@@ -122,9 +138,13 @@ public class MainGUI extends Thread implements ActionListener
 
 		public void run(){
 			while(true){
-				synchronized(toilet){
+				//Synkroniserer uret omkring et objekt, kaldet clock. I hindsight muligvis unødvændigt.
+				synchronized(clock){
+					//Henter ny instance af kalenderen cal.
 					cal = Calendar.getInstance();
+					//date sættes til at modtage Calender klassens data.
 					date = cal.getTime();
+					//Formaterer date efter ønsket visning, som i dette tilfælde er et 24 timers ur, der viser Timer og minutter.
 					timeField.setText(df.format(date));
 					try {
 						Thread.sleep(20000);
@@ -137,16 +157,15 @@ public class MainGUI extends Thread implements ActionListener
 	}
 
 
+	/**
+	 * Starter tråden tt i TimeThread som står for opdatering af uret.
+	 */
 	public static void startThread(){
 		tt.start();
 	}
-	@SuppressWarnings("deprecation")
-	public void stopThread(){
-		tt.stop();
-	}
 
-
-	//Actions til knapper
+	//Actions til knapper, hver isæt lukker Main guien ned, og åbner en ny instans af et af de nye 
+	//GUI objekter. Burde genoverveje metode for at tilgå nye GUI instanser på.
 	public void actionPerformed(ActionEvent e)
 	{	  
 		if(e.getSource() == btn_aktivitet)

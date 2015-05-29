@@ -1,21 +1,29 @@
 package Domain;
+/*
+    Database-koden for varer-table
+   	CREATE TABLE medlemmer(
+	ID int NOT NULL AUTO_INCREMENT,
+ 	Fornavn varchar(255) NOT NULL,
+	Efternavn varchar(255) NOT NULL,
+  	Adresse varchar (255),
+  	Fødselsdato int(6) NOT NULL,
+	Telefon int (10),
+	Email varchar (255),
+	NavnPåDør varchar (255),
+	Billeder TINYINT (1),
+	PRIMARY KEY (ID)
+	)
+*/
 
+/**
+ * Medlem objekt. Dette bruges til at holde information fra databasen,<br>
+ * Getters og Setters er tilgængelige for hver værdi.
+ * 
+ * <p>Indeholder toString() override som lader Medlem objekter sættes nemt ind i en mySQL syntax
+ * @author Shonix
+ *
+ */
 public class Medlem{
-	/**
-	 *  Database-koden for varer-table
-	   	CREATE TABLE medlemmer(
-		ID int NOT NULL AUTO_INCREMENT,
-	 	Fornavn varchar(255) NOT NULL,
-		Efternavn varchar(255) NOT NULL,
-	  	Adresse varchar (255),
-	  	Fødselsdato int(6) NOT NULL,
-		Telefon int (10),
-		Email varchar (255),
-		NavnPåDør varchar (255),
-		Billeder TINYINT (1),
-		PRIMARY KEY (ID)
-		)
-* **/
 	private int id;
 	private String fornavn;
 	private String efternavn;

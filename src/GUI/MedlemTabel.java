@@ -38,6 +38,13 @@ public class MedlemTabel implements ActionListener,KeyListener {
 	private TableRowSorter<TableModel> rowSorter;
 
 
+	/**
+	 * Denne klasse styrer et JTable, som er redigerbart, med funktioner til at ændre diverse værdier direkte i databasen,<br>
+	 *  for hvert medlem. Og slette medlemmer direkte fra systemet og databasen.
+	 *  
+	 *  <p>Det er mulighed for at søge i JTablet, og for at sortere i det.</p>
+	 * @param medlemGUI
+	 */
 	public MedlemTabel(MedlemGUI medlemGUI){
 		frame = new JFrame ();
 		this.medlemGUI = medlemGUI;
@@ -45,7 +52,7 @@ public class MedlemTabel implements ActionListener,KeyListener {
 		southPanel = new JPanel();
 		centerPanel = new JPanel();
 
-		//Table of content
+		//Opretter JTable
 		table = new JTable();
 		table.setModel(model);
 		rowSorter = new TableRowSorter<>((table.getModel()));
@@ -90,6 +97,10 @@ public class MedlemTabel implements ActionListener,KeyListener {
 		frame.setVisible(true);
 	}
 
+	/**
+	 * Metode for at opdatere JTable, med en ArrayListe. 
+	 * Sætter columns og rows op for JTablet.
+	 */
 	public void updateJTable() {
 		ArrayList<Medlem> medlemmer = new Control().hentMedlemmer();
 		// add the column names
@@ -109,8 +120,6 @@ public class MedlemTabel implements ActionListener,KeyListener {
 					medlem.getNavnPåDør(),
 					medlem.getBilleder()});
 		}
-
-		
 		medlemmer.clear();
 	}
 

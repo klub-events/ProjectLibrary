@@ -12,9 +12,16 @@ package Domain;
   `dato` varchar(10) NOT NULL,
   PRIMARY KEY (`id`)
 )
-
  *
- *@author PeterRaasthøj
+ *
+ */
+/**
+ * Aktivitet objekt. Dette bruges til at holde information fra databasen,<br>
+ * Getters og Setters er tilgængelige for hver værdi.
+ * 
+ * <p>Indeholder toString() override som lader Aktivitet objekter sættes nemt ind i en mySQL syntax
+ * @author PeterRaasthøj
+ *
  */
 public class Aktivitet {
 	private int id;

@@ -9,9 +9,18 @@ package Domain;
   `aktivitetID` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 	)
- *@Author PeterRaasthøj, PatrickRavnholt
+ *
  */
 
+
+/**
+ * Tilmeld objekt. Dette bruges til at holde information fra databasen,<br>
+ * Getters og Setters er tilgængelige for hver værdi.
+ * 
+ * <p>Indeholder toString() override som lader Varer objekter sættes nemt ind i en mySQL syntax
+ * @author PeterRaasthøj
+ *
+ */
 public class Tilmeld 
 {
 	int id;

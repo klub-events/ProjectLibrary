@@ -18,7 +18,10 @@ import Domain.Barbog;
 import Domain.Medlem;
 
 /**
- * @author Shonix
+ * Used for connecting to the database. As the system is designed for a single user, the DB_Connector are only accessible through<br>
+ * the getInstance method, seeing as the class have a private Constructor. This makes sure that only one connection to the database<br>
+ * gets created at any one time.
+ * @author PeterRaasthøj
  *
  */
 public class DB_Connector {
