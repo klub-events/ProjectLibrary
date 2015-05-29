@@ -5,6 +5,7 @@ package Domain;
  * 
  	CREATE TABLE aktiviteter (
 	id int(11) NOT NULL,
+	pris varchar(2),
 	navn varchar(255),
     antal varchar (2),
     dato varchar (15),
