@@ -25,13 +25,13 @@ public class TilmeldAktivitetGUI extends MainGUI implements ActionListener
 	//combobox medlem
 	@SuppressWarnings("rawtypes")
 	private JComboBox medlemBox;
-	private String[] medlemValg = {"svend"};
+	
 
 	@SuppressWarnings({ "rawtypes" })
 
 	//combobox aktivitet
 	private JComboBox aktivitetBox;
-	private String[] aktivitetValg = {"fodbold"};
+	
 
 	JButton btn_gem = new JButton("GEM");
 	private JTable table;

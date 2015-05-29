@@ -4,14 +4,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.regex.PatternSyntaxException;
 
 import javax.swing.*;
-import javax.swing.event.DocumentEvent;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -65,9 +60,11 @@ public class MedlemGUI extends MainGUI implements KeyListener {
 	int fieldBorder = 130;
 	int labelBorder = 50;
 
+	@SuppressWarnings("rawtypes")
 	private JComboBox billedeValg;
 	private String[] comboValg = { "Nej", "Ja" };
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public MedlemGUI() {
 		// Tilføjer et panel som alle
 		JPanel content = new JPanel(null);

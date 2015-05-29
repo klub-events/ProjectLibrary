@@ -10,7 +10,6 @@ import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.TimeZone;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -141,6 +140,7 @@ public class MainGUI extends Thread implements ActionListener
 	public static void startThread(){
 		tt.start();
 	}
+	@SuppressWarnings("deprecation")
 	public void stopThread(){
 		tt.stop();
 	}
