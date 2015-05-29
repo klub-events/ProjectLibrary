@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import com.mysql.jdbc.Statement;
 
-import Domain.Aktivitet;
+import Domain.AKtivitet;
 import Domain.Tilmeld;
 import Domain.Varer;
 import Domain.Barbog;
@@ -124,6 +124,19 @@ public class DB_Connector {
 			e.printStackTrace();
 		}
 	}
+	
+	public void opretAktivitet(AKtivitet aktivitet) {
+		
+		try {
+			String sql = "INSERT INTO aktiviteter VALUES(" + aktivitet.toString() 
+					+ ");";
+			System.out.println(sql);
+			conn.createStatement().executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 
 	public ArrayList<Medlem> hentMedlemmer(){
 		ArrayList<Medlem> medlemmer = new ArrayList<Medlem>();
@@ -143,7 +156,7 @@ public class DB_Connector {
 				medlemmer.add(new Medlem (id, fornavn, efternavn, adresse, fødselsdato, telefon, email, navnPåDør, billeder));
 			}
 		}
-		catch(Exception e){
+		catch(SQLException e){
 			e.printStackTrace();
 		}
 		return medlemmer;	
@@ -155,17 +168,18 @@ public class DB_Connector {
 		return null;
 	}
 	
-	public ArrayList<Aktivitet> hentAktiviteter(){
-		ArrayList<Aktivitet> aktiviteter = new ArrayList<Aktivitet>();
+	public ArrayList<AKtivitet> hentAktiviteter(){
+		ArrayList<AKtivitet> aktiviteter = new ArrayList<AKtivitet>();
 		try{
 			String sql = "SELECT * FROM aktiviteter ORDER BY aktiviteter.id ASC;";
 			rs = conn.createStatement().executeQuery(sql);
 			while(rs.next()){
 				int id = rs.getInt("id");
 				String navn = rs.getString("navn");
+				String pris = rs.getString("pris");
 				String antal = rs.getString("antal");
 				String dato = rs.getString("dato");
-				aktiviteter.add(new Aktivitet (id, navn, antal, dato));
+				aktiviteter.add(new AKtivitet (id, navn, pris, antal, dato));
 				
 			}
 		}

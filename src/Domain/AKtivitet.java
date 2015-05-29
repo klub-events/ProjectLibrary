@@ -13,22 +13,25 @@ package Domain;
  *
  *@author PeterRaasthøj
  */
-public class Aktivitet {
+public class AKtivitet {
 	private int id;
 	private String navn;
+	private String pris;
 	private String antal;
 	private String dato;
 	
-	public Aktivitet(int id, String navn, String antal, String dato) {
+	public AKtivitet(int id, String navn,String pris, String antal, String dato) {
 		this.id = id;
 		this.navn = navn;
+		this.pris = pris;
 		this.antal = antal;
 		this.dato = dato;
 	}
 	
+
 	@Override
-	public String toString(){
-		return id + ",'" + navn + "'," + antal + "'," + dato;
+	public String toString() {
+		return (id + ",'"+this.navn+"'" + ", " + "'"+this.pris+"'" + ", " + "'"+this.antal+"'" + ", " + "'"+this.dato+"'");
 	}
 	
 	public int getId() {
@@ -46,7 +49,14 @@ public class Aktivitet {
 	public void setNavn(String navn) {
 		this.navn = navn;
 	}
+	public String getPris() {
+		return pris;
+	}
 
+	public void setPris(String pris) {
+		this.pris = pris;
+	}
+	
 	public String getAntal() {
 		return antal;
 	}
