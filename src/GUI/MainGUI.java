@@ -34,6 +34,7 @@ public class MainGUI extends Thread implements ActionListener
 	protected JButton  btn_medlem = new JButton("MEDLEM");
 	protected JButton  btn_aktivitet = new JButton("AKTIVITET"); 
 	protected JButton  btn_tilmeld = new JButton("TILMELD AKTIVITET");
+	protected JButton  btn_barbog = new JButton("BARBOG");
 
 	//clock API
 	protected static JTextField timeField = new JTextField();
@@ -77,16 +78,20 @@ public class MainGUI extends Thread implements ActionListener
 		btn_medlem.setToolTipText("Administrer tilmeldinger til klubben");
 		btn_medlem.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-
-		Panel_Top.add(btn_aktivitet);
-		btn_aktivitet.addActionListener(this);
-		btn_aktivitet.setToolTipText("Administrer aktiviter");
-		btn_aktivitet.setCursor(new Cursor(Cursor.HAND_CURSOR));
-
 		Panel_Top.add(btn_saldo);
 		btn_saldo.addActionListener(this);
 		btn_saldo.setToolTipText("Administrer medlemmers saldo");
 		btn_saldo.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		
+		Panel_Top.add(btn_barbog);
+		btn_barbog.addActionListener(this);
+		btn_barbog.setToolTipText("Åben barbogen");
+		btn_barbog.setCursor(new Cursor(Cursor.HAND_CURSOR));
+				
+		Panel_Top.add(btn_aktivitet);
+		btn_aktivitet.addActionListener(this);
+		btn_aktivitet.setToolTipText("Administrer aktiviter");
+		btn_aktivitet.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
 		Panel_Top.add(btn_tilmeld);
 		btn_tilmeld.addActionListener(this);
@@ -121,7 +126,7 @@ public class MainGUI extends Thread implements ActionListener
 				date = cal.getTime();
 				timeField.setText(df.format(date));
 				try {
-					Thread.sleep(20000);
+					Thread.sleep(10000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -160,7 +165,12 @@ public class MainGUI extends Thread implements ActionListener
 			frame.dispose();
 		}
 		if(e.getSource() == btn_saldo){
-			new BarBogGUI();
+			new SaldoGUI();
+			frame.dispose();
+		}
+		if(e.getSource() == btn_barbog )
+		{
+			new BarbogGUI();
 			frame.dispose();
 		}
 

@@ -19,49 +19,101 @@ import Domain.Barbog;
 import Domain.ClosedCellTableModel;
 import Domain.Control;
 
-public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
+public class BarbogGUI extends MainGUI implements ActionListener, KeyListener {
 	private JTable table;
 
-	private JButton btnTraek = new JButton("Træk");
-	private JButton btnIndsaet = new JButton("Indsæt");
+	private JButton btnKoldskål = new JButton("Koldskål");
+	private JButton btnKakaomælk = new JButton("Kakaomælk");
+	private JButton btnIste = new JButton("Iste");
+	private JButton btnJuice = new JButton("Juice");
+	private JButton btnSaftevand = new JButton("Saftevand");
+	private JButton btnSodavand = new JButton("Sodavand");
+	private JButton btnYougurt = new JButton("Yougurt");
+	private JButton btnParisertoast = new JButton("Parisertoast");
+	private JButton btnPariserkalkun = new JButton("Pariser/kalkun");
+	private JButton btnSmørtoast= new JButton("Smørtoast");
+	private JButton btnPastasalat = new JButton("Pastasalat");
+	private JButton btnKrasser = new JButton("Krasser");
+	private JButton btnFrugt = new JButton("Frugt");
+	private JButton btnRiskiks = new JButton("Riskiks");
+	private JButton btnIs = new JButton("Is");
 	private JButton btn_search;
 
 	private JTextField searchField = new JTextField();
-	private JTextField beloebField = new JTextField();
-	private JTextField indsaetField = new JTextField();
-
 
 	private JTextField idField = new JTextField();
 	private JTextField navnField = new JTextField();
-	private JTextField saldoField = new JTextField();
+	private JTextField barbogField = new JTextField();
+	private JTextField vigtigField = new JTextField();
 
 	private JLabel idLabel = new JLabel("ID");
 	private JLabel navnLabel = new JLabel("Navn");
-	private JLabel saldoLabel = new JLabel("Saldo");
-	private JLabel beloebLabel = new JLabel("Beløb til behandling");
-
+	private JLabel barbogLabel = new JLabel("Saldo");
+	private JLabel vigtigLabel = new JLabel("Vigtignote");
+	
 	private ClosedCellTableModel model = new ClosedCellTableModel();
 	private TableRowSorter<TableModel> rowSorter;
 	private int selectedRow;
 	private boolean isListenerActive = true;
 
-	public BarBogGUI() {
+	public BarbogGUI() {
 		JPanel center3 = new JPanel();
 		center3.setLayout(null);
 
 		// Buttons
-		btnIndsaet.setBounds(50, 100, 100, 60);
-		btnIndsaet.addActionListener(this);
+		btnKoldskål.setBounds(50, 100, 90, 60);
+		btnKoldskål.addActionListener(this);
 
-		btnTraek.setBounds(50, 170, 100, 60);
-		btnTraek.addActionListener(this);
+		btnKakaomælk.setBounds(50, 200, 90, 60);
+		btnKakaomælk.addActionListener(this);
+		
+		btnIste.setBounds(150,100,90,60);
+		btnIste.addActionListener(this);
 
-		btn_search = new JButton("SØG");btn_search.setBounds									(580, 20, 60, 30);
+		btnJuice.setBounds(150,200,90,60);
+		btnJuice.addActionListener(this);
+		
+		btnSaftevand.setBounds(250,100,90,60);
+		btnSaftevand.addActionListener(this);
+		
+		btnSodavand.setBounds(250,200,90,60);
+		btnSodavand.addActionListener(this);
+		
+		btnYougurt.setBounds(350,100,90,60);
+		btnYougurt.addActionListener(this);
+		
+		btnParisertoast.setBounds(50,350,90,60);
+		btnParisertoast.addActionListener(this);
+		
+		btnPariserkalkun.setBounds(150,350,90,60);
+		btnPariserkalkun.addActionListener(this);
+		
+		btnSmørtoast.setBounds(250,350,90,60);
+		btnSmørtoast.addActionListener(this);
+		
+		btnPastasalat.setBounds(350,350,90,60);
+		btnPastasalat.addActionListener(this);
+		
+		btnKrasser.setBounds(50,450,90,60);
+		btnKrasser.addActionListener(this);
+		
+		btnFrugt.setBounds(150,450,90,60);
+		btnFrugt.addActionListener(this);
+		
+		btnRiskiks.setBounds(250,450,90,60);
+		btnRiskiks.addActionListener(this);
+		
+		btnIs.setBounds(350,200,90,60);
+		btnIs.addActionListener(this);
+		
+
+		
+		
+		btn_search = new JButton("SØG");btn_search.setBounds(580, 20, 60, 30);
 		btn_search.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btn_search.addActionListener(this);
 
 		// Edit TextFields
-		beloebField.setBounds(170, 140, 120, 60);
 		searchField.setBounds(640, 20, 190, 30);
 		searchField.addKeyListener(this);
 
@@ -74,34 +126,53 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 		navnField.setEditable(false);
 		navnField.setText("N/A");
 
-		saldoField.setBounds(170, 50, 50, 20);
-		saldoField.setEditable(false);
-		saldoField.setText("N/A");
+		barbogField.setBounds(170, 50, 50, 20);
+		barbogField.setEditable(false);
+		barbogField.setText("N/A");
+		
+		vigtigField.setBounds(230,50,250,20);
+		vigtigField.setEditable(false);
+		vigtigField.setText("N/A");
+		
 
 		// Labels
 		idLabel.setBounds(50, 30, 20, 20);
 		navnLabel.setBounds(110, 30, 50, 20);
-		saldoLabel.setBounds(170, 30, 50, 20);
-		beloebLabel.setBounds(170, 120, 120, 20);
+		barbogLabel.setBounds(170, 30, 50, 20);
+		vigtigLabel.setBounds(230,30,100,20);
 
 		// Indsætter content til framen, til framen.
-		center3.add(saldoLabel);
+		center3.add(barbogLabel);
 		center3.add(idLabel);
 		center3.add(navnLabel);
-		center3.add(saldoField);
+		center3.add(vigtigLabel);
+		center3.add(vigtigField);
+		// Mad Knapper
+		center3.add(barbogField);
 		center3.add(navnField);
 		center3.add(idField);
-		center3.add(btnTraek);
-		center3.add(btnIndsaet);
-		center3.add(indsaetField);
-		center3.add(beloebField);
-		center3.add(beloebLabel);
+		center3.add(btnKoldskål);
+		center3.add(btnKakaomælk);
+		center3.add(btnIste);
+		center3.add(btnJuice);
+		center3.add(btnSaftevand);
+		center3.add(btnSodavand);
+		center3.add(btnYougurt);
+		center3.add(btnParisertoast);
+		center3.add(btnIs);
+		center3.add(btnPariserkalkun);
+		center3.add(btnSmørtoast);
+		center3.add(btnPastasalat);
+		center3.add(btnKrasser);
+		center3.add(btnFrugt);
+		center3.add(btnRiskiks);
 		center3.add(searchField);
+		// Søge feldt
 		center3.add(btn_search);
 
 		// Jtable
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(580, 50, 250, 500); // x, y, width, height
+		scrollPane.setBounds(580, 50, 250, 350); // x, y, width, height
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		table.setRowHeight(20);
@@ -134,9 +205,11 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 								String id = String.valueOf((int) model.getValueAt(selectedRow, 0));
 								String navn = (String) model.getValueAt(selectedRow, 1);
 								String saldo = String.valueOf((int) model.getValueAt(selectedRow, 2));
+								String vigtigNote = (String) model.getValueAt(selectedRow, 3);
 								idField.setText(id);
 								navnField.setText(navn);
-								saldoField.setText(saldo);
+								barbogField.setText(saldo);
+								vigtigField.setText(vigtigNote);
 							}catch(ArrayIndexOutOfBoundsException e1){
 
 							}
@@ -146,21 +219,14 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 				});
 		updateJTable();
 	}
-
-	public boolean validateInput() {
-		String noget = beloebField.getText();
-		boolean valid = noget.matches("[0-9]+");
-		return valid;
-	}
-
 	public void updateJTable() {
 		ArrayList<Barbog> barbogs = new Control().hentBarbog();
 
-		model.setColumnIdentifiers(new String[] { "ID", "Navn", "Saldo" });
+		model.setColumnIdentifiers(new String[] { "ID", "Navn", "Saldo","Vigtig Note" });
 		for (int i = 0; i < model.getColumnCount(); i++){
 			rowSorter.setSortable(i, false);}
 		for (Barbog barbog : barbogs) {
-			model.addRow(new Object[] { barbog.getId(), barbog.getNavn(),barbog.getSaldo(), });
+			model.addRow(new Object[] { barbog.getId(), barbog.getNavn(),barbog.getSaldo(), barbog.getVigtig() });
 		}
 		barbogs.clear();
 	}
@@ -225,92 +291,5 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 
 			frame.dispose();
 		}
-
-		if (e.getSource() == btnIndsaet) {
-			int input = 0;
-			int saldo = 0;
-			int id = 0;
-			selectedRow = table.getSelectedRow();
-
-			try {
-				input = Integer.parseInt(beloebField.getText());
-			} catch (NumberFormatException | ArrayIndexOutOfBoundsException e1) {
-				JOptionPane.showMessageDialog(frame, "Forket indtastet beløb.");
-			}
-			try {
-				id = (int) (model.getValueAt(selectedRow, 0));
-				saldo = Integer.parseInt(saldoField.getText());
-			} catch (NumberFormatException | ArrayIndexOutOfBoundsException e1) {
-				JOptionPane.showMessageDialog(frame, "Intet medlem er valgt.");
-			}
-			Boolean result = validateInput();
-			beloebField.setText(null);
-
-			System.out.println(result);
-			if(result){
-				if (table.getSelectedRow() >= 0) {
-					/*
-					 * kodestykket herunder er fundet ved hjælp af siden
-					 * http://stackoverflow.com/questions/8396870/joptionpane-yes-or-no-window
-					 */
-					int reply = JOptionPane.showConfirmDialog(frame,"Er du sikker på du sætte\n " +input +"kr." + " \nind på "+ model.getValueAt(selectedRow, 1) + "'s saldo?","Bekræft indsættelse", JOptionPane.YES_NO_OPTION);
-					if(reply==0){
-					isListenerActive = false;
-					model.setRowCount(0);
-					new Control().indsaetBeloeb(saldo, input, id);
-					updateJTable();
-					model.fireTableDataChanged();
-					isListenerActive = true;
-					table.addRowSelectionInterval(selectedRow, selectedRow);
-					}
-				}
-			}
-			else{
-				JOptionPane.showMessageDialog(frame, "syntaksen på beløbet er forkert");
-			}
 		}
-
-		if (e.getSource() == btnTraek) {
-			int id = 0;
-			int input = 0;
-			int saldo = 0;
-			selectedRow = table.getSelectedRow();
-			try {
-				input = Integer.parseInt(beloebField.getText());
-			} catch (NumberFormatException | ArrayIndexOutOfBoundsException e1) {
-				JOptionPane.showMessageDialog(frame, "Forket indtastet beløb.");
-			}
-			try {
-				id = (int) (model.getValueAt(selectedRow, 0));
-				saldo = Integer.parseInt(saldoField.getText());
-			} catch (NumberFormatException | ArrayIndexOutOfBoundsException e1) {
-				JOptionPane.showMessageDialog(frame, "Intet medlem er valgt.");
-			}
-			Boolean result = validateInput();
-			beloebField.setText(null);
-			if (result){
-				if (table.getSelectedRow() >= 0) {
-					/*
-					 * kodestykket herunder er fundet ved hjælp af siden
-					 * http://stackoverflow.com/questions/8396870/joptionpane-yes-or-no-window
-					 */
-					int reply = JOptionPane.showConfirmDialog(frame,"Er du sikker på du vil trække\n " +input +"kr." + " \nfra medlemmet: "+ model.getValueAt(selectedRow, 1),"Bekræft fratrækkelse", JOptionPane.YES_NO_OPTION);
-					if(reply==0){
-					isListenerActive = false;
-					model.setRowCount(0);
-					new Control().traekBeloeb(saldo, input, id);
-					updateJTable();
-					model.fireTableDataChanged();
-					isListenerActive = true;
-					table.addRowSelectionInterval(selectedRow, selectedRow);
-					}
-				}
-			}
-			else{
-				JOptionPane.showMessageDialog(frame, "syntaksen på beløbet er forkert");
-			}
-			
-
-		}
-	}
 }

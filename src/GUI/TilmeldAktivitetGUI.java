@@ -122,7 +122,7 @@ public class TilmeldAktivitetGUI extends MainGUI implements ActionListener
 		}
 
 		if(e.getSource() == btn_saldo ){
-			new BarBogGUI();
+			new SaldoGUI();
 
 			frame.dispose();
 		}
