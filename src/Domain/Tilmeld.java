@@ -20,22 +20,22 @@ public class Tilmeld
 {
 	int id;
 	String medlemNavn;
-	int aktivitetID;
+	String aktivitetID;
 	
-	public Tilmeld(int medlemID, String medlemNavn, int aktivitetID) {
+	public Tilmeld(int medlemID, String medlemNavn, String medlemNavn2) {
 		this.id = medlemID;
 		this.medlemNavn = medlemNavn;
-		this.aktivitetID = aktivitetID;
+		this.aktivitetID = medlemNavn2;
 	}
 	public String toString(){
 		return (id + ",'"+this.medlemNavn+"'" + ", " + "'"+this.aktivitetID+"'");
 	}
 	
-	public int getFk_aktivitetID() {
+	public String getFk_aktivitetID() {
 		return aktivitetID;
 	}
 
-	public void setFk_aktivitetID(int fk_aktivitetID) {
+	public void setFk_aktivitetID(String fk_aktivitetID) {
 		this.aktivitetID = fk_aktivitetID;
 	}
 

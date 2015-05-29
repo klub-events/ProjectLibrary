@@ -103,8 +103,39 @@ public class TilmeldAktivitetGUI extends MainGUI implements ActionListener
 		btn_tilmeld.setBackground(Color.GRAY);
 		
 		
+		updateJTable();
 	}//constructor slutter
 
+	public void updateJTable() {
+		ArrayList<Tilmeld> medlemmer = new Control().hentTilmeldinger();
+		// add the column names
+		model.setColumnIdentifiers(new String[] { "id", "fk_medlemNavn", "aktivitetID"});
+
+		// Foreach loop to loop through the ArrayList. One row (person) at a
+		// time
+		for (Tilmeld tilmeld : medlemmer) {
+			model.addRow(new Object[]
+					{
+					
+					tilmeld.getFk_aktivitetID(), tilmeld.getFk_aktivitetID(), tilmeld.getFk_medlemNavn()
+					
+					
+					
+					});	
+		}
+			
+		
+
+		//til patrick
+		//for (Medlem medlem : medlemmer){
+		//arrayList.add(medlem.getFornavn();
+		//}
+
+		//JCombobox aktivitetsMedlemmer(arrayList);
+		// add the DefaultTableModel to the JTable
+		medlemmer.clear();
+	}
+	
 	public void actionPerformed(ActionEvent e)
 	{
 		if(e.getSource() == btn_aktivitet)

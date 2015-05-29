@@ -164,8 +164,29 @@ public class DB_Connector {
 	}
 	
 	public ArrayList<Tilmeld> hentTilmeldinger(){
-		//SELECT tilmeld.id, tilmeld.fk_medlemNavn, aktiviteter.navn FROM tilmeld LEFT JOIN aktiviteter ON tilmeld.aktivitetID = aktiviteter.id ORDER BY tilmeld.id ASC;
-		return null;
+		ArrayList<Tilmeld> tilmeld = new ArrayList<Tilmeld>();
+		try
+		{
+			String sql = "SELECT tilmeld.id, tilmeld.fk_medlemNavn, aktiviteter.navn FROM tilmeld LEFT JOIN aktiviteter ON tilmeld.aktivitetID = aktiviteter.id ORDER BY tilmeld.id ASC;";
+			rs = conn.createStatement().executeQuery(sql);
+			while(rs.next()){
+				int id = rs.getInt("tilmeld.id");
+				String aktivitetnavn = rs.getString("aktiviteter.navn");
+				String medlemNavn = rs.getString("tilmeld.fk_medlemNavn");
+			
+				
+				
+				tilmeld.add(new Tilmeld (id, aktivitetnavn, medlemNavn));
+				
+			}
+		}
+		
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		
+		return tilmeld;
 	}
 	
 	public ArrayList<AKtivitet> hentAktiviteter(){

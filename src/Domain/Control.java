@@ -104,6 +104,10 @@ public class Control {
 	public ArrayList<AKtivitet> hentAktiviteter() {
 		return db.hentAktiviteter();
 	}
+	
+	public ArrayList<Tilmeld> hentTilmeldinger() {
+		return db.hentTilmeldinger();
+	}
 
 }
 
