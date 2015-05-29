@@ -209,10 +209,7 @@ public class MedlemGUI extends MainGUI implements KeyListener {
 	
 
 	public void actionPerformed(ActionEvent e) {
-		/*----------------------------
-		 * 
-		 * DETTE ER EN TEST FUNKTION
-		 * 
+
 	
 		if(e.getSource() == test){
 			Medlem medlem = new Medlem(0, "test", "test", "test", "123",
@@ -221,11 +218,7 @@ public class MedlemGUI extends MainGUI implements KeyListener {
 			Barbog barbog = new Barbog(medlem.getId(),"null","null",0);
 			new Control().opretBarbog(barbog,medlem);
 		}
-		/*
-		 * 
-		 * DETTE ER EN TEST FUNKTION
-		 * 
-		 ---------------------------
+
 		
 		if(e.getSource() == btn_search){
 			String text = searchField.getText().toLowerCase();
@@ -296,9 +289,7 @@ public class MedlemGUI extends MainGUI implements KeyListener {
 			new MedlemTabel(this);
 		}
 	}
-*/
 
-}
 
 	@Override
 	public void keyPressed(KeyEvent arg0) {
