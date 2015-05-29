@@ -126,6 +126,11 @@ public class TilmeldAktivitetGUI extends MainGUI implements ActionListener
 
 			frame.dispose();
 		}
+		if(e.getSource() == btn_tilmeld)
+		{
+			new TilmeldAktivitetGUI();
+			frame.dispose();
+		}
 
 		if(e.getSource() == btn_gem){
 			Medlem m = (Medlem) medlemBox.getSelectedItem();

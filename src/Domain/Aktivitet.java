@@ -3,6 +3,7 @@ package Domain;
 /*
  * Oprettelse af aktivitet tabel
  * 
+
 	CREATE TABLE `aktiviteter` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `navn` varchar(255) NOT NULL,

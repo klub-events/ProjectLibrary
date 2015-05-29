@@ -8,7 +8,7 @@ pris int (255) NOT NULL,
 navn varchar (255) NOT NULL,
 tilgængelig int (1),
 antal int (6) NOT NULL);
- * **/
+ */
 public class Varer {
 	int id;
 	int pris;
