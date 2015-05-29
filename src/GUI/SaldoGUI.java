@@ -18,6 +18,7 @@ import javax.swing.table.TableRowSorter;
 import Domain.Barbog;
 import Domain.ClosedCellTableModel;
 import Domain.Control;
+import Domain.Medlem;
 
 public class SaldoGUI extends MainGUI implements ActionListener, KeyListener {
 	private JTable table;
@@ -31,13 +32,13 @@ public class SaldoGUI extends MainGUI implements ActionListener, KeyListener {
 	private JTextField searchField = new JTextField();
 	private JTextField beloebField = new JTextField();
 	private JTextField indsaetField = new JTextField();
-	
+
 
 	private JTextField idField = new JTextField();
 	private JTextField navnField = new JTextField();
 	private JTextField saldoField = new JTextField();
 	private JTextField noteField = new JTextField();
-	
+
 	private JLabel idLabel = new JLabel("ID");
 	private JLabel navnLabel = new JLabel("Navn");
 	private JLabel saldoLabel = new JLabel("Saldo");
@@ -63,11 +64,12 @@ public class SaldoGUI extends MainGUI implements ActionListener, KeyListener {
 		btn_search.setBounds(580, 20, 60, 30);
 		btn_search.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btn_search.addActionListener(this);
-		
+
 		btnChangeNote.setBounds(50, 400, 100, 60);
 		btnChangeNote.addActionListener(this);
-		
+
 		btnGemChanges.setBounds(200, 400, 100, 60);
+		btnGemChanges.addActionListener(this);
 		// Edit TextFields
 		beloebField.setBounds(170, 140, 120, 60);
 		searchField.setBounds(640, 20, 190, 30);
@@ -89,7 +91,7 @@ public class SaldoGUI extends MainGUI implements ActionListener, KeyListener {
 		noteField.setBounds(50, 270, 300, 100);
 		noteField.setEditable(false);
 		noteField.setText("ingen info");
-		
+
 		// Labels
 		idLabel.setBounds(50, 30, 20, 20);
 		navnLabel.setBounds(110, 30, 50, 20);
@@ -228,116 +230,134 @@ public class SaldoGUI extends MainGUI implements ActionListener, KeyListener {
 		}
 		if (e.getSource() == btnChangeNote) {
 			noteField.setEditable(true);
-			System.out.println("lol");
 		}
-		if (e.getSource() == btn_aktivitet) {
-			new AktivitetGUI();
-
-			frame.dispose();
-		}
-
-		if (e.getSource() == btn_medlem) {
-			new MedlemGUI();
-
-			frame.dispose();
-		}
-		
-		if(e.getSource() == btn_barbog){
-			new BarBogGUI();
-			frame.dispose();
-		}
-		if (e.getSource() == btn_tilmeld) {
-			new TilmeldAktivitetGUI();
-
-			frame.dispose();
-		}
-
-		if (e.getSource() == btnIndsaet) {
-			int input = 0;
-			int saldo = 0;
-			int id = 0;
+		if(e.getSource() == btnGemChanges){
+			int identifier;
+			String note = noteField.getText();
 			selectedRow = table.getSelectedRow();
-
-			try {
-				input = Integer.parseInt(beloebField.getText());
-			} catch (NumberFormatException | ArrayIndexOutOfBoundsException e1) {
-				JOptionPane.showMessageDialog(frame, "Forket indtastet beløb.");
+			try{
+				identifier = (int) model.getValueAt(selectedRow,0);
+				new Control().updateNote(identifier,note);
+			}catch(ArrayIndexOutOfBoundsException e1){
+				JOptionPane.showMessageDialog(frame,"Du har ikke valgt et medlem.");
 			}
-			try {
-				id = (int) (model.getValueAt(selectedRow, 0));
-				saldo = Integer.parseInt(saldoField.getText());
-			} catch (NumberFormatException | ArrayIndexOutOfBoundsException e1) {
-				JOptionPane.showMessageDialog(frame, "Intet medlem er valgt.");
-			}
-			Boolean result = validateInput();
-			beloebField.setText(null);
+			noteField.setEditable(false);
+			isListenerActive = false;
+			model.setRowCount(0);
+			updateJTable();
+			model.fireTableDataChanged();
+			isListenerActive = true;
+			table.addRowSelectionInterval(selectedRow, selectedRow);
+		}
 
-			System.out.println(result);
-			if(result){
-				if (table.getSelectedRow() >= 0) {
-					/*
-					 * kodestykket herunder er fundet ved hjælp af siden
-					 * http://stackoverflow.com/questions/8396870/joptionpane-yes-or-no-window
-					 */
-					int reply = JOptionPane.showConfirmDialog(frame,"Er du sikker på du sætte\n " +input +"kr." + " \nind på "+ model.getValueAt(selectedRow, 1) + "'s saldo?","Bekræft indsættelse", JOptionPane.YES_NO_OPTION);
-					if(reply==0){
-					isListenerActive = false;
-					model.setRowCount(0);
-					new Control().indsaetBeloeb(saldo, input, id);
-					updateJTable();
-					model.fireTableDataChanged();
-					isListenerActive = true;
-					table.addRowSelectionInterval(selectedRow, selectedRow);
+			if (e.getSource() == btn_aktivitet) {
+				new AktivitetGUI();
+
+				frame.dispose();
+			}
+
+			if (e.getSource() == btn_medlem) {
+				new MedlemGUI();
+
+				frame.dispose();
+			}
+
+			if(e.getSource() == btn_barbog){
+				new BarBogGUI();
+				frame.dispose();
+			}
+			if (e.getSource() == btn_tilmeld) {
+				new TilmeldAktivitetGUI();
+
+				frame.dispose();
+			}
+
+			if (e.getSource() == btnIndsaet) {
+				int input = 0;
+				int saldo = 0;
+				int id = 0;
+				selectedRow = table.getSelectedRow();
+
+				try {
+					input = Integer.parseInt(beloebField.getText());
+				} catch (NumberFormatException | ArrayIndexOutOfBoundsException e1) {
+					JOptionPane.showMessageDialog(frame, "Forket indtastet beløb.");
+				}
+				try {
+					id = (int) (model.getValueAt(selectedRow, 0));
+					saldo = Integer.parseInt(saldoField.getText());
+				} catch (NumberFormatException | ArrayIndexOutOfBoundsException e1) {
+					JOptionPane.showMessageDialog(frame, "Intet medlem er valgt.");
+				}
+				Boolean result = validateInput();
+				beloebField.setText(null);
+
+				System.out.println(result);
+				if(result){
+					if (table.getSelectedRow() >= 0) {
+						/*
+						 * kodestykket herunder er fundet ved hjælp af siden
+						 * http://stackoverflow.com/questions/8396870/joptionpane-yes-or-no-window
+						 */
+						int reply = JOptionPane.showConfirmDialog(frame,"Er du sikker på du sætte\n " +input +"kr." + " \nind på "+ model.getValueAt(selectedRow, 1) + "'s saldo?","Bekræft indsættelse", JOptionPane.YES_NO_OPTION);
+						if(reply==0){
+							isListenerActive = false;
+							model.setRowCount(0);
+							new Control().indsaetBeloeb(saldo, input, id);
+							updateJTable();
+							model.fireTableDataChanged();
+							isListenerActive = true;
+							table.addRowSelectionInterval(selectedRow, selectedRow);
+						}
 					}
 				}
-			}
-			else{
-				JOptionPane.showMessageDialog(frame, "syntaksen på beløbet er forkert");
-			}
-		}
-
-		if (e.getSource() == btnTraek) {
-			int id = 0;
-			int input = 0;
-			int saldo = 0;
-			selectedRow = table.getSelectedRow();
-			try {
-				input = Integer.parseInt(beloebField.getText());
-			} catch (NumberFormatException | ArrayIndexOutOfBoundsException e1) {
-				JOptionPane.showMessageDialog(frame, "Forket indtastet beløb.");
-			}
-			try {
-				id = (int) (model.getValueAt(selectedRow, 0));
-				saldo = Integer.parseInt(saldoField.getText());
-			} catch (NumberFormatException | ArrayIndexOutOfBoundsException e1) {
-				JOptionPane.showMessageDialog(frame, "Intet medlem er valgt.");
-			}
-			Boolean result = validateInput();
-			beloebField.setText(null);
-			if (result){
-				if (table.getSelectedRow() >= 0) {
-					/*
-					 * kodestykket herunder er fundet ved hjælp af siden
-					 * http://stackoverflow.com/questions/8396870/joptionpane-yes-or-no-window
-					 */
-					int reply = JOptionPane.showConfirmDialog(frame,"Er du sikker på du vil trække\n " +input +"kr." + " \nfra medlemmet: "+ model.getValueAt(selectedRow, 1),"Bekræft fratrækkelse", JOptionPane.YES_NO_OPTION);
-					if(reply==0){
-					isListenerActive = false;
-					model.setRowCount(0);
-					new Control().traekBeloeb(saldo, input, id);
-					updateJTable();
-					model.fireTableDataChanged();
-					isListenerActive = true;
-					table.addRowSelectionInterval(selectedRow, selectedRow);
-					}
+				else{
+					JOptionPane.showMessageDialog(frame, "syntaksen på beløbet er forkert");
 				}
 			}
-			else{
-				JOptionPane.showMessageDialog(frame, "syntaksen på beløbet er forkert");
+
+			if (e.getSource() == btnTraek) {
+				int id = 0;
+				int input = 0;
+				int saldo = 0;
+				selectedRow = table.getSelectedRow();
+				try {
+					input = Integer.parseInt(beloebField.getText());
+				} catch (NumberFormatException | ArrayIndexOutOfBoundsException e1) {
+					JOptionPane.showMessageDialog(frame, "Forket indtastet beløb.");
+				}
+				try {
+					id = (int) (model.getValueAt(selectedRow, 0));
+					saldo = Integer.parseInt(saldoField.getText());
+				} catch (NumberFormatException | ArrayIndexOutOfBoundsException e1) {
+					JOptionPane.showMessageDialog(frame, "Intet medlem er valgt.");
+				}
+				Boolean result = validateInput();
+				beloebField.setText(null);
+				if (result){
+					if (table.getSelectedRow() >= 0) {
+						/*
+						 * kodestykket herunder er fundet ved hjælp af siden
+						 * http://stackoverflow.com/questions/8396870/joptionpane-yes-or-no-window
+						 */
+						int reply = JOptionPane.showConfirmDialog(frame,"Er du sikker på du vil trække\n " +input +"kr." + " \nfra medlemmet: "+ model.getValueAt(selectedRow, 1),"Bekræft fratrækkelse", JOptionPane.YES_NO_OPTION);
+						if(reply==0){
+							isListenerActive = false;
+							model.setRowCount(0);
+							new Control().traekBeloeb(saldo, input, id);
+							updateJTable();
+							model.fireTableDataChanged();
+							isListenerActive = true;
+							table.addRowSelectionInterval(selectedRow, selectedRow);
+						}
+					}
+				}
+				else{
+					JOptionPane.showMessageDialog(frame, "syntaksen på beløbet er forkert");
+				}
+
 			}
-			
-		}
-		/**
+			/**
 		if (e.getSource() == btnNote){
 			String input = "";
 			try {
@@ -345,11 +365,11 @@ public class SaldoGUI extends MainGUI implements ActionListener, KeyListener {
 			} catch ( ArrayIndexOutOfBoundsException e1) {
 				JOptionPane.showMessageDialog(frame, "Forket indtastet beløb.");
 			}
-				
-			
-		
+
+
+
 		}
-	
-	**/
+
+			 **/
+		}
 	}
-}

@@ -109,6 +109,11 @@ public class Control {
 		return db.hentTilmeldinger();
 	}
 
+	public void updateNote(int identifier, String note) {
+		db.updateNote(identifier, note);
+		
+	}
+
 }
 
 
