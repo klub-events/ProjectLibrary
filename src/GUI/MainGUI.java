@@ -60,10 +60,11 @@ public class MainGUI extends Thread implements ActionListener
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(new BorderLayout());
+		frame.setResizable(false);
 
 
 		Panel_Top.setLayout( new GridLayout());
-		Panel_Content.setLayout(new GridLayout());// MANGLER LAYOUT TIL AT PLACE DE FORSKELLIGE TING
+		Panel_Content.setLayout(new GridLayout());
 		frame.getContentPane().add(Panel_Top, "North");
 		frame.getContentPane().add(Panel_Content, "Center");
 
