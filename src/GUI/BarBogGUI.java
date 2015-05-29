@@ -62,7 +62,6 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 
 	private ClosedCellTableModel model = new ClosedCellTableModel();
 	private TableRowSorter<TableModel> rowSorter;
-	private int selectedRow;
 	private boolean isListenerActive = true;
 
 	public BarBogGUI() {
@@ -144,7 +143,7 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 		barbogField.setEditable(false);
 		barbogField.setText("N/A");
 
-		vigtigField.setBounds(230,50,250,20);
+		vigtigField.setBounds(230,50,250,40);
 		vigtigField.setEditable(false);
 		vigtigField.setText("N/A");
 
