@@ -16,6 +16,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+
+/** hvad extender den. implementere . bruges
+ * @author Patrick
+ *
+ */
 public class AktivitetGUI extends MainGUI implements ActionListener
 {
 	private JButton btn_opret = new JButton("OPRET");	
@@ -130,6 +135,9 @@ public class AktivitetGUI extends MainGUI implements ActionListener
 	
 	
 	
+	/**
+	 *  parammetre returner, hvad gør den hvor bruges den
+	 */
 	public void clearAll() {
 		navnBox.setText(null);
 		prisBox.setText(null);
