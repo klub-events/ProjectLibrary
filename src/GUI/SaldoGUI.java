@@ -354,19 +354,5 @@ public class SaldoGUI extends MainGUI implements ActionListener, KeyListener {
 				}
 
 			}
-			/**
-		if (e.getSource() == btnNote){
-			String input = "";
-			try {
-				input = noteField.getText();
-			} catch ( ArrayIndexOutOfBoundsException e1) {
-				JOptionPane.showMessageDialog(frame, "Forket indtastet beløb.");
-			}
-
-
-
-		}
-
-			 **/
 		}
 	}
