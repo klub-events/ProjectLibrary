@@ -21,7 +21,7 @@ public class MedlemGUI extends MainGUI implements KeyListener {
 	private JButton btn_visMember;
 	private JButton btn_search;
 	//DETTE ER EN TEST KNAP ----------------------------------------
-	private JButton test;
+	//private JButton test;
 	//DETTE ER EN TEST KNAP ----------------------------------------
 
 	// Værdier for indtastede oplysnigner
@@ -110,18 +110,18 @@ public class MedlemGUI extends MainGUI implements KeyListener {
 		/*-------------------------------------------------------------
 		 * 
 		 * 
-		 * DETTE ER EN TEST KNAP, FJERN NÅR SYSTEM SKAL AFLEVERES
+		 * DETTE ER EN TEST KNAP
 		 *  
 		 * 
-		 */
+		 *
 		 test = new JButton("TEST");
 		 test.setBounds(550,530 , 20,20);
 		 content.add(test);
 		 test.addActionListener(this);
-		/*
+		 *
 		 * 
 		 * 
-		 * DETTE ER EN TEST KNAP, FJERN NÅR SYSTEM SKAL AFLEVERES
+		 * DETTE ER EN TEST KNAP
 		 *  
 		 * 
 		 -----------------------------------------------------------*/
@@ -159,6 +159,9 @@ public class MedlemGUI extends MainGUI implements KeyListener {
 
 	// For at rydde tekstfields når medlem er oprettet
 	// Gør det letter for bruger, hurtigt at oprette nye medlemmer
+	/**
+	 * Sætter alle textfields indeholdt af funktionen lig null, således de er klar til nyt input fra brugeren.
+	 */
 	public void clearAll() {
 		fornavnField.setText(null);
 		efternavnField.setText(null);
@@ -170,6 +173,11 @@ public class MedlemGUI extends MainGUI implements KeyListener {
 	}
 
 
+	/**
+	 * Metode for at validerer at hver textfield indholder data til når der skal oprettes et nyt medlem.<br>
+	 * ser efter om fields forbeholdt talinput, indeholder tal eller tekst med en regex sætning.
+	 * @return true eller false alt efter om valideringen går i gennem eller ej
+	 */
 	public boolean validateInput() {
 		if 		(  !fornavnField.getText().equals("")
 				&& !efternavnField.getText().equals("")
@@ -186,6 +194,10 @@ public class MedlemGUI extends MainGUI implements KeyListener {
 		}
 	}
 
+	/**
+	 * Metode for at opdatere JTable, med en ArrayListe. 
+	 * Sætter columns og rows op for JTablet.
+	 */
 	public void updateJTable(){
 		model.setRowCount(0);
 		ArrayList<Medlem> medlemmer = new Control().hentMedlemmer();
@@ -197,38 +209,42 @@ public class MedlemGUI extends MainGUI implements KeyListener {
 		medlemmer.clear();
 	}
 
-	
-
 	@Override
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
 	
-
-	public void actionPerformed(ActionEvent e) {
-
 	
+	public void actionPerformed(ActionEvent e) {
+	/*
+	 * Dette er funktionen for test knappen, brugt løbende for at teste medlems oprettelse, redigering
+	 * samspil med andre klasser, og sletning fra systemet.
+	 * Hurtig måde at sætte et nyt medlem op på. Ikke sikkert at bruge som sådan.
+	 * 
 		if(e.getSource() == test){
 			Medlem medlem = new Medlem(0, "test", "test", "test", "123",
 					"123", "test", "test", 1);
 			new Control().opretMedlem(medlem);
 			Barbog barbog = new Barbog(medlem.getId(),"null","null",0);
-			new Control().opretBarbog(barbog,medlem);
+			new Control().opretBarbog(barbog);
 		}
-
+	*/
 		
 		if(e.getSource() == btn_search){
+			//Sørger for at alle input bliver sat til lower case. muligvis ligegyldigt.
 			String text = searchField.getText().toLowerCase();
 			if (text.length() == 0) {
 				rowSorter.setRowFilter(null);
 			} else {
+				//regexFilter (?i) fundet på internette d.28/5 på siden:
+				//https://community.oracle.com/thread/1354225
+				//regexFilter - sætning som sørger for at der ikke differencieres imellem store og små bogstaver
 				rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" +text));
 			}
 		}
 
 		if (e.getSource() == btn_opretMedlem) {
-
 			// Anskaffer input tekst fra hver af TekstFieldsne.
 			// Anvender selvkreeret getInputText() for at få input
 			// er at finde i LabelTextField klassen.
@@ -247,26 +263,20 @@ public class MedlemGUI extends MainGUI implements KeyListener {
 			}
 
 			if(validateInput()){
-				if(foedselsdatoField.getText().length()>6){
-					JOptionPane.showMessageDialog(frame, "Din fødselsdato er for lang.");
-					
-				}
-				else if(telefonField.getText().length()>12){
-					JOptionPane.showMessageDialog(frame, "Dit telefon nummer er for langt.");
-				}
+				//tester om fødselsdato fielded har modtaget et input længere end 6 karakterer. Det samme for telefonField med 12 karakterer.
+				if(foedselsdatoField.getText().length()>6){JOptionPane.showMessageDialog(frame, "Din fødselsdato er for lang.");}
+				else if(telefonField.getText().length()>12){JOptionPane.showMessageDialog(frame, "Dit telefon nummer er for langt.");}
 				else{
-				Medlem medlem = new Medlem(0, fornavn, efternavn, adresse, foedselsdato,
-						telefon, email, navnDoer, billeder);
+				//Opretter et medlem og en barbog herti, og sender disse til databasen.
+				Medlem medlem = new Medlem(0, fornavn, efternavn, adresse, foedselsdato,telefon, email, navnDoer, billeder);
 				new Control().opretMedlem(medlem);
 				Barbog barbog = new Barbog(medlem.getId(),"null","null",0);
-				new Control().opretBarbog(barbog,medlem);
-				JOptionPane.showMessageDialog(frame, "Medlemmet: " + medlem.getFornavn()
-						+ " er nu tilføjet til databasen med ID: " + medlem.getId());
+				new Control().opretBarbog(barbog);
+				JOptionPane.showMessageDialog(frame, "Medlemmet: " + medlem.getFornavn() + " er nu tilføjet til databasen med ID: " + medlem.getId());
 				clearAll();
+				//Tømmer JTablet så det er klart til at modtage nyt input, og blive opdateret med en ny ArrayListe, med opdaterede input.
 				model.setRowCount(0);
 				updateJTable();
-				model.fireTableDataChanged();
-				System.out.println(medlem.getFødselsdato());
 				}
 			}
 			else{
@@ -308,6 +318,7 @@ public class MedlemGUI extends MainGUI implements KeyListener {
 		
 	}
 
+	//key listener på når man giver slip på en knap. I vores tilfælde Enter knappen.
 	@Override
 	public void keyReleased(KeyEvent e) {
 		if(e.getSource()==searchField){
@@ -320,7 +331,8 @@ public class MedlemGUI extends MainGUI implements KeyListener {
 					 * kodestykket herunder er fundet fra siden
 					 * https://community.oracle.com/thread/1354225
 					 * fra bruger 843806 - regexFilter sørger for at 
-					 * der ikke tages højde for store/små bostaver når der søges.
+					 * der ikke tages højde for store/små bostaver når der søges. Sorterer JTable/rowSorter efter kun at vise
+					 * felter, med givet input.
 					 */
 					try{
 						rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" +text));

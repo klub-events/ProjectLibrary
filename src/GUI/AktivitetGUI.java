@@ -180,10 +180,12 @@ public class AktivitetGUI extends MainGUI implements ActionListener
 			
 			frame.dispose();
 									
+
 			}		
 			
 			
 		
+
 		
 		if(e.getSource() == btn_aktivitet)
 		{

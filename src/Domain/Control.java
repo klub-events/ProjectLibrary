@@ -3,8 +3,17 @@ package Domain;
 import java.util.ArrayList;
 
 import Datalink.*;
-import GUI.MedlemGUI;
 
+/**
+ * Klasse som bruges for at GUI laget kan faa information, og sende information til Datalink og Domain laget.<br>
+ * Bruges for at holde hvert lag adskildt, og opnå tre lags arkitektur.
+ * 
+ * <p>Alle kald fra GUI laget som skal ud ad, eller ind til GUI laget sendes igennem her.<br>
+ * Hver metode i denne klasse findes i DB_Connect, og er beskrevet heri. Da dette blot er en klasse for gennemgang,<br>
+ * er alle metoders funktioner beskrevet i root klassen for hver funktion.</p>
+ * @author PeterRaasthøj
+ *
+ */
 public class Control {
 	//private DB_Connector;
 	private DB_Connector db;
@@ -43,7 +52,7 @@ public class Control {
 
 	//Bruges til at kalde funktionen der opdatere alle felter i databasen, med værdier
 	//hentet fra en arrayliste, fyldt med medlemmer, der komemr fra gui - JTablet.
-	public void updateDB(ArrayList <Medlem> opdateMedlem){
+	public void opdaterMedlemmer(ArrayList <Medlem> opdateMedlem){
 		db.opdaterMedlemmer(opdateMedlem);
 	}
 	//kalder funktionen slet medlem i databasen, med en identifier, altså id, fra et medlem
@@ -60,8 +69,8 @@ public class Control {
 	}
 
 	//Bruges til at kalde funktionen der opretter nye barbøger i databasen, ud fra et barbog objekt
-	public void opretBarbog(Barbog barbog, Medlem medlem){
-		db.opretBarbog(barbog,medlem);
+	public void opretBarbog(Barbog barbog){
+		db.opretBarbog(barbog);
 	}
 
 	public void opdaterBarbog(ArrayList<Barbog> opdateBarbog){
@@ -94,7 +103,7 @@ public class Control {
 	}
 
 	public void traekBeloeb(int saldo, int input,int id) {
-		int total = math.substract(saldo, input);
+		int total = math.substrakter(saldo, input);
 		db.traekBeloeb(total,id);
 		db.hentBarbog();
 		}

@@ -1,6 +1,8 @@
 package Domain;
 
-/**
+import java.util.ArrayList;
+
+/*
  *  Database-koden for varer-table
 CREATE TABLE varer(
 ID int PRIMARY KEY AUTO_INCREMENT,
@@ -9,12 +11,22 @@ navn varchar (255) NOT NULL,
 tilgængelig int (1),
 antal int (6) NOT NULL);
  */
+
+/**
+ * Varer objekt. Dette bruges til at holde information fra databasen,<br>
+ * Getters og Setters er tilgængelige for hver værdi.
+ * 
+ * <p>Indeholder toString() override som lader Varer objekter sættes nemt ind i en mySQL syntax
+ * @author PeterRaasthøj
+ *
+ */
 public class Varer {
 	int id;
 	int pris;
 	String navn;
-	int tilgængelig;//hvilket tidspunkt på dagen de må sælges (1= altid, 0 = aften)
+	int tilgængelig;
 	int antal;
+	
 	
 	public Varer(int id, int pris, String navn, int tilgængelig, int antal){
 		this.id = id;

@@ -20,6 +20,11 @@ import Domain.Barbog;
 import Domain.ClosedCellTableModel;
 import Domain.Control;
 
+/**
+ * GUI objektet der styrer barbogen. Indeholder alle elementer for denne gui. Implementerer ActionListener, KeyListener og extender MainGUI.
+ * @author PeterRaasthøj
+ *
+ */
 public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 	private JTable table;
 	
@@ -46,7 +51,6 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 	private JTextField searchField = new JTextField();
 
 	private JTextField beloebField = new JTextField();
-	private JTextField indsaetField = new JTextField();
 	private JTextField beloeb = new JTextField();
 
 
@@ -71,11 +75,14 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 	private int koeb = 0;
 	private boolean isListenerActive = true;
 
+	/**
+	 * Sætter alle elementer op på framen som vises.
+	 */
 	public BarBogGUI() {
 		JPanel center3 = new JPanel();
 		center3.setLayout(null);
 
-		// Buttons
+		// Knapper opsættes.
 		btnKoldskål.setBounds(50, 100, 90, 60);
 		btnKoldskål.addActionListener(this);
 
@@ -130,21 +137,19 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 	//	btnKøb.setBorderPainted(false);
 		btnKøb.setBackground(Color.green);
 
-		
 		btnAnnuler.setBounds(750,515, 100,50);
 		btnAnnuler.addActionListener(this);
 		btnAnnuler.setBackground(Color.red);
 		
 		btn_search = new JButton("SØG");btn_search.setBounds(580, 20, 60, 30);
-
 		btn_search.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btn_search.addActionListener(this);
 
-		// Edit TextFields
+		// Redigerbare JTextFields opsættes
 		searchField.setBounds(640, 20, 190, 30);
 		searchField.addKeyListener(this);
 
-		// Non-edit TextFields
+		// Ikke redigerbare JTextFields opsættes
 		idField.setBounds(50, 20, 25, 20);
 		idField.setEditable(false);
 		idField.setText("N/A");
@@ -166,27 +171,28 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 		vigtigField.setText("Ingen info");
 
 
-		// Labels
+		// Labels opsættes
 		idLabel.setBounds(50, 00, 20, 20);
 		navnLabel.setBounds(110, 00, 50, 20);
 		barbogLabel.setBounds(170, 00, 50, 20);
 		vigtigLabel.setBounds(50,40,100,20);
 		købssum.setBounds(580,500,100,20);
+
 		// Indsætter content til framen, til framen.
 		center3.add(barbogLabel);
 		center3.add(idLabel);
 		center3.add(navnLabel);
 		center3.add(vigtigLabel);
 		center3.add(vigtigField);
-		// Mad Knapper
 		center3.add(barbogField);
 		center3.add(navnField);
 		center3.add(idField);
 		center3.add(købssum);
-
-		center3.add(indsaetField);
-	//	center3.add(beloeb);
 		center3.add(beloebField);
+
+		
+		// Mad Knapper
+
 		center3.add(btnKoldskål);
 		center3.add(btnKakaomælk);
 		center3.add(btnIste);
@@ -205,10 +211,11 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 		center3.add(btnKøb);
 		center3.add(btnAnnuler);
 		center3.add(searchField);
-		// Søge feldt
+		
+		// Søge felt
 		center3.add(btn_search);
 
-		// Jtable
+		// Jtable opsættes på ScrollpPane
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(580, 50, 250, 350); // x, y, width, height
 		table = new JTable();
@@ -220,9 +227,7 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 		rowSorter = new TableRowSorter<>((table.getModel()));
 		table.setRowSorter(rowSorter);
 
-		System.out.println();
-
-		// tilføj content til gui
+		// tilføjer al content som er tilføjet til panelet center3 til gui
 		Panel_Content.add(center3);
 		center3.setBackground(Color.WHITE);
 		btn_saldo.setBackground(Color.GRAY);
@@ -230,7 +235,9 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 		/*
 		 * En List Selection Listener. Checker på mouseinput, om selectedRow er
 		 * selected.. Hvis en row bliver selected udfører den var.setText(var)
-		 * tingene..
+		 * på felterne.
+		 * 
+		 * Bruges for at overfører data fra JTables til ikke redigerbare Fields 
 		 */
 		table.getSelectionModel().addListSelectionListener(
 
@@ -243,16 +250,11 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 								String id = String.valueOf((int) model.getValueAt(selectedRow, 0));
 								String navn = (String) model.getValueAt(selectedRow, 1);
 								String saldo = String.valueOf((int) model.getValueAt(selectedRow, 2));
-
-								//String vigtigNote = (String) model.getValueAt(selectedRow, 3);
-
 								String vigtigNote = (String) model.getValueAt(selectedRow, 3);
 
 								idField.setText(id);
 								navnField.setText(navn);
-
 								saldoField.setText(saldo);
-								//noteField.setText(vigtigNote);
 								barbogField.setText(saldo);
 								vigtigField.setText(vigtigNote);
 
@@ -265,6 +267,10 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 				});
 		updateJTable();
 	}
+	
+	/**
+	 * Opdaterer JTablet med ArrayListe af Barbøger hentet fra, og opsat i databasen.
+	 */
 	public void updateJTable() {
 		ArrayList<Barbog> barbogs = new Control().hentBarbog();
 
@@ -307,9 +313,7 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 	@Override
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-
 	}
-
 
 	public void actionPerformed(ActionEvent e) {
 
@@ -525,25 +529,7 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 			new BarBogGUI();
 			frame.dispose();
 		}
-
-
-
-
 	}
-	/**
-		if (e.getSource() == btnNote){
-			String input = "";
-			try {
-				input = noteField.getText();
-			} catch ( ArrayIndexOutOfBoundsException e1) {
-				JOptionPane.showMessageDialog(frame, "Forket indtastet beløb.");
-			}
-
-
-
-		}
-
-	 **/
 }
 
 
