@@ -13,6 +13,11 @@ import javax.swing.table.TableRowSorter;
 
 import Domain.*;
 
+/**
+ * Anvendes når medlems oprettelse GUIen skal oprettes.
+ * @author PeterRaasthøj
+ *
+ */
 public class MedlemGUI extends MainGUI implements KeyListener {
 	{
 		btn_medlem.setBackground(Color.white);

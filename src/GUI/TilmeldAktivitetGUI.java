@@ -20,62 +20,64 @@ import javax.swing.table.TableRowSorter;
 
 import Domain.*;
 
+/**Denne klasse extender MainGUI som er den alle sider har tilfælles og 
+ * implementer Actionlistener får at knapper kan have funktionalitt.
+ * Indeholder dropdowns, jtable og gem knap. 
+ * @author Patrick
+ *
+ */
 public class TilmeldAktivitetGUI extends MainGUI implements ActionListener
 {
 	//combobox medlem
 	@SuppressWarnings("rawtypes")
 	private JComboBox medlemBox;
-	
+
 
 	@SuppressWarnings({ "rawtypes" })
 
 	//combobox aktivitet
 	private JComboBox aktivitetBox;
-	
+
 
 	JButton btn_gem = new JButton("GEM");
+	
 	private JTable table;
 	private ClosedCellTableModel model = new ClosedCellTableModel();
 	private TableRowSorter<TableModel> rowSorter;
-	
 	private ArrayList<Medlem> medlemmer = new Control().hentMedlemmer();
 	private ArrayList<Aktivitet> aktiviteter = new Control().hentAktiviteter();
-	
-	
+
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public TilmeldAktivitetGUI()
 	{
 		JPanel panel2 = new JPanel(new GridLayout(0, 1));
 
-		
 
 		//medlems dropdown
 		medlemBox = new JComboBox();
 		for(Medlem medlem : medlemmer){
-		medlemBox.addItem(medlem);
+			medlemBox.addItem(medlem);
 		}
 		medlemBox.setSelectedIndex(0);
 		medlemBox.setBackground(Color.white);
 		JPanel panel1 = new JPanel(new FlowLayout());
 		JLabel label1 = new JLabel("Hvilket medlem skal tilmeldes: ");
-		panel1.add(label1);
-		panel1.add(medlemBox);
+
 
 		//aktivitet dropdown
 		aktivitetBox = new JComboBox();
 		for(Aktivitet aktivitet : aktiviteter){
 			aktivitetBox.addItem(aktivitet);
-			}
+		}
 		aktivitetBox.setBackground(Color.white);
 		JLabel label2 = new JLabel("Hvilken aktivets skal der tilmeldes til: ");
-		panel1.add(label2);
-		panel1.add(aktivitetBox);
+
 
 
 		//gem knap
 		btn_gem.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btn_gem.addActionListener(this);
-		panel1.add(btn_gem);
 
 
 
@@ -88,54 +90,59 @@ public class TilmeldAktivitetGUI extends MainGUI implements ActionListener
 		table.setFillsViewportHeight(true);
 		table.setModel(model);
 		JPanel panel3 = new JPanel(new GridLayout(1,1));
-		panel3.add(scrollPane);
 		rowSorter = new TableRowSorter<>((table.getModel()));
 		table.setRowSorter(rowSorter);
+		rowSorter = new TableRowSorter<>((table.getModel()));
+		table.setRowSorter(rowSorter);
+		updateJTable();
 
-		rowSorter = new TableRowSorter<>((table.getModel()));
-		table.setRowSorter(rowSorter);
+		btn_tilmeld.setBackground(Color.GRAY);
 
 		//adder til frame
+		panel1.add(label1);
+		panel1.add(medlemBox);
+		panel1.add(label2);
+		panel1.add(aktivitetBox);
+		panel1.add(btn_gem);
+		panel3.add(scrollPane);
 		panel2.add(panel1);
 		Panel_Content.add(panel2);
 		panel2.add(panel3);		
 
-		btn_tilmeld.setBackground(Color.GRAY);
-		
-		
-		updateJTable();
+
+
+
 	}//constructor slutter
 
-	public void updateJTable() {
+	/**
+	 * adder database udtræk til jtable
+	 */
+	public void updateJTable() 
+	{
 		ArrayList<Tilmeld> medlemmer = new Control().hentTilmeldinger();
 		// add the column names
-		model.setColumnIdentifiers(new String[] { "id", "Aktivitet", "Navn"});
+		model.setColumnIdentifiers(new String[] {"Aktivitet", "Navn"});
 
-		// Foreach loop to loop through the ArrayList. One row (person) at a
-		// time
-		for (Tilmeld tilmeld : medlemmer) {
+		//looper aktiviter igennem og indsætter i jtable
+		for (Tilmeld tilmeld : medlemmer) 
+		{
 			model.addRow(new Object[]
 					{
-					
-					tilmeld.getFk_aktivitetID(), tilmeld.getFk_aktivitetID(), tilmeld.getFk_medlemNavn()
-					
-					
-					
+
+					tilmeld.getFk_aktivitetID(), tilmeld.getFk_medlemNavn()
+
+
+
 					});	
 		}
-			
-		
 
-		//til patrick
-		//for (Medlem medlem : medlemmer){
-		//arrayList.add(medlem.getFornavn();
-		//}
-
-		//JCombobox aktivitetsMedlemmer(arrayList);
-		// add the DefaultTableModel to the JTable
 		medlemmer.clear();
-	}
-	
+	}//updateJTable slutter
+
+	/* (non-Javadoc)
+	 * @see GUI.MainGUI#actionPerformed(java.awt.event.ActionEvent)
+	 * Indeholder actionlistener til at indsætte i db
+	 */
 	public void actionPerformed(ActionEvent e)
 	{
 		if(e.getSource() == btn_aktivitet)
@@ -152,35 +159,47 @@ public class TilmeldAktivitetGUI extends MainGUI implements ActionListener
 			frame.dispose();
 		}
 
-		if(e.getSource() == btn_saldo ){
+		if(e.getSource() == btn_saldo )
+		{
 			new SaldoGUI();
 
 			frame.dispose();
 		}
-		
-			
-		if(e.getSource() == btn_barbog){
+
+
+		if(e.getSource() == btn_barbog)
+		{
 			new BarBogGUI();
 			frame.dispose();
-			}
-		
+		}
 
-		if(e.getSource() == btn_gem){
+		if(e.getSource() == btn_tilmeld)
+		{
+			new TilmeldAktivitetGUI();
+			frame.dispose();
+		}
+
+
+
+		if(e.getSource() == btn_gem)
+		{
 			Medlem m = (Medlem) medlemBox.getSelectedItem();
 
 			Aktivitet a = (Aktivitet) aktivitetBox.getSelectedItem();
 			int id = 0;
 			String fk_medlemNavn = m.getFornavn();
 			int fk_aktivitetID = a.getid();
-			try{
-				
+			try
+			{
+
 				new Control().opretTilmelding(id, fk_medlemNavn, fk_aktivitetID);
 
 
-			}catch(Exception e1){
+			}
+			catch(Exception e1){
 				JOptionPane.showMessageDialog(frame,"Et eller flere felter er ikke blevet udfyldt. Udfyld alle felter, og prøv igen.");
 			}
 		}
 
-	}
+	}//actionperformed slutter
 }//public class slutter
