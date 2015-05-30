@@ -112,6 +112,11 @@ public class Control {
 		
 	}
 
+	public int hentVarePris(String vare) {
+		return db.hentVarePris(vare);
+		
+	}
+
 }
 
 

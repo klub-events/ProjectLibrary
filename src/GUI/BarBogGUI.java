@@ -15,20 +15,21 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
+import Datalink.DB_Connector;
 import Domain.Barbog;
 import Domain.ClosedCellTableModel;
 import Domain.Control;
 
 public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 	private JTable table;
-
+	
 	private JButton btnKoldskål = new JButton("Koldskål");
 	private JButton btnKakaomælk = new JButton("Kakaomælk");
 	private JButton btnIste = new JButton("Iste");
 	private JButton btnJuice = new JButton("Juice");
 	private JButton btnSaftevand = new JButton("Saftevand");
 	private JButton btnSodavand = new JButton("Sodavand");
-	private JButton btnYougurt = new JButton("Yougurt");
+	private JButton btnYougurt = new JButton("Yogurt");
 	private JButton btnParisertoast = new JButton("Parisertoast");
 	private JButton btnPariserkalkun = new JButton("Pariser/kalkun");
 	private JButton btnSmørtoast= new JButton("Smørtoast");
@@ -37,13 +38,16 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 	private JButton btnFrugt = new JButton("Frugt");
 	private JButton btnRiskiks = new JButton("Riskiks");
 	private JButton btnIs = new JButton("Is");
+	
+	private JButton btnKøb = new JButton("Køb");
+	private JButton btnAnnuler= new JButton("Annuler");
 	private JButton btn_search;
 
 	private JTextField searchField = new JTextField();
 
 	private JTextField beloebField = new JTextField();
 	private JTextField indsaetField = new JTextField();
-
+	private JTextField beloeb = new JTextField();
 
 
 	private JTextField idField = new JTextField();
@@ -59,10 +63,12 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 	private JLabel navnLabel = new JLabel("Navn");
 	private JLabel barbogLabel = new JLabel("Saldo");
 	private JLabel vigtigLabel = new JLabel("Vigtignote");
+	private JLabel købssum = new JLabel("Købssum");
 
 	private ClosedCellTableModel model = new ClosedCellTableModel();
 	private TableRowSorter<TableModel> rowSorter;
 	private int selectedRow;
+	private int koeb = 0;
 	private boolean isListenerActive = true;
 
 	public BarBogGUI() {
@@ -78,7 +84,6 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 
 		btnIste.setBounds(150,100,90,60);
 		btnIste.addActionListener(this);
-
 
 		btn_search = new JButton("SØG");
 		btn_search.setBounds(580, 20, 60, 30);
@@ -119,9 +124,17 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 		btnIs.setBounds(350,200,90,60);
 		btnIs.addActionListener(this);
 
+		btnKøb.setBounds(640, 515, 100, 50);
+		btnKøb.addActionListener(this);
+	//	btnKøb.setOpaque(true);
+	//	btnKøb.setBorderPainted(false);
+		btnKøb.setBackground(Color.green);
 
-
-
+		
+		btnAnnuler.setBounds(750,515, 100,50);
+		btnAnnuler.addActionListener(this);
+		btnAnnuler.setBackground(Color.red);
+		
 		btn_search = new JButton("SØG");btn_search.setBounds(580, 20, 60, 30);
 
 		btn_search.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -132,29 +145,33 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 		searchField.addKeyListener(this);
 
 		// Non-edit TextFields
-		idField.setBounds(50, 50, 25, 20);
+		idField.setBounds(50, 20, 25, 20);
 		idField.setEditable(false);
 		idField.setText("N/A");
 
-		navnField.setBounds(110, 50, 50, 20);
+		navnField.setBounds(85, 20, 80, 20);
 		navnField.setEditable(false);
 		navnField.setText("N/A");
+		
+		beloebField.setBounds(580, 530, 50, 20);
+		beloebField.setEditable(false);
+		beloebField.setText(String.valueOf(koeb));	
 
-		barbogField.setBounds(170, 50, 50, 20);
+		barbogField.setBounds(170, 20, 50, 20);
 		barbogField.setEditable(false);
 		barbogField.setText("N/A");
 
-		vigtigField.setBounds(230,50,250,20);
+		vigtigField.setBounds(50,60,500,20);
 		vigtigField.setEditable(false);
-		vigtigField.setText("N/A");
+		vigtigField.setText("Ingen info");
 
 
 		// Labels
-		idLabel.setBounds(50, 30, 20, 20);
-		navnLabel.setBounds(110, 30, 50, 20);
-		barbogLabel.setBounds(170, 30, 50, 20);
-		vigtigLabel.setBounds(230,30,100,20);
-
+		idLabel.setBounds(50, 00, 20, 20);
+		navnLabel.setBounds(110, 00, 50, 20);
+		barbogLabel.setBounds(170, 00, 50, 20);
+		vigtigLabel.setBounds(50,40,100,20);
+		købssum.setBounds(580,500,100,20);
 		// Indsætter content til framen, til framen.
 		center3.add(barbogLabel);
 		center3.add(idLabel);
@@ -165,8 +182,10 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 		center3.add(barbogField);
 		center3.add(navnField);
 		center3.add(idField);
+		center3.add(købssum);
 
 		center3.add(indsaetField);
+	//	center3.add(beloeb);
 		center3.add(beloebField);
 		center3.add(btnKoldskål);
 		center3.add(btnKakaomælk);
@@ -183,6 +202,8 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 		center3.add(btnKrasser);
 		center3.add(btnFrugt);
 		center3.add(btnRiskiks);
+		center3.add(btnKøb);
+		center3.add(btnAnnuler);
 		center3.add(searchField);
 		// Søge feldt
 		center3.add(btn_search);
@@ -300,6 +321,183 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 				rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));;
 			}
 		}
+		
+		if (e.getSource() == btnKøb){
+			
+			int saldo = 0;
+			int id = 0;
+			selectedRow = table.getSelectedRow();
+			
+			try {
+				saldo = Integer.parseInt(saldoField.getText());
+				id = (int) (model.getValueAt(selectedRow, 0));
+				koeb = Integer.parseInt(beloebField.getText());
+
+			
+			} catch (NumberFormatException | ArrayIndexOutOfBoundsException e1) {
+				JOptionPane.showMessageDialog(frame, "Intet medlem er valgt.");
+			}
+			if(selectedRow > -1){
+			isListenerActive = false;
+			model.setRowCount(0);
+			new Control().traekBeloeb(saldo, koeb, id);
+			updateJTable();
+			model.fireTableDataChanged();
+			isListenerActive = true;
+			table.addRowSelectionInterval(selectedRow, selectedRow);
+			JOptionPane.showMessageDialog(frame, "Købet for " + koeb + " DDK er udført");
+			koeb = 0;
+			beloebField.setText(String.valueOf(koeb));
+			}
+		}
+		
+		if (e.getSource() == btnAnnuler){
+			koeb = 0;
+			beloebField.setText(String.valueOf(koeb));
+
+		}	
+		
+		
+		if (e.getSource() == btnKoldskål){
+			int identifier;
+			int pris = 0;
+			String vare = "koldskål";
+			pris = new Control().hentVarePris(vare);
+			selectedRow = table.getSelectedRow();
+			koeb = koeb + pris;
+			beloebField.setText(String.valueOf(koeb));	
+		}
+		if (e.getSource() == btnIste){
+			int identifier;
+			int pris = 0;
+			String vare = "iste";
+			pris = new Control().hentVarePris(vare);
+			selectedRow = table.getSelectedRow();
+			koeb = koeb + pris;
+			beloebField.setText(String.valueOf(koeb));	
+		}
+		if (e.getSource() == btnKakaomælk){
+			int identifier;
+			int pris = 0;
+			String vare = "kakaomælk";
+			pris = new Control().hentVarePris(vare);
+			selectedRow = table.getSelectedRow();
+			koeb = koeb + pris;
+			beloebField.setText(String.valueOf(koeb));	
+		}
+		if (e.getSource() == btnJuice){
+			int identifier;
+			int pris = 0;
+			String vare = "juice";
+			pris = new Control().hentVarePris(vare);
+			selectedRow = table.getSelectedRow();
+			koeb = koeb + pris;
+			beloebField.setText(String.valueOf(koeb));	
+		}
+		if (e.getSource() == btnSaftevand){
+			int identifier;
+			int pris = 0;
+			String vare = "saftevand";
+			pris = new Control().hentVarePris(vare);
+			selectedRow = table.getSelectedRow();
+			koeb = koeb + pris;
+			beloebField.setText(String.valueOf(koeb));	
+		}
+		if (e.getSource() == btnSodavand){
+			int identifier;
+			int pris = 0;
+			String vare = "sodavand";
+			pris = new Control().hentVarePris(vare);
+			selectedRow = table.getSelectedRow();
+			koeb = koeb + pris;
+			beloebField.setText(String.valueOf(koeb));	
+		}
+		if (e.getSource() == btnParisertoast){
+			int identifier;
+			int pris = 0;
+			String vare = "parisertoast";
+			pris = new Control().hentVarePris(vare);
+			selectedRow = table.getSelectedRow();
+			koeb = koeb + pris;
+			beloebField.setText(String.valueOf(koeb));	
+		}
+		if (e.getSource() == btnYougurt){
+			int identifier;
+			int pris = 0;
+			String vare = "yogurt";
+			pris = new Control().hentVarePris(vare);
+			selectedRow = table.getSelectedRow();
+			koeb = koeb + pris;
+			beloebField.setText(String.valueOf(koeb));	
+		}
+		if (e.getSource() == btnPariserkalkun){
+			int identifier;
+			int pris = 0;
+			String vare = "pariserkalkun";
+			pris = new Control().hentVarePris(vare);
+			selectedRow = table.getSelectedRow();
+			koeb = koeb + pris;
+			beloebField.setText(String.valueOf(koeb));	
+		}
+		if (e.getSource() == btnIs){
+			int identifier;
+			int pris = 0;
+			String vare = "is";
+			pris = new Control().hentVarePris(vare);
+			selectedRow = table.getSelectedRow();
+			koeb = koeb + pris;
+			beloebField.setText(String.valueOf(koeb));	
+		}
+		if (e.getSource() == btnSmørtoast){
+			int identifier;
+			int pris = 0;
+			String vare = "smørtoast";
+			pris = new Control().hentVarePris(vare);
+			selectedRow = table.getSelectedRow();
+			koeb = koeb + pris;
+			beloebField.setText(String.valueOf(koeb));	
+		}
+		if (e.getSource() == btnPastasalat){
+			int identifier;
+			int pris = 0;
+			String vare = "pastasalat";
+			pris = new Control().hentVarePris(vare);
+			selectedRow = table.getSelectedRow();
+			koeb = koeb + pris;
+			beloebField.setText(String.valueOf(koeb));	
+		}
+		if (e.getSource() == btnKrasser){
+			int identifier;
+			int pris = 0;
+			String vare = "krasser";
+			pris = new Control().hentVarePris(vare);
+			selectedRow = table.getSelectedRow();
+			koeb = koeb + pris;
+			beloebField.setText(String.valueOf(koeb));	
+		}
+		if (e.getSource() == btnFrugt){
+			int identifier;
+			int pris = 0;
+			String vare = "frugt";
+			pris = new Control().hentVarePris(vare);
+			selectedRow = table.getSelectedRow();
+			koeb = koeb + pris;
+			beloebField.setText(String.valueOf(koeb));	
+		}
+		if (e.getSource() == btnRiskiks){
+			int identifier;
+			int pris = 0;
+			String vare = "riskiks";
+			pris = new Control().hentVarePris(vare);
+			selectedRow = table.getSelectedRow();
+			koeb = koeb + pris;
+			beloebField.setText(String.valueOf(koeb));	
+		}
+		
+		
+		
+		
+		
 
 		if (e.getSource() == btn_aktivitet) {
 

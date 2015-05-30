@@ -20,4 +20,5 @@ public class Udregning {
 	public String changeNote(String txt){
 		return txt;
 	}
+	
 }

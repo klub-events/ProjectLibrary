@@ -88,7 +88,7 @@ public class SaldoGUI extends MainGUI implements ActionListener, KeyListener {
 		saldoField.setEditable(false);
 		saldoField.setText("N/A");
 
-		noteField.setBounds(50, 270, 300, 100);
+		noteField.setBounds(50, 320, 500, 40);
 		noteField.setEditable(false);
 		noteField.setText("ingen info");
 

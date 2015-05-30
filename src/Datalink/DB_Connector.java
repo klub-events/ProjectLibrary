@@ -339,7 +339,7 @@ public class DB_Connector {
 				int pris = rs.getInt("pris");
 				String navn = rs.getString("navn");
 				int tilgængelig = rs.getInt("tilgængelig");
-				int antal = rs.getInt("lagertal");
+				int antal = rs.getInt("antal");
 				varer.add(new Varer (id, pris, navn, tilgængelig, antal));
 			}
 		} catch(Exception e){
@@ -409,6 +409,18 @@ public class DB_Connector {
 			e.printStackTrace();
 		}
 		
+	}
+
+	public int hentVarePris(String vare) {
+		ArrayList<Varer> varer = hentVarer();
+		int pris = 0;
+		for (Varer varen : varer){
+			if(vare.equals(varen.getNavn())){
+				pris = varen.getPris(); 
+			}
+			
+		}
+		return pris;
 	}
 
 
