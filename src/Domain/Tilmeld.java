@@ -1,7 +1,7 @@
 package Domain;
 
 /*
- * Statement for oprettelse af tilmeld table
+ * Statement for oprettelse af tilmeld table 
  * 
   CREATE TABLE `tilmeld` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
