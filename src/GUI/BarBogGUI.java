@@ -15,19 +15,19 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-import Datalink.DB_Connector;
 import Domain.Barbog;
 import Domain.ClosedCellTableModel;
 import Domain.Control;
 
 /**
  * GUI objektet der styrer barbogen. Indeholder alle elementer for denne gui. Implementerer ActionListener, KeyListener og extender MainGUI.
- * @author PeterRaasthøj
+ * @author DanR
  *
  */
 public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 	private JTable table;
 	
+	//klik-knapper instantieres
 	private JButton btnKoldskål = new JButton("Koldskål");
 	private JButton btnKakaomælk = new JButton("Kakaomælk");
 	private JButton btnIste = new JButton("Iste");
@@ -48,21 +48,16 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 	private JButton btnAnnuler= new JButton("Annuler");
 	private JButton btn_search;
 
+	//tekst-fields instantieres
 	private JTextField searchField = new JTextField();
-
 	private JTextField beloebField = new JTextField();
-	private JTextField beloeb = new JTextField();
-
-
 	private JTextField idField = new JTextField();
 	private JTextField navnField = new JTextField();
-
 	private JTextField saldoField = new JTextField();
-
 	private JTextField barbogField = new JTextField();
 	private JTextField vigtigField = new JTextField();
 
-
+	//labels instantieres
 	private JLabel idLabel = new JLabel("ID");
 	private JLabel navnLabel = new JLabel("Navn");
 	private JLabel barbogLabel = new JLabel("Saldo");
@@ -77,12 +72,13 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 
 	/**
 	 * Sætter alle elementer op på framen som vises.
+	 * @Author DanR
 	 */
 	public BarBogGUI() {
 		JPanel center3 = new JPanel();
 		center3.setLayout(null);
 
-		// Knapper opsættes.
+		// Knappernes position/layout opsættes.
 		btnKoldskål.setBounds(50, 100, 90, 60);
 		btnKoldskål.addActionListener(this);
 
@@ -133,9 +129,7 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 
 		btnKøb.setBounds(640, 515, 100, 50);
 		btnKøb.addActionListener(this);
-	//	btnKøb.setOpaque(true);
-	//	btnKøb.setBorderPainted(false);
-		btnKøb.setBackground(Color.green);
+		btnKøb.setBackground(Color.GREEN);
 
 		btnAnnuler.setBounds(750,515, 100,50);
 		btnAnnuler.addActionListener(this);
@@ -170,7 +164,6 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 		vigtigField.setEditable(false);
 		vigtigField.setText("Ingen info");
 
-
 		// Labels opsættes
 		idLabel.setBounds(50, 00, 20, 20);
 		navnLabel.setBounds(110, 00, 50, 20);
@@ -192,7 +185,6 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 
 		
 		// Mad Knapper
-
 		center3.add(btnKoldskål);
 		center3.add(btnKakaomælk);
 		center3.add(btnIste);
@@ -212,12 +204,12 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 		center3.add(btnAnnuler);
 		center3.add(searchField);
 		
-		// Søge felt
+		//Søgefelt
 		center3.add(btn_search);
 
 		// Jtable opsættes på ScrollpPane
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(580, 50, 250, 350); // x, y, width, height
+		scrollPane.setBounds(580, 50, 250, 350);
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		table.setRowHeight(20);
@@ -227,7 +219,7 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 		rowSorter = new TableRowSorter<>((table.getModel()));
 		table.setRowSorter(rowSorter);
 
-		// tilføjer al content som er tilføjet til panelet center3 til gui
+		// tilføjer alt content som er tilføjet til panelet center3 til gui, samt 
 		Panel_Content.add(center3);
 		center3.setBackground(Color.WHITE);
 		btn_saldo.setBackground(Color.GRAY);
@@ -283,6 +275,7 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 		barbogs.clear();
 	}
 
+
 	@Override
 	public void keyPressed(KeyEvent e) {
 	}
@@ -312,8 +305,9 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
+		// bruges ikke
 	}
+
 
 	public void actionPerformed(ActionEvent e) {
 
@@ -355,15 +349,15 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 			}
 		}
 		
+		//nulstiller blot koeb og opdaterer koebsfield.
 		if (e.getSource() == btnAnnuler){
 			koeb = 0;
 			beloebField.setText(String.valueOf(koeb));
 
 		}	
 		
-		
+		//funktionen til knapperne. varer-navnet i databasen skal matche String vare, for at det fungerer.
 		if (e.getSource() == btnKoldskål){
-			int identifier;
 			int pris = 0;
 			String vare = "koldskål";
 			pris = new Control().hentVarePris(vare);
@@ -372,7 +366,6 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 			beloebField.setText(String.valueOf(koeb));	
 		}
 		if (e.getSource() == btnIste){
-			int identifier;
 			int pris = 0;
 			String vare = "iste";
 			pris = new Control().hentVarePris(vare);
@@ -381,7 +374,6 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 			beloebField.setText(String.valueOf(koeb));	
 		}
 		if (e.getSource() == btnKakaomælk){
-			int identifier;
 			int pris = 0;
 			String vare = "kakaomælk";
 			pris = new Control().hentVarePris(vare);
@@ -390,7 +382,6 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 			beloebField.setText(String.valueOf(koeb));	
 		}
 		if (e.getSource() == btnJuice){
-			int identifier;
 			int pris = 0;
 			String vare = "juice";
 			pris = new Control().hentVarePris(vare);
@@ -399,7 +390,6 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 			beloebField.setText(String.valueOf(koeb));	
 		}
 		if (e.getSource() == btnSaftevand){
-			int identifier;
 			int pris = 0;
 			String vare = "saftevand";
 			pris = new Control().hentVarePris(vare);
@@ -408,7 +398,6 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 			beloebField.setText(String.valueOf(koeb));	
 		}
 		if (e.getSource() == btnSodavand){
-			int identifier;
 			int pris = 0;
 			String vare = "sodavand";
 			pris = new Control().hentVarePris(vare);
@@ -417,7 +406,6 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 			beloebField.setText(String.valueOf(koeb));	
 		}
 		if (e.getSource() == btnParisertoast){
-			int identifier;
 			int pris = 0;
 			String vare = "parisertoast";
 			pris = new Control().hentVarePris(vare);
@@ -426,7 +414,6 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 			beloebField.setText(String.valueOf(koeb));	
 		}
 		if (e.getSource() == btnYougurt){
-			int identifier;
 			int pris = 0;
 			String vare = "yogurt";
 			pris = new Control().hentVarePris(vare);
@@ -435,7 +422,6 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 			beloebField.setText(String.valueOf(koeb));	
 		}
 		if (e.getSource() == btnPariserkalkun){
-			int identifier;
 			int pris = 0;
 			String vare = "pariserkalkun";
 			pris = new Control().hentVarePris(vare);
@@ -444,7 +430,6 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 			beloebField.setText(String.valueOf(koeb));	
 		}
 		if (e.getSource() == btnIs){
-			int identifier;
 			int pris = 0;
 			String vare = "is";
 			pris = new Control().hentVarePris(vare);
@@ -453,7 +438,6 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 			beloebField.setText(String.valueOf(koeb));	
 		}
 		if (e.getSource() == btnSmørtoast){
-			int identifier;
 			int pris = 0;
 			String vare = "smørtoast";
 			pris = new Control().hentVarePris(vare);
@@ -462,7 +446,6 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 			beloebField.setText(String.valueOf(koeb));	
 		}
 		if (e.getSource() == btnPastasalat){
-			int identifier;
 			int pris = 0;
 			String vare = "pastasalat";
 			pris = new Control().hentVarePris(vare);
@@ -471,7 +454,6 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 			beloebField.setText(String.valueOf(koeb));	
 		}
 		if (e.getSource() == btnKrasser){
-			int identifier;
 			int pris = 0;
 			String vare = "krasser";
 			pris = new Control().hentVarePris(vare);
@@ -480,7 +462,6 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 			beloebField.setText(String.valueOf(koeb));	
 		}
 		if (e.getSource() == btnFrugt){
-			int identifier;
 			int pris = 0;
 			String vare = "frugt";
 			pris = new Control().hentVarePris(vare);
@@ -489,7 +470,6 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 			beloebField.setText(String.valueOf(koeb));	
 		}
 		if (e.getSource() == btnRiskiks){
-			int identifier;
 			int pris = 0;
 			String vare = "riskiks";
 			pris = new Control().hentVarePris(vare);
@@ -497,12 +477,8 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 			koeb = koeb + pris;
 			beloebField.setText(String.valueOf(koeb));	
 		}
-		
-		
-		
-		
-		
 
+		//action for knapperne i top-pane.
 		if (e.getSource() == btn_aktivitet) {
 
 			new AktivitetGUI();

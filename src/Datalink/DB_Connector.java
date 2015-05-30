@@ -289,10 +289,8 @@ public class DB_Connector {
 	public ArrayList<Barbog> hentBarbog(){
 		ArrayList<Barbog> barbogs = new ArrayList<Barbog>();
 		try{
-			//should try to test performance differnce for the actual defense, to see which is better (no time for the report)
 			//String sql = "SELECT m.ID, m.fornavn, b.vigtignote, b.saldo FROM medlemmer m, barbog b WHERE m.ID = b.ID ORDER BY b.ID ASC;";
 			String sql = "SELECT medlemmer.ID, medlemmer.fornavn, barbog.vigtignote, barbog.saldo FROM medlemmer INNER JOIN barbog WHERE medlemmer.ID = barbog.ID ORDER BY barbog.ID ASC;";
-			//String sql = "SELECT * FROM barbog ORDER BY barbog.id ASC;";
 			rs = conn.createStatement().executeQuery(sql);
 			while(rs.next()){
 				int id = rs.getInt("ID");
