@@ -59,21 +59,15 @@ public class AktivitetGUI extends MainGUI implements ActionListener
 
 		//adder navn og tekstfield til vinduet
 		this.navnBox = new LabelTextfield(labelTekster[0]);
-		String navn = navnBox.getInputText();
 		content1.add(navnBox);
 
 		this.prisBox = new LabelTextfield(labelTekster[1]);
-		String pris = prisBox.getInputText();
 		content1.add(prisBox);
 
 		this.deltagerantalBox = new LabelTextfield(labelTekster[2]);
-		String deltagerantal = deltagerantalBox.getInputText();
 		content1.add(deltagerantalBox);
 
-		//speciel desginet dato api kommer
 		this.datoBox = new LabelTextfield(labelTekster[3]);
-		String dato = datoBox.getInputText();
-
 		content1.setBackground(Color.WHITE);
 
 		btn_aktivitet.setBackground(Color.GRAY);
