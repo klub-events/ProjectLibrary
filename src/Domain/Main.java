@@ -2,12 +2,12 @@ package Domain;
 import GUI.*;
 
 
-public class Program
+public class Main
 {
-	@SuppressWarnings("unused")
+
 	public static void main(String[] args)
 	{
-		MainGUI mainGUI = new MainGUI();
+		new MainGUI();
 		MainGUI.startThread();
 	}
 }

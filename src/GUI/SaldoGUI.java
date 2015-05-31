@@ -18,7 +18,6 @@ import javax.swing.table.TableRowSorter;
 import Domain.Barbog;
 import Domain.ClosedCellTableModel;
 import Domain.Control;
-import Domain.Medlem;
 
 /**
  * @author PeterRaasthøj DanRydeng MadsHansen

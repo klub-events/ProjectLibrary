@@ -8,6 +8,7 @@ import javax.swing.table.DefaultTableModel;
  * @author PeterRaasthøj
  *
  */
+@SuppressWarnings("serial")
 public class ClosedColumnTableModel extends DefaultTableModel {
 	@Override
 	public boolean isCellEditable(int row, int col) {

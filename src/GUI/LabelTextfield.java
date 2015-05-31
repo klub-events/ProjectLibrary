@@ -15,6 +15,7 @@ import javax.swing.JTextField;
  * @author PeterRaasthøj
  *
  */
+@SuppressWarnings("serial")
 public class LabelTextfield extends JPanel {
 	JTextField textField = new JTextField();
 	JLabel label = new JLabel();

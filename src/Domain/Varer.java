@@ -1,7 +1,5 @@
 package Domain;
 
-import java.util.ArrayList;
-
 /*
  *  Database-koden for varer-table
 CREATE TABLE varer(
