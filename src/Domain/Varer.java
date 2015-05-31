@@ -17,7 +17,7 @@ antal int (6) NOT NULL);
  * Getters og Setters er tilgængelige for hver værdi.
  * 
  * <p>Indeholder toString() override som lader Varer objekter sættes nemt ind i en mySQL syntax
- * @author PeterRaasthøj
+ * @author PeterRaasthøj DanRydeng 
  *
  */
 public class Varer {

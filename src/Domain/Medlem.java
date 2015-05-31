@@ -20,7 +20,7 @@ package Domain;
  * Getters og Setters er tilgængelige for hver værdi.
  * 
  * <p>Indeholder toString() override som lader Medlem objekter sættes nemt ind i en mySQL syntax
- * @author Shonix
+ * @author PeterRaasthøj
  *
  */
 public class Medlem{

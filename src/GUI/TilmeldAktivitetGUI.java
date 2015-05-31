@@ -21,9 +21,9 @@ import javax.swing.table.TableRowSorter;
 import Domain.*;
 
 /**Denne klasse extender MainGUI som er den alle sider har tilfælles og 
- * implementer Actionlistener får at knapper kan have funktionalitt.
- * Indeholder dropdowns, jtable og gem knap. 
- * @author Patrick
+ * implementer Actionlistener får at knapper kan have funktionalitet.
+ * Indeholder JComboBox, JTable og JButtons. 
+ * @author PatrickRavnsholt
  *
  */
 public class TilmeldAktivitetGUI extends MainGUI implements ActionListener

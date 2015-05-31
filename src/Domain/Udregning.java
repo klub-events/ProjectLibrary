@@ -2,7 +2,7 @@ package Domain;
 
 /**
  * Klasse som bruges for udregninger af diverse saldoer.
- * @author PeterRaasthøj
+ * @author PeterRaasthøj DanRydeng 
  *
  */
 public class Udregning {

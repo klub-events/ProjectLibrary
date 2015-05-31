@@ -72,7 +72,7 @@ public class BarBogGUI extends MainGUI implements ActionListener, KeyListener {
 
 	/**
 	 * Sætter alle elementer op på framen som vises.
-	 * @Author DanR
+	 * @Author DanRydeng 
 	 */
 	public BarBogGUI() {
 		JPanel center3 = new JPanel();

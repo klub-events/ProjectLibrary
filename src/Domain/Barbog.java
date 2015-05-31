@@ -13,7 +13,7 @@ package Domain;
  * Getters og Setters er tilgængelige for hver værdi.
  * 
  * <p>Indeholder toString() override som lader Barbog objekter sættes nemt ind i en mySQL syntax
- * @author PeterRaasthøj
+ * @author PeterRaasthøj DanRydeng
  *
  */
 public class Barbog {

@@ -11,7 +11,7 @@ import Datalink.*;
  * <p>Alle kald fra GUI laget som skal ud ad, eller ind til GUI laget sendes igennem her.<br>
  * Hver metode i denne klasse findes i DB_Connect, og er beskrevet heri. Da dette blot er en klasse for gennemgang,<br>
  * er alle metoders funktioner beskrevet i root klassen for hver funktion.</p>
- * @author PeterRaasthøj
+ * @author PeterRaasthøj DanRydeng MadsHansen PatrickRavnsholt
  *
  */
 public class Control {

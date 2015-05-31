@@ -19,8 +19,8 @@ import javax.swing.table.TableRowSorter;
 
 /** Denne klasse extender MainGUI som er den alle sider har tilfælles og 
  * implementer Actionlistener får at knapper kan have funktionalitt.
- * Indeholder knapper og tekstfields og jtable
- * @author Patrick
+ * Indeholder JButtons, JTextFields og JTable
+ * @author PatrickRavnsholt
  *
  */
 public class AktivitetGUI extends MainGUI implements ActionListener

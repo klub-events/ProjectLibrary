@@ -20,6 +20,10 @@ import Domain.ClosedCellTableModel;
 import Domain.Control;
 import Domain.Medlem;
 
+/**
+ * @author PeterRaasthøj DanRydeng MadsHansen
+ *
+ */
 public class SaldoGUI extends MainGUI implements ActionListener, KeyListener {
 	private JTable table;
 
@@ -49,6 +53,9 @@ public class SaldoGUI extends MainGUI implements ActionListener, KeyListener {
 	private int selectedRow;
 	private boolean isListenerActive = true;
 
+	/**
+	 * Sætter de basale GUI elementer såsom knapper, tekst felter og tabel.
+	 */
 	public SaldoGUI() {
 		JPanel center3 = new JPanel();
 		center3.setLayout(null);
@@ -165,12 +172,20 @@ public class SaldoGUI extends MainGUI implements ActionListener, KeyListener {
 		updateJTable();
 	}
 
+	/**
+	 * Metode for at validerer at fields forbeholdt talinput, indeholder tal eller tekst med en regex sætning.
+	 * @return true eller false alt efter om valideringen går i gennem eller ej
+	 */
 	public boolean validateInput() {
 		String noget = beloebField.getText();
 		boolean valid = noget.matches("[0-9]+");
 		return valid;
 	}
 
+	/**
+	 * Metode for at opdatere JTable, med en ArrayListe. 
+	 * Sætter columns og rows op for JTablet.
+	 */
 	public void updateJTable() {
 		ArrayList<Barbog> barbogs = new Control().hentBarbog();
 
